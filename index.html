@@ -20,26 +20,9 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Mondrian Grid Lines */
-        .grid-line {
-            position: absolute;
-            background: #121212;
-            z-index: 1;
-        }
-
-        .grid-line.horizontal {
-            width: 100%;
-            height: 4px;
-        }
-
-        .grid-line.vertical {
-            height: 100%;
-            width: 4px;
+            padding: 0 40px;
         }
 
         /* Header */
@@ -50,444 +33,274 @@
             background: #FDF3E1;
             border-bottom: 4px solid #121212;
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 2rem 0;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 900;
             color: #121212;
             background: #F6C700;
-            padding: 0.5rem 1rem;
-            border: 3px solid #121212;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0;
-            list-style: none;
-        }
-
-        .nav-links li {
-            border-right: 3px solid #121212;
-        }
-
-        .nav-links li:last-child {
-            border-right: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #121212;
-            font-weight: 700;
-            padding: 1rem 1.5rem;
-            display: block;
-            background: #FBE7C3;
-            transition: background 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            background: #F6C700;
-        }
-
-        .cta-button {
-            background: #D7462E;
-            color: #FDF3E1;
-            padding: 1rem 1.5rem;
-            border: 3px solid #121212;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cta-button:hover {
-            background: #F77B0B;
-            color: #121212;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            grid-template-rows: 1fr 2fr 1fr;
-            position: relative;
-            background: #235E9E;
-            margin-top: 80px;
-        }
-
-        .hero-grid-1 {
-            background: #F6C700;
-            border-right: 4px solid #121212;
-            border-bottom: 4px solid #121212;
-        }
-
-        .hero-grid-2 {
-            background: #FDF3E1;
-            border-bottom: 4px solid #121212;
-        }
-
-        .hero-grid-3 {
-            background: #D7462E;
-            border-left: 4px solid #121212;
-            border-bottom: 4px solid #121212;
-        }
-
-        .hero-grid-4 {
-            background: #FBE7C3;
-            border-right: 4px solid #121212;
-            border-top: 4px solid #121212;
-        }
-
-        .hero-content {
-            background: #FDF3E1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
+            padding: 1rem 2rem;
             border: 4px solid #121212;
-            grid-column: 2;
-            grid-row: 2;
-            z-index: 2;
-        }
-
-        .hero-grid-6 {
-            background: #143C66;
-            border-left: 4px solid #121212;
-            border-top: 4px solid #121212;
-        }
-
-        .hero-grid-7 {
-            background: #F77B0B;
-            border-right: 4px solid #121212;
-        }
-
-        .hero-grid-8 {
-            background: #235E9E;
-        }
-
-        .hero-grid-9 {
-            background: #FBE7C3;
-            border-left: 4px solid #121212;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            color: #121212;
             text-transform: uppercase;
             letter-spacing: 2px;
-            line-height: 1.2;
         }
 
-        .hero p {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            color: #121212;
-            line-height: 1.6;
-            max-width: 500px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 0;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: #F6C700;
-            color: #121212;
-            padding: 1rem 2rem;
-            border: 3px solid #121212;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-right: none;
-        }
-
-        .btn-primary:hover {
-            background: #F77B0B;
-        }
-
-        .btn-secondary {
-            background: #D7462E;
+        .contact-button {
+            background: #235E9E;
             color: #FDF3E1;
             padding: 1rem 2rem;
-            border: 3px solid #121212;
+            border: 4px solid #121212;
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-size: 1rem;
         }
 
-        .btn-secondary:hover {
+        .contact-button:hover {
             background: #143C66;
         }
 
         /* Main Content */
         .main-content {
-            background: #FDF3E1;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* About Section */
-        .about {
+            margin-top: 140px;
             padding: 4rem 0;
-            background: #FBE7C3;
-            border-top: 4px solid #121212;
         }
 
-        .about h2 {
+        /* Hero Section */
+        .hero {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            color: #121212;
+            margin-bottom: 6rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: #F6C700;
-            padding: 1rem;
-            border: 4px solid #121212;
-            display: inline-block;
-            margin-left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .about-content .intro {
-            font-size: 1.25rem;
-            text-align: center;
             margin-bottom: 3rem;
             color: #121212;
-            font-weight: 600;
-            max-width: 800px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: #121212;
+            line-height: 1.6;
+            font-weight: 500;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 3rem;
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0;
-            margin-top: 3rem;
-        }
-
-        .about-card {
-            padding: 2rem;
-            border: 2px solid #121212;
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 4rem;
+            padding: 4rem;
+            border: 4px solid #121212;
             position: relative;
         }
 
-        .about-card:nth-child(1) { background: #F6C700; }
-        .about-card:nth-child(2) { background: #235E9E; color: #FDF3E1; }
-        .about-card:nth-child(3) { background: #D7462E; color: #FDF3E1; }
-        .about-card:nth-child(4) { background: #F77B0B; }
+        .content-section:nth-child(1) { 
+            background: #F6C700; 
+        }
+        
+        .content-section:nth-child(2) { 
+            background: #235E9E; 
+            color: #FDF3E1; 
+        }
+        
+        .content-section:nth-child(3) { 
+            background: #FDF3E1;
+            border-color: #F6C700;
+            border-width: 6px;
+        }
+        
+        .content-section:nth-child(4) { 
+            background: #121212; 
+            color: #F6C700; 
+        }
 
-        .about-card h3 {
+        .content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .content-section p {
             font-size: 1.25rem;
-            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .content-section ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.25rem;
+            line-height: 1.7;
+        }
+
+        .content-section li {
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .content-section strong {
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .about-card p {
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        .about-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .about-card li {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        .about-card strong {
-            font-weight: 900;
+        /* Special styling for the different section */
+        .content-section:nth-child(3) h2 {
+            background: #F6C700;
+            color: #121212;
+            padding: 1rem 2rem;
+            border: 4px solid #121212;
+            display: inline-block;
+            margin-bottom: 2rem;
         }
 
         /* Footer */
         footer {
             background: #121212;
-            color: #FDF3E1;
-            padding: 2rem 0;
+            color: #F6C700;
+            padding: 3rem 0;
             text-align: center;
             border-top: 4px solid #121212;
+            margin-top: 6rem;
         }
 
-        .footer-bottom {
+        .footer-content {
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .container {
+                padding: 0 20px;
             }
             
-            .hero {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                min-height: 80vh;
-            }
-
-            .hero-content {
-                grid-column: 1;
-                grid-row: 1;
-            }
-            
-            .hero-buttons {
+            nav {
+                padding: 0 20px;
                 flex-direction: column;
-                align-items: center;
+                gap: 1rem;
             }
             
-            .hero-buttons a {
-                width: 100%;
-                max-width: 300px;
-                text-align: center;
-                border-right: 3px solid #121212;
+            .logo {
+                font-size: 1.5rem;
+                padding: 0.75rem 1.5rem;
             }
-
-            .about-grid {
-                grid-template-columns: 1fr;
+            
+            .main-content {
+                margin-top: 180px;
+                padding: 2rem 0;
             }
-
-            .btn-primary {
-                border-right: 3px solid #121212;
-                border-bottom: none;
+            
+            .content-section {
+                padding: 2rem;
+                margin-bottom: 2rem;
             }
-
-            .btn-secondary {
-                border-top: none;
+            
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 1px;
+            }
+            
+            .hero p {
+                font-size: 1.25rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .content-section p,
+            .content-section ul {
+                font-size: 1.1rem;
             }
         }
 
-        /* Remove all gradients and shadows - pure flat design */
+        /* Remove all gradients and complex effects */
         * {
             box-shadow: none !important;
             background-image: none !important;
-        }
-
-        /* Mondrian-style geometric elements */
-        .geometric-accent {
-            position: absolute;
-            background: #F6C700;
-            border: 3px solid #121212;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="container">
-            <div class="logo">CALDRIS.IO</div>
-            <ul class="nav-links">
-                <li><a href="#features">FEATURES</a></li>
-                <li><a href="#how-it-works">HOW IT WORKS</a></li>
-                <li><a href="#about">ABOUT</a></li>
-            </ul>
-            <a href="mailto:chris@caldris.io" class="cta-button">CONTACT US</a>
+        <nav>
+            <div class="logo">Caldris.io</div>
+            <a href="mailto:chris@caldris.io" class="contact-button">Contact Us</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-grid-1"></div>
-        <div class="hero-grid-2"></div>
-        <div class="hero-grid-3"></div>
-        <div class="hero-grid-4"></div>
-        <div class="hero-content">
-            <h1>THE OPERATIONAL LAYER FOR MODERN BUSINESS</h1>
-            <p>Caldris.io deploys secure AI agents that automate the glue work behind every business, freeing your team to focus on what matters most—strategy, growth, and meaningful work.</p>
-            <div class="hero-buttons">
-                <a href="#demo" class="btn-primary">SEE IT IN ACTION</a>
-                <a href="#learn-more" class="btn-secondary">LEARN MORE</a>
-            </div>
-        </div>
-        <div class="hero-grid-6"></div>
-        <div class="hero-grid-7"></div>
-        <div class="hero-grid-8"></div>
-        <div class="hero-grid-9"></div>
-    </section>
-
     <main class="main-content">
-        <section id="about" class="about">
-            <div class="container">
-                <h2>CALDRIS.IO IS THE OPERATIONAL LAYER FOR MODERN BUSINESS</h2>
-                <div class="about-content">
-                    <p class="intro">Most companies run on brittle workflows, scattered tools, and human duct tape. Caldris replaces that chaos with a secure, unified platform of AI agents that automate the most tedious parts of running a company—so your team can focus on leading, thinking, and building.</p>
-                    
-                    <div class="about-grid">
-                        <div class="about-card">
-                            <h3>WHAT CALDRIS DOES</h3>
-                            <p>Automates back-office tasks like AR, AP, payroll, onboarding, and compliance, working across all your systems—no matter how messy or fragmented. Caldris agents are auditable, accountable, and never invisible. Everything is transparent, secure, and under your control.</p>
-                        </div>
-                        
-                        <div class="about-card">
-                            <h3>FOR WHOM</h3>
-                            <p>Built especially for high-touch service firms, VC-backed startups, and modern businesses whose growth is throttled by manual, repetitive operational work.</p>
-                        </div>
-                        
-                        <div class="about-card">
-                            <h3>HOW IT'S DIFFERENT</h3>
-                            <ul>
-                                <li><strong>More than automation:</strong> Caldris agents don't replace people—they report to them and become trusted operational teammates.</li>
-                                <li><strong>Human-in-the-loop:</strong> You define the rules, agents execute and coordinate, and you oversee everything.</li>
-                                <li><strong>Designed for trust:</strong> Security, audit trails, and permissioning are built in at every layer.</li>
-                                <li><strong>Works with your tools:</strong> Integrates with modern apps and even legacy systems.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="about-card">
-                            <h3>WHY IT MATTERS</h3>
-                            <p>Caldris eliminates operational drag, restores time for creative, strategic work, and lets high-performing teams scale without extra overhead. It's like giving your business an invisible, always-on operations team that never gets tired.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="container">
+            <section class="hero">
+                <h1>The Operational Layer for Modern Business</h1>
+                <p>Most companies run on brittle workflows, scattered tools, and human duct tape. Caldris replaces that chaos with a secure, unified platform of AI agents that automate the most tedious parts of running a company—so your team can focus on leading, thinking, and building.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>What Caldris Does</h2>
+                <p>Automates back-office tasks like AR, AP, payroll, onboarding, and compliance, working across all your systems—no matter how messy or fragmented. Caldris agents are auditable, accountable, and never invisible. Everything is transparent, secure, and under your control.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>For Whom</h2>
+                <p>Built especially for high-touch service firms, VC-backed startups, and modern businesses whose growth is throttled by manual, repetitive operational work.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>How It's Different</h2>
+                <ul>
+                    <li><strong>More than automation:</strong> Caldris agents don't replace people—they report to them and become trusted operational teammates.</li>
+                    <li><strong>Human-in-the-loop:</strong> You define the rules, agents execute and coordinate, and you oversee everything.</li>
+                    <li><strong>Designed for trust:</strong> Security, audit trails, and permissioning are built in at every layer.</li>
+                    <li><strong>Works with your tools:</strong> Integrates with modern apps and even legacy systems.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>Why It Matters</h2>
+                <p>Caldris eliminates operational drag, restores time for creative, strategic work, and lets high-performing teams scale without extra overhead. It's like giving your business an invisible, always-on operations team that never gets tired.</p>
+            </section>
+        </div>
     </main>
 
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>CALDRIS.IO</h3>
-                    <p>The operational backbone for high-growth teams. Secure, intelligent, and designed to scale.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 CALDRIS.IO. ALL RIGHTS RESERVED.</p>
+                <p>&copy; 2025 Caldris.io. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Simple smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -498,19 +311,6 @@
                         block: 'start'
                     });
                 }
-            });
-        });
-
-        // Simple hover effects without animations
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.02)';
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                this.style.zIndex = '1';
             });
         });
     </script>
