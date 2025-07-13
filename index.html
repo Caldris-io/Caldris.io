@@ -487,6 +487,13 @@
                 }
             }
         });
+        
+        // Make every rectangle click trigger a color randomization across all layers
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('rectangle')) {
+                randomizeColors();
+            }
+        });
     </script>
 </body>
 </html>
