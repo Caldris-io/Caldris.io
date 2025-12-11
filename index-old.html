@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_pPUCpQb90Nv08nzcLLtDrZQgXy1xTqTHuSKTTNVbPS7', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2025-05-24',
+        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+    })
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Operational Layer for Service Business</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f8f8f8;
+            font-family: 'Lora', serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #f8f8f8 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f8f8f8 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f8f8f8 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f8f8f8 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        
+        .operational-grid {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            transform-style: preserve-3d;
+            animation: rotate 30s linear infinite;
+            perspective: 1000px;
+        }
+        
+        .layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid #000000;
+            background: rgba(255, 255, 255, 0.9);
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-rows: repeat(6, minmax(0, 1fr));
+            gap: 3px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        
+        .layer-1 {
+            transform: translateZ(0px);
+            z-index: 4;
+        }
+        
+        .layer-2 {
+            transform: translateZ(-80px);
+            z-index: 3;
+        }
+        
+        .layer-3 {
+            transform: translateZ(-160px);
+            z-index: 2;
+        }
+        
+        .layer-4 {
+            transform: translateZ(-240px);
+            z-index: 1;
+        }
+        
+        .rectangle {
+            background: #ffffff;
+            border: 2px solid #000000;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            height: auto;
+        }
+        .rectangle.active {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .rectangle.red {
+            background: #de2d26;
+            animation: redPulse 6s ease-in-out infinite;
+        }
+        
+        .rectangle.blue {
+            background: #3182bd;
+            animation: bluePulse 6s ease-in-out infinite 1.5s;
+        }
+        
+        .rectangle.yellow {
+            background: #fecc5c;
+            animation: yellowPulse 6s ease-in-out infinite 3s;
+        }
+        
+        .rectangle.white {
+            background: #ffffff;
+            animation: whitePulse 6s ease-in-out infinite 4.5s;
+        }
+        
+        .rectangle.black {
+            background: #000000;
+        }
+        
+        .line-horizontal {
+            position: absolute;
+            height: 4px;
+            background: #000000;
+            left: 0;
+            right: 0;
+            transition: all 0.3s ease;
+            animation: lineFlow 8s linear infinite;
+        }
+        
+        .line-vertical {
+            position: absolute;
+            width: 4px;
+            background: #000000;
+            top: 0;
+            bottom: 0;
+            transition: all 0.3s ease;
+            animation: lineFlow 8s linear infinite 2s;
+        }
+        
+        .info-panel {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            background: #ffffff;
+            border: 4px solid #000000;
+            padding: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            max-width: 280px;
+        }
+        
+        .info-panel h2 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            color: #de2d26;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 5px;
+        }
+        
+        .info-panel p {
+            margin: 8px 0;
+            font-size: 11px;
+            color: #000000;
+            line-height: 1.3;
+        }
+        
+        .stats {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            background: #ffffff;
+            border: 4px solid #000000;
+            padding: 20px;
+            font-family: 'Lora', serif;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            color: #000000;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 3px;
+        }
+        
+        .metric-value {
+            color: #3182bd;
+            font-weight: bold;
+        }
+        
+        .composition-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotateX(10deg) rotateY(0deg); }
+            to { transform: rotateX(10deg) rotateY(360deg); }
+        }
+        
+        @keyframes redPulse {
+            0%, 100% { 
+                background: #de2d26;
+                transform: scale(1);
+            }
+            50% { 
+                background: #a50f15;
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes bluePulse {
+            0%, 100% { 
+                background: #3182bd;
+                transform: scale(1);
+            }
+            50% { 
+                background: #08519c;
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes yellowPulse {
+            0%, 100% { 
+                background: #fecc5c;
+                transform: scale(1);
+            }
+            50% { 
+                background: #fd8d3c;
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes whitePulse {
+            0%, 100% { 
+                background: #ffffff;
+                transform: scale(1);
+            }
+            50% { 
+                background: #f0f0f0;
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes lineFlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+                
+        .asymmetric-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr 3fr 1fr 2fr;
+            grid-template-rows: 1fr 3fr 1fr 2fr 1fr;
+            gap: 4px;
+            padding: 40px;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        
+        .mondrian-rect {
+            border: 2px solid #000000;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="asymmetric-grid">
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+            <div class="mondrian-rect"></div>
+        </div>
+        
+        <div class="operational-grid">
+            <div class="layer layer-1">
+                <!-- Rectangles will be generated by JavaScript -->
+            </div>
+            <div class="layer layer-2">
+                <!-- Rectangles will be generated by JavaScript -->
+            </div>
+            <div class="layer layer-3">
+                <!-- Rectangles will be generated by JavaScript -->
+            </div>
+            <div class="layer layer-4">
+                <!-- Rectangles will be generated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h2>Caldris.io - The Operational Layer</h2>
+            <p>Systematic Coordination</p>
+            <p>Geometric Harmony</p>
+            <p>Functional Abstraction</p>
+            <p>Universal Principles</p>
+        </div>
+        
+        <div class="stats">
+            <div class="metric">
+                <span title="System Structure">Topology:</span>
+                <span class="metric-value" id="composition">0</span>
+            </div>
+            <div class="metric">
+                <span title="Evenness of Coordination">Load Balance:</span>
+                <span class="metric-value" id="balance">0%</span>
+            </div>
+            <div class="metric">
+                <span title="Elements in Motion">Active Agents:</span>
+                <span class="metric-value" id="elements">0</span>
+            </div>
+            <div class="metric">
+                <span title="System Activity Rate">Throughput:</span>
+                <span class="metric-value" id="rhythm">0</span>
+            </div>
+        </div>    
+    </div>
+
+    <script>
+        // Generate rectangles for each layer
+        const layers = document.querySelectorAll('.layer');
+        const colors = ['red', 'blue', 'yellow', 'white', 'black'];
+        const totalRectangles = 36; // 6x6 grid
+        
+        layers.forEach((layer, layerIndex) => {
+            for (let i = 0; i < totalRectangles; i++) {
+                const rectangle = document.createElement('div');
+                rectangle.className = 'rectangle';
+                rectangle.dataset.index = i;
+                rectangle.dataset.layer = layerIndex;
+                
+                // Assign colors in De Stijl style - mostly white with strategic color placement
+                if (Math.random() < 0.15) {
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    rectangle.classList.add(colors[colorIndex]);
+                } else {
+                    rectangle.classList.add('white');
+                }
+                
+                layer.appendChild(rectangle);
+            }
+        });
+        
+        // Animation system
+        let time = 0;
+        let activeElements = new Set();
+        
+        function updateMetrics() {
+            const composition = Math.floor(Math.random() * 100) + 1;
+            const balance = Math.floor(Math.random() * 15) + 85;
+            const elementCount = activeElements.size;
+            const rhythm = Math.floor(Math.random() * 10) + 1;
+            
+            document.getElementById('composition').textContent = composition;
+            document.getElementById('balance').textContent = balance + '%';
+            document.getElementById('elements').textContent = elementCount;
+            document.getElementById('rhythm').textContent = rhythm;
+        }
+        
+        function activateRandomElements() {
+            // Clear previous active elements
+            activeElements.forEach(element => {
+                element.classList.remove('active');
+            });
+            activeElements.clear();
+            
+            // Activate new random elements across all layers
+            const allRectangles = document.querySelectorAll('.rectangle');
+            const numToActivate = Math.floor(Math.random() * 12) + 8;
+            
+            for (let i = 0; i < numToActivate; i++) {
+                const randomRect = allRectangles[Math.floor(Math.random() * allRectangles.length)];
+                randomRect.classList.add('active');
+                activeElements.add(randomRect);
+            }
+        }
+        
+        function randomizeColors() {
+            const allRectangles = document.querySelectorAll('.rectangle');
+            
+            allRectangles.forEach(rect => {
+                // Remove all color classes
+                colors.forEach(color => rect.classList.remove(color));
+                
+                // Add new color with De Stijl probability
+                if (Math.random() < 0.2) {
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    rect.classList.add(colors[colorIndex]);
+                } else {
+                    rect.classList.add('white');
+                }
+            });
+        }
+        
+        function animate() {
+            time += 0.01;
+            
+            // Update active elements every 3 seconds
+            if (Math.floor(time * 10) % 30 === 0) {
+                activateRandomElements();
+            }
+            
+            // Update metrics every 2 seconds
+            if (Math.floor(time * 10) % 20 === 0) {
+                updateMetrics();
+            }
+            
+            // Randomize colors every 8 seconds
+            if (Math.floor(time * 10) % 80 === 0) {
+                randomizeColors();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Start animation
+        animate();
+        
+        // Initial setup
+        activateRandomElements();
+        updateMetrics();
+        
+        // Mouse interaction - more subtle for De Stijl aesthetic
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            // Subtle rotation adjustment
+            const grid = document.querySelector('.operational-grid');
+            const rotateX = 10 + (mouseY - 0.5) * 5;
+            const rotateY = (mouseX - 0.5) * 10;
+            
+            grid.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        
+        // Reset on mouse leave
+        document.addEventListener('mouseleave', () => {
+            const grid = document.querySelector('.operational-grid');
+            grid.style.transform = '';
+        });
+        
+        // Rectangle hover effects
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.classList.contains('rectangle')) {
+                e.target.classList.add('active');
+            }
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.classList.contains('rectangle')) {
+                if (!activeElements.has(e.target)) {
+                    e.target.classList.remove('active');
+                }
+            }
+        });
+        
+        // Make every rectangle click trigger a color randomization across all layers
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('rectangle')) {
+                randomizeColors();
+            }
+        });
+    </script>
+</body>
+</html>

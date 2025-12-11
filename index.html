@@ -2,507 +2,661 @@
 <html lang="en">
 <head>
     <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_pPUCpQb90Nv08nzcLLtDrZQgXy1xTqTHuSKTTNVbPS7', {
         api_host: 'https://us.i.posthog.com',
-        defaults: '2025-05-24',
-        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+        person_profiles: 'identified_only',
     })
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The AI Operational Layer for Service Business</title>
+    <title>Caldris — Compliance-Ready Audit Trails for AI Agents</title>
+    <meta name="description" content="Prove Zero Trust to your auditor. Immutable logs that map to SOC 2, HIPAA, and more.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="caldris_icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        :root {
+            --red: #E41E26;
+            --yellow: #FFD200;
+            --blue: #0057B8;
+            --black: #111111;
+            --cream: #FAE5BE;
+            --white: #FFFFFF;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background: #f8f8f8;
-            font-family: 'Lora', serif;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(45deg, #f8f8f8 25%, transparent 25%), 
-                        linear-gradient(-45deg, #f8f8f8 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #f8f8f8 75%), 
-                        linear-gradient(-45deg, transparent 75%, #f8f8f8 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-        }
-        
-        .operational-grid {
-            position: relative;
-            width: 600px;
-            height: 600px;
-            transform-style: preserve-3d;
-            animation: rotate 30s linear infinite;
-            perspective: 1000px;
-        }
-        
-        .layer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 4px solid #000000;
-            background: rgba(255, 255, 255, 0.9);
-            display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
-            grid-template-rows: repeat(6, minmax(0, 1fr));
-            gap: 3px;
-            padding: 20px;
             box-sizing: border-box;
-            transition: all 0.3s ease;
         }
-        
-        .layer-1 {
-            transform: translateZ(0px);
-            z-index: 4;
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--black);
+            line-height: 1.6;
+            min-height: 100vh;
         }
-        
-        .layer-2 {
-            transform: translateZ(-80px);
-            z-index: 3;
-        }
-        
-        .layer-3 {
-            transform: translateZ(-160px);
-            z-index: 2;
-        }
-        
-        .layer-4 {
-            transform: translateZ(-240px);
-            z-index: 1;
-        }
-        
-        .rectangle {
-            background: #ffffff;
-            border: 2px solid #000000;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            cursor: pointer;
-            aspect-ratio: 1 / 1;
-            width: 100%;
-            height: auto;
-        }
-        .rectangle.active {
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-        }
-        
-        .rectangle.red {
-            background: #de2d26;
-            animation: redPulse 6s ease-in-out infinite;
-        }
-        
-        .rectangle.blue {
-            background: #3182bd;
-            animation: bluePulse 6s ease-in-out infinite 1.5s;
-        }
-        
-        .rectangle.yellow {
-            background: #fecc5c;
-            animation: yellowPulse 6s ease-in-out infinite 3s;
-        }
-        
-        .rectangle.white {
-            background: #ffffff;
-            animation: whitePulse 6s ease-in-out infinite 4.5s;
-        }
-        
-        .rectangle.black {
-            background: #000000;
-        }
-        
-        .line-horizontal {
-            position: absolute;
-            height: 4px;
-            background: #000000;
-            left: 0;
-            right: 0;
-            transition: all 0.3s ease;
-            animation: lineFlow 8s linear infinite;
-        }
-        
-        .line-vertical {
-            position: absolute;
-            width: 4px;
-            background: #000000;
-            top: 0;
-            bottom: 0;
-            transition: all 0.3s ease;
-            animation: lineFlow 8s linear infinite 2s;
-        }
-        
-        .info-panel {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            background: #ffffff;
-            border: 4px solid #000000;
-            padding: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            max-width: 280px;
-        }
-        
-        .info-panel h2 {
-            margin: 0 0 15px 0;
-            font-size: 18px;
-            color: #de2d26;
-            border-bottom: 3px solid #000000;
-            padding-bottom: 5px;
-        }
-        
-        .info-panel p {
-            margin: 8px 0;
-            font-size: 11px;
-            color: #000000;
-            line-height: 1.3;
-        }
-        
-        .stats {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            background: #ffffff;
-            border: 4px solid #000000;
-            padding: 20px;
-            font-family: 'Lora', serif;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .metric {
+
+        /* Header */
+        header {
+            padding: 24px 48px;
             display: flex;
             justify-content: space-between;
-            margin: 8px 0;
-            color: #000000;
-            border-bottom: 1px solid #000000;
-            padding-bottom: 3px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
-        .metric-value {
-            color: #3182bd;
-            font-weight: bold;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--black);
         }
-        
-        .composition-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 10;
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
         }
-        
-        @keyframes rotate {
-            from { transform: rotateX(10deg) rotateY(0deg); }
-            to { transform: rotateX(10deg) rotateY(360deg); }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        
-        @keyframes redPulse {
-            0%, 100% { 
-                background: #de2d26;
-                transform: scale(1);
-            }
-            50% { 
-                background: #a50f15;
-                transform: scale(1.05);
-            }
-        }
-        
-        @keyframes bluePulse {
-            0%, 100% { 
-                background: #3182bd;
-                transform: scale(1);
-            }
-            50% { 
-                background: #08519c;
-                transform: scale(1.05);
-            }
-        }
-        
-        @keyframes yellowPulse {
-            0%, 100% { 
-                background: #fecc5c;
-                transform: scale(1);
-            }
-            50% { 
-                background: #fd8d3c;
-                transform: scale(1.05);
-            }
-        }
-        
-        @keyframes whitePulse {
-            0%, 100% { 
-                background: #ffffff;
-                transform: scale(1);
-            }
-            50% { 
-                background: #f0f0f0;
-                transform: scale(1.02);
-            }
-        }
-        
-        @keyframes lineFlow {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-                
-        .asymmetric-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 48px 120px;
             display: grid;
-            grid-template-columns: 2fr 1fr 3fr 1fr 2fr;
-            grid-template-rows: 1fr 3fr 1fr 2fr 1fr;
-            gap: 4px;
-            padding: 40px;
-            box-sizing: border-box;
-            pointer-events: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
-        
-        .mondrian-rect {
-            border: 2px solid #000000;
-            background: rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 span {
+            color: var(--red);
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: #444;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        /* Waitlist Form */
+        .waitlist-form {
+            display: flex;
+            gap: 12px;
+            max-width: 480px;
+        }
+
+        .waitlist-form input[type="email"] {
+            flex: 1;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 3px solid var(--black);
+            background: var(--white);
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .waitlist-form input[type="email"]:focus {
+            border-color: var(--blue);
+        }
+
+        .waitlist-form button {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            background: var(--black);
+            color: var(--white);
+            border: 3px solid var(--black);
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .waitlist-form button:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .form-note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 12px;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mondrian-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 1fr 2fr 1fr;
+            gap: 8px;
+            width: 400px;
+            height: 400px;
+            border: 4px solid var(--black);
+            padding: 8px;
+            background: var(--white);
+        }
+
+        .mondrian-cell {
+            border: 3px solid var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .cell-red { background: var(--red); color: var(--white); }
+        .cell-blue { background: var(--blue); color: var(--white); }
+        .cell-yellow { background: var(--yellow); color: var(--black); }
+        .cell-white { background: var(--white); }
+        .cell-span-2 { grid-row: span 2; }
+        .cell-span-col-2 { grid-column: span 2; }
+
+        /* Problem Section */
+        .problem {
+            background: var(--white);
+            border-top: 4px solid var(--black);
+            border-bottom: 4px solid var(--black);
+            padding: 80px 48px;
+        }
+
+        .problem-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 16px;
+        }
+
+        .problem h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 48px;
+            max-width: 700px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .problem-card {
+            padding: 32px;
+            border: 3px solid var(--black);
+            background: var(--cream);
+        }
+
+        .problem-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .problem-card p {
+            font-size: 15px;
+            color: #444;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 48px;
+        }
+
+        .how-it-works h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 48px;
+        }
+
+        .stack-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 700px;
+        }
+
+        .stack-layer {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 32px;
+            border: 3px solid var(--black);
+            background: var(--white);
+        }
+
+        .stack-layer.caldris {
+            background: var(--yellow);
+            border-width: 4px;
+        }
+
+        .stack-number {
+            width: 36px;
+            height: 36px;
+            background: var(--black);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .stack-layer.caldris .stack-number {
+            background: var(--red);
+        }
+
+        .stack-content h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stack-content p {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .stack-layer.caldris .stack-content p {
+            color: var(--black);
+        }
+
+        .stack-arrow {
+            text-align: center;
+            font-size: 24px;
+            color: var(--black);
+        }
+
+        /* What You Get */
+        .features {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 48px;
+        }
+
+        .features-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features .section-label {
+            color: var(--yellow);
+        }
+
+        .features h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 48px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            border: 3px solid var(--white);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: #ccc;
+        }
+
+        /* CTA Section */
+        .cta {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 48px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta p {
+            font-size: 20px;
+            color: #444;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .waitlist-form {
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 3px solid var(--black);
+            padding: 32px 48px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        footer a {
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--red);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                padding: 48px 24px 80px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .mondrian-grid {
+                width: 300px;
+                height: 300px;
+            }
+
+            .problem-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+            }
+
+            header {
+                padding: 20px 24px;
+            }
+
+            .problem,
+            .how-it-works,
+            .features,
+            .cta {
+                padding: 60px 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="asymmetric-grid">
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-            <div class="mondrian-rect"></div>
-        </div>
-        
-        <div class="operational-grid">
-            <div class="layer layer-1">
-                <!-- Rectangles will be generated by JavaScript -->
+    <header>
+        <a href="/" class="logo">
+            <img src="caldris_icon.png" alt="Caldris" class="logo-icon">
+            <span class="logo-text">Caldris</span>
+        </a>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Compliance-ready audit trails for <span>AI agents</span></h1>
+                <p>Prove Zero Trust to your auditor. Immutable logs that map to SOC 2, HIPAA, and more.</p>
+
+                <form class="waitlist-form" id="waitlist-hero">
+                    <input type="email" placeholder="you@company.com" required>
+                    <button type="submit">Join Waitlist</button>
+                </form>
+                <p class="form-note">Be first to know when we launch. No spam.</p>
             </div>
-            <div class="layer layer-2">
-                <!-- Rectangles will be generated by JavaScript -->
+
+            <div class="hero-visual">
+                <div class="mondrian-grid">
+                    <div class="mondrian-cell cell-red cell-span-2">Agent<br>Actions</div>
+                    <div class="mondrian-cell cell-white">Auth</div>
+                    <div class="mondrian-cell cell-blue">Scope</div>
+                    <div class="mondrian-cell cell-yellow cell-span-col-2">Evidence Log</div>
+                    <div class="mondrian-cell cell-white">Policy</div>
+                    <div class="mondrian-cell cell-white">Export</div>
+                    <div class="mondrian-cell cell-white">Audit</div>
+                </div>
             </div>
-            <div class="layer layer-3">
-                <!-- Rectangles will be generated by JavaScript -->
+        </section>
+
+        <!-- Problem -->
+        <section class="problem">
+            <div class="problem-inner">
+                <p class="section-label">The Problem</p>
+                <h2>AI agents are taking real actions in production. Your compliance team needs proof they're controlled.</h2>
+
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>Auth isn't enough</h3>
+                        <p>You've set up permissions, but can you prove to an auditor that agents only accessed what they were supposed to?</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Logs aren't evidence</h3>
+                        <p>Debug traces tell you what happened. They don't prove authorization or map to compliance controls.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Manual proof doesn't scale</h3>
+                        <p>Screenshots and spreadsheets worked for humans. AI agents make thousands of decisions a day.</p>
+                    </div>
+                </div>
             </div>
-            <div class="layer layer-4">
-                <!-- Rectangles will be generated by JavaScript -->
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works">
+            <p class="section-label">How It Works</p>
+            <h2>Caldris sits alongside your auth layer</h2>
+
+            <div class="stack-diagram">
+                <div class="stack-layer">
+                    <div class="stack-number">1</div>
+                    <div class="stack-content">
+                        <h4>Your Agent Orchestrator</h4>
+                        <p>LangChain, Semantic Kernel, or your own code</p>
+                    </div>
+                </div>
+                <div class="stack-arrow">↓</div>
+                <div class="stack-layer">
+                    <div class="stack-number">2</div>
+                    <div class="stack-content">
+                        <h4>Auth Layer (Arcade, Merge, etc.)</h4>
+                        <p>"Is this agent allowed to act as this user?"</p>
+                    </div>
+                </div>
+                <div class="stack-arrow">↓</div>
+                <div class="stack-layer caldris">
+                    <div class="stack-number">3</div>
+                    <div class="stack-content">
+                        <h4>Caldris Evidence Layer</h4>
+                        <p>"Prove it was authorized. Show the auditor."</p>
+                    </div>
+                </div>
+                <div class="stack-arrow">↓</div>
+                <div class="stack-layer">
+                    <div class="stack-number">4</div>
+                    <div class="stack-content">
+                        <h4>External Systems</h4>
+                        <p>Gmail, Slack, QuickBooks, your APIs</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="info-panel">
-            <h2>Caldris.io - The Operational Layer</h2>
-            <p>Systematic Coordination</p>
-            <p>Geometric Harmony</p>
-            <p>Functional Abstraction</p>
-            <p>Universal Principles</p>
-        </div>
-        
-        <div class="stats">
-            <div class="metric">
-                <span title="System Structure">Topology:</span>
-                <span class="metric-value" id="composition">0</span>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="features-inner">
+                <p class="section-label">What You Get</p>
+                <h2>Evidence, not just observability</h2>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <rect x="4" y="4" width="24" height="24" stroke="#FFD200" stroke-width="3"/>
+                                <path d="M10 16h12M16 10v12" stroke="#FFD200" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <h3>Immutable decision logs</h3>
+                        <p>Every agent action recorded with actor, intent, scopes requested vs. granted, and outcome.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <circle cx="16" cy="16" r="12" stroke="#FFD200" stroke-width="3"/>
+                                <path d="M12 16l3 3 6-6" stroke="#FFD200" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <h3>Pre-mapped compliance controls</h3>
+                        <p>Events tagged to SOC 2 CC6.1, CC7.2, HIPAA §164.312, and more. No manual mapping.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <rect x="6" y="8" width="20" height="16" stroke="#FFD200" stroke-width="3"/>
+                                <path d="M6 14h20" stroke="#FFD200" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <h3>One-click evidence export</h3>
+                        <p>Generate evidence bundles for Vanta, Drata, or your auditor in seconds.</p>
+                    </div>
+                </div>
             </div>
-            <div class="metric">
-                <span title="Evenness of Coordination">Load Balance:</span>
-                <span class="metric-value" id="balance">0%</span>
-            </div>
-            <div class="metric">
-                <span title="Elements in Motion">Active Agents:</span>
-                <span class="metric-value" id="elements">0</span>
-            </div>
-            <div class="metric">
-                <span title="System Activity Rate">Throughput:</span>
-                <span class="metric-value" id="rhythm">0</span>
-            </div>
-        </div>    
-    </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta">
+            <h2>Ready to prove your agents follow the rules?</h2>
+            <p>Join the waitlist. We're onboarding design partners now.</p>
+
+            <form class="waitlist-form" id="waitlist-cta">
+                <input type="email" placeholder="you@company.com" required>
+                <button type="submit">Join Waitlist</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Caldris. <a href="mailto:hello@caldris.io">hello@caldris.io</a></p>
+    </footer>
 
     <script>
-        // Generate rectangles for each layer
-        const layers = document.querySelectorAll('.layer');
-        const colors = ['red', 'blue', 'yellow', 'white', 'black'];
-        const totalRectangles = 36; // 6x6 grid
-        
-        layers.forEach((layer, layerIndex) => {
-            for (let i = 0; i < totalRectangles; i++) {
-                const rectangle = document.createElement('div');
-                rectangle.className = 'rectangle';
-                rectangle.dataset.index = i;
-                rectangle.dataset.layer = layerIndex;
-                
-                // Assign colors in De Stijl style - mostly white with strategic color placement
-                if (Math.random() < 0.15) {
-                    const colorIndex = Math.floor(Math.random() * colors.length);
-                    rectangle.classList.add(colors[colorIndex]);
-                } else {
-                    rectangle.classList.add('white');
+        // Waitlist form handling - PostHog best practices
+        document.querySelectorAll('.waitlist-form').forEach(form => {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = form.querySelector('input[type="email"]').value;
+                const button = form.querySelector('button');
+                const formId = form.id; // 'waitlist-hero' or 'waitlist-cta'
+                const originalText = button.textContent;
+
+                button.textContent = 'Joining...';
+                button.disabled = true;
+
+                // Track with PostHog using recommended pattern
+                if (window.posthog) {
+                    // Identify user by email
+                    posthog.identify(email, {
+                        email: email,
+                        waitlist_status: 'pending',
+                        waitlist_join_date: new Date().toISOString()
+                    });
+
+                    // Capture the waitlist event with properties
+                    posthog.capture('waitlist_joined', {
+                        signup_source: formId === 'waitlist-hero' ? 'hero' : 'cta',
+                        $set: {
+                            email: email,
+                            waitlist_status: 'pending',
+                            waitlist_join_date: new Date().toISOString()
+                        }
+                    });
                 }
-                
-                layer.appendChild(rectangle);
-            }
-        });
-        
-        // Animation system
-        let time = 0;
-        let activeElements = new Set();
-        
-        function updateMetrics() {
-            const composition = Math.floor(Math.random() * 100) + 1;
-            const balance = Math.floor(Math.random() * 15) + 85;
-            const elementCount = activeElements.size;
-            const rhythm = Math.floor(Math.random() * 10) + 1;
-            
-            document.getElementById('composition').textContent = composition;
-            document.getElementById('balance').textContent = balance + '%';
-            document.getElementById('elements').textContent = elementCount;
-            document.getElementById('rhythm').textContent = rhythm;
-        }
-        
-        function activateRandomElements() {
-            // Clear previous active elements
-            activeElements.forEach(element => {
-                element.classList.remove('active');
+
+                // Show success state
+                setTimeout(() => {
+                    button.textContent = 'You\'re in!';
+                    button.style.background = '#0057B8';
+                    button.style.borderColor = '#0057B8';
+                    form.querySelector('input').value = '';
+
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '';
+                        button.style.borderColor = '';
+                        button.disabled = false;
+                    }, 3000);
+                }, 500);
             });
-            activeElements.clear();
-            
-            // Activate new random elements across all layers
-            const allRectangles = document.querySelectorAll('.rectangle');
-            const numToActivate = Math.floor(Math.random() * 12) + 8;
-            
-            for (let i = 0; i < numToActivate; i++) {
-                const randomRect = allRectangles[Math.floor(Math.random() * allRectangles.length)];
-                randomRect.classList.add('active');
-                activeElements.add(randomRect);
-            }
-        }
-        
-        function randomizeColors() {
-            const allRectangles = document.querySelectorAll('.rectangle');
-            
-            allRectangles.forEach(rect => {
-                // Remove all color classes
-                colors.forEach(color => rect.classList.remove(color));
-                
-                // Add new color with De Stijl probability
-                if (Math.random() < 0.2) {
-                    const colorIndex = Math.floor(Math.random() * colors.length);
-                    rect.classList.add(colors[colorIndex]);
-                } else {
-                    rect.classList.add('white');
-                }
-            });
-        }
-        
-        function animate() {
-            time += 0.01;
-            
-            // Update active elements every 3 seconds
-            if (Math.floor(time * 10) % 30 === 0) {
-                activateRandomElements();
-            }
-            
-            // Update metrics every 2 seconds
-            if (Math.floor(time * 10) % 20 === 0) {
-                updateMetrics();
-            }
-            
-            // Randomize colors every 8 seconds
-            if (Math.floor(time * 10) % 80 === 0) {
-                randomizeColors();
-            }
-            
-            requestAnimationFrame(animate);
-        }
-        
-        // Start animation
-        animate();
-        
-        // Initial setup
-        activateRandomElements();
-        updateMetrics();
-        
-        // Mouse interaction - more subtle for De Stijl aesthetic
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            // Subtle rotation adjustment
-            const grid = document.querySelector('.operational-grid');
-            const rotateX = 10 + (mouseY - 0.5) * 5;
-            const rotateY = (mouseX - 0.5) * 10;
-            
-            grid.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        
-        // Reset on mouse leave
-        document.addEventListener('mouseleave', () => {
-            const grid = document.querySelector('.operational-grid');
-            grid.style.transform = '';
-        });
-        
-        // Rectangle hover effects
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.classList.contains('rectangle')) {
-                e.target.classList.add('active');
-            }
-        });
-        
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.classList.contains('rectangle')) {
-                if (!activeElements.has(e.target)) {
-                    e.target.classList.remove('active');
-                }
-            }
-        });
-        
-        // Make every rectangle click trigger a color randomization across all layers
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('rectangle')) {
-                randomizeColors();
-            }
         });
     </script>
 </body>
