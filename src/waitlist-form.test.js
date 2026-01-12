@@ -17,10 +17,10 @@ describe('WaitlistForm', () => {
     button = form.querySelector('button');
     waitlistForm = new WaitlistForm(form);
 
-    // Mock fetch
+    // Mock fetch (Web3Forms returns JSON)
     global.fetch.mockResolvedValue({
       ok: true,
-      json: async () => ({}),
+      json: async () => ({ success: true, message: 'Email sent successfully' }),
     });
 
     // Mock PostHog
@@ -40,8 +40,9 @@ describe('WaitlistForm', () => {
       expect(waitlistForm.originalButtonText).toBe('Join Waitlist');
     });
 
-    test('should have correct Formsubmit URL', () => {
-      expect(waitlistForm.formsubmitUrl).toBe('https://formsubmit.co/chris@caldris.io');
+    test('should have correct Web3Forms URL and API key', () => {
+      expect(waitlistForm.web3formsUrl).toBe('https://api.web3forms.com/submit');
+      expect(waitlistForm.web3formsKey).toBe('be39a141-110b-4797-9780-fb85498e239e');
     });
   });
 
@@ -142,27 +143,42 @@ describe('WaitlistForm', () => {
     });
   });
 
-  describe('submitToFormsubmit', () => {
-    test('should submit form data to Formsubmit', async () => {
+  describe('submitToWeb3Forms', () => {
+    test('should submit form data to Web3Forms', async () => {
       const email = 'test@example.com';
 
-      await waitlistForm.submitToFormsubmit(email);
+      await waitlistForm.submitToWeb3Forms(email);
 
       expect(global.fetch).toHaveBeenCalledTimes(1);
       expect(global.fetch).toHaveBeenCalledWith(
-        'https://formsubmit.co/chris@caldris.io',
+        'https://api.web3forms.com/submit',
         expect.objectContaining({
           method: 'POST',
-          body: expect.any(FormData)
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: expect.any(String)
         })
       );
+
+      // Verify the body contains the access key and email
+      const callArgs = global.fetch.mock.calls[0];
+      const bodyData = JSON.parse(callArgs[1].body);
+      expect(bodyData.access_key).toBe('be39a141-110b-4797-9780-fb85498e239e');
+      expect(bodyData.email).toBe(email);
     });
 
     test('should throw error on failed submission', async () => {
-      global.fetch.mockResolvedValueOnce({ ok: false });
+      global.fetch.mockResolvedValueOnce({
+        ok: false,
+        status: 400,
+        statusText: 'Bad Request',
+        json: async () => ({ message: 'Invalid access key' })
+      });
 
       await expect(
-        waitlistForm.submitToFormsubmit('test@example.com')
+        waitlistForm.submitToWeb3Forms('test@example.com')
       ).rejects.toThrow('Submission failed');
     });
   });
@@ -396,8 +412,13 @@ describe('WaitlistForm', () => {
 
       // Verify submission
       expect(global.fetch).toHaveBeenCalledWith(
-        'https://formsubmit.co/chris@caldris.io',
-        expect.objectContaining({ method: 'POST' })
+        'https://api.web3forms.com/submit',
+        expect.objectContaining({
+          method: 'POST',
+          headers: expect.objectContaining({
+            'Content-Type': 'application/json'
+          })
+        })
       );
 
       // Verify PostHog tracking
