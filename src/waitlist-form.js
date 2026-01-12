@@ -1,6 +1,6 @@
 /**
  * Waitlist form handler for Caldris.io
- * Handles form submission to Formsubmit and PostHog tracking
+ * Handles form submission to Web3Forms and PostHog tracking
  */
 
 class WaitlistForm {
@@ -10,7 +10,8 @@ class WaitlistForm {
     this.button = formElement.querySelector('button');
     this.formId = formElement.id;
     this.originalButtonText = this.button.textContent;
-    this.formsubmitUrl = 'https://formsubmit.co/chris@caldris.io';
+    this.web3formsUrl = 'https://api.web3forms.com/submit';
+    this.web3formsKey = 'be39a141-110b-4797-9780-fb85498e239e';
   }
 
   /**
@@ -51,28 +52,51 @@ class WaitlistForm {
    * Build form data for submission
    */
   buildFormData(email) {
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('source', this.getSignupSource());
-    formData.append('timestamp', new Date().toISOString());
-    formData.append('_subject', 'New Caldris Waitlist Signup');
-    formData.append('_captcha', 'false');
-    formData.append('_template', 'table');
-    return formData;
+    return {
+      access_key: this.web3formsKey,
+      email: email,
+      source: this.getSignupSource(),
+      timestamp: new Date().toISOString(),
+      subject: 'New Caldris Waitlist Signup',
+      from_name: 'Caldris Waitlist',
+      replyto: email
+    };
   }
 
   /**
-   * Submit form to Formsubmit
+   * Submit form to Web3Forms
    */
-  async submitToFormsubmit(email) {
+  async submitToWeb3Forms(email) {
     const formData = this.buildFormData(email);
-    const response = await fetch(this.formsubmitUrl, {
-      method: 'POST',
-      body: formData
+
+    console.log('🔵 [DEBUG] Submitting to Web3Forms:', {
+      url: this.web3formsUrl,
+      email: email,
+      source: this.getSignupSource(),
+      timestamp: new Date().toISOString()
     });
 
+    const response = await fetch(this.web3formsUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    console.log('🔵 [DEBUG] Web3Forms response:', {
+      status: response.status,
+      statusText: response.statusText,
+      ok: response.ok
+    });
+
+    // Get response body for debugging
+    const responseData = await response.json();
+    console.log('🔵 [DEBUG] Web3Forms response body:', responseData);
+
     if (!response.ok) {
-      throw new Error('Submission failed');
+      throw new Error(`Submission failed: ${response.status} ${response.statusText} - ${responseData.message || 'Unknown error'}`);
     }
 
     return response;
@@ -147,16 +171,23 @@ class WaitlistForm {
     this.setButtonState('Joining...', true);
 
     try {
-      // Submit to Formsubmit
-      await this.submitToFormsubmit(email);
+      // Submit to Web3Forms
+      console.log('🔵 [DEBUG] Starting form submission for:', email);
+      await this.submitToWeb3Forms(email);
 
       // Track with PostHog
+      console.log('🔵 [DEBUG] Tracking with PostHog');
       this.trackWithPostHog(email);
 
       // Show success
+      console.log('✅ [DEBUG] Form submission successful!');
       this.showSuccess();
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('❌ [DEBUG] Form submission error:', {
+        message: error.message,
+        stack: error.stack,
+        error: error
+      });
       this.showError();
     }
   }

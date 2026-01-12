@@ -1,3 +1,3 @@
 ## About Caldris.io
-Caldris is building an operational layer of AI agents to simplify complex business operations.  
+Caldris is building compliance-ready audit trails for AI agents
 [Learn more →](https://caldris.io)

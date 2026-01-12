@@ -1,13 +1,13 @@
 # Waitlist Email Storage Setup ✅
 
-## Current Setup: Formsubmit (Simplest Option)
+## Current Setup: Web3Forms (Reliable & Free)
 
-Your email form is now configured to send submissions to **chris@caldris.io** using Formsubmit.
+Your email form is now configured to send submissions to **chris@caldris.io** using Web3Forms.
 
 ### How it works:
 1. When someone submits the form, you'll receive an email at **chris@caldris.io**
-2. On the FIRST submission, you'll get a confirmation email - just click the link to activate
-3. After that, all submissions come directly to your inbox as nicely formatted emails
+2. No confirmation needed - emails start arriving immediately
+3. All submissions come directly to your inbox as nicely formatted emails
 
 ### What's included in each email:
 - Email address submitted
@@ -15,18 +15,16 @@ Your email form is now configured to send submissions to **chris@caldris.io** us
 - Timestamp
 
 ### To change the destination email:
-Edit line 636 in `index.html`:
-```javascript
-const response = await fetch('https://formsubmit.co/chris@caldris.io', {
-```
-Replace `chris@caldris.io` with your preferred email.
+1. Go to https://web3forms.com and get a new access key with your email
+2. Update the `web3formsKey` in `src/waitlist-form.js` (line 14)
 
 ## Benefits of this setup:
-- ✅ **Zero signup required** - works immediately
-- ✅ **Completely free** - unlimited submissions
+- ✅ **No confirmation needed** - works immediately
+- ✅ **Completely free** - 250 submissions/month
 - ✅ **No database needed** - emails go straight to your inbox
 - ✅ **PostHog tracking** - still captures analytics
-- ✅ **Professional format** - emails are formatted as tables
+- ✅ **Better deliverability** - more reliable than Formsubmit
+- ✅ **Spam protection** - built-in hCaptcha integration available
 
 ## Alternative: Google Sheets Integration
 
@@ -50,6 +48,5 @@ const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
 ## Testing:
 1. Deploy your site
 2. Submit a test email
-3. Check your inbox for the confirmation email (first time only)
-4. Click confirm
-5. All future submissions will arrive automatically!
+3. Check your inbox at chris@caldris.io - email should arrive within 1-2 minutes
+4. All future submissions will arrive automatically!
