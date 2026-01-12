@@ -2,10 +2,10 @@
 
 ## Current Setup: Formsubmit (Simplest Option)
 
-Your email form is now configured to send submissions to **hello@caldris.io** using Formsubmit.
+Your email form is now configured to send submissions to **chris@caldris.io** using Formsubmit.
 
 ### How it works:
-1. When someone submits the form, you'll receive an email at **hello@caldris.io**
+1. When someone submits the form, you'll receive an email at **chris@caldris.io**
 2. On the FIRST submission, you'll get a confirmation email - just click the link to activate
 3. After that, all submissions come directly to your inbox as nicely formatted emails
 
@@ -15,11 +15,11 @@ Your email form is now configured to send submissions to **hello@caldris.io** us
 - Timestamp
 
 ### To change the destination email:
-Edit line 637 in `index.html`:
+Edit line 636 in `index.html`:
 ```javascript
-const response = await fetch('https://formsubmit.co/hello@caldris.io', {
+const response = await fetch('https://formsubmit.co/chris@caldris.io', {
 ```
-Replace `hello@caldris.io` with your preferred email.
+Replace `chris@caldris.io` with your preferred email if needed.
 
 ## Benefits of this setup:
 - ✅ **Zero signup required** - works immediately
@@ -50,6 +50,6 @@ const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
 ## Testing:
 1. Deploy your site
 2. Submit a test email
-3. Check your inbox for the confirmation email (first time only)
+3. Check chris@caldris.io inbox for the confirmation email (first time only)
 4. Click confirm
 5. All future submissions will arrive automatically!
