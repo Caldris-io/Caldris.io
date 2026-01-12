@@ -66,13 +66,35 @@ class WaitlistForm {
    */
   async submitToFormsubmit(email) {
     const formData = this.buildFormData(email);
+
+    console.log('🔵 [DEBUG] Submitting to Formsubmit:', {
+      url: this.formsubmitUrl,
+      email: email,
+      source: this.getSignupSource(),
+      timestamp: new Date().toISOString()
+    });
+
     const response = await fetch(this.formsubmitUrl, {
       method: 'POST',
       body: formData
     });
 
+    console.log('🔵 [DEBUG] Formsubmit response:', {
+      status: response.status,
+      statusText: response.statusText,
+      ok: response.ok,
+      headers: {
+        contentType: response.headers.get('content-type'),
+        location: response.headers.get('location')
+      }
+    });
+
+    // Try to get response body for debugging
+    const responseText = await response.text();
+    console.log('🔵 [DEBUG] Formsubmit response body:', responseText);
+
     if (!response.ok) {
-      throw new Error('Submission failed');
+      throw new Error(`Submission failed: ${response.status} ${response.statusText} - ${responseText}`);
     }
 
     return response;
@@ -148,15 +170,22 @@ class WaitlistForm {
 
     try {
       // Submit to Formsubmit
+      console.log('🔵 [DEBUG] Starting form submission for:', email);
       await this.submitToFormsubmit(email);
 
       // Track with PostHog
+      console.log('🔵 [DEBUG] Tracking with PostHog');
       this.trackWithPostHog(email);
 
       // Show success
+      console.log('✅ [DEBUG] Form submission successful!');
       this.showSuccess();
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('❌ [DEBUG] Form submission error:', {
+        message: error.message,
+        stack: error.stack,
+        error: error
+      });
       this.showError();
     }
   }
