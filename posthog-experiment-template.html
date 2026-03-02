@@ -1,0 +1,117 @@
+<!--
+  PostHog A/B Test Template
+  ==========================
+  Copy-paste pattern for adding experiments to any page.
+  Reference implementation: Eagle Ridge hero-variant experiment.
+
+  3-Part Pattern:
+    1. CSS: Anti-FOUC hiding (variants hidden by default)
+    2. HTML: Variant A (control) + Variant B (test) containers
+    3. JS: showVariant() with guard + fallback timer + onFeatureFlags callback
+
+  Setup:
+    1. Copy the CSS, HTML, and JS sections into your page
+    2. Replace "your-experiment" with your experiment name
+    3. Replace "your-feature-flag" with your PostHog feature flag key
+    4. Create the feature flag in PostHog dashboard with:
+       - Key: your-feature-flag
+       - Variants: "control" and "test" (50/50 split)
+    5. Create an experiment linked to that feature flag
+-->
+
+<!-- ============================================================
+     STEP 1: CSS — Anti-FOUC (Flash of Unstyled Content)
+     Add this to your <style> block or stylesheet.
+     Both variants start hidden so the user never sees a flash.
+     ============================================================ -->
+<style>
+    .experiment-variant { display: none; }
+</style>
+
+
+<!-- ============================================================
+     STEP 2: HTML — Variant containers
+     Place these where the experiment content should appear.
+     Only one will be shown based on the feature flag.
+     ============================================================ -->
+
+<!-- Variant A (control): Your current/default content -->
+<div id="your-experiment-variant-a" class="experiment-variant">
+    <h1>Control Headline</h1>
+    <p>This is what users see by default (and when PostHog is blocked).</p>
+</div>
+
+<!-- Variant B (test): The variation you're testing -->
+<div id="your-experiment-variant-b" class="experiment-variant">
+    <h1>Test Headline</h1>
+    <p>This is the alternative you're measuring against control.</p>
+</div>
+
+
+<!-- ============================================================
+     STEP 3: JS — Experiment routing
+     Add this in a <script> tag at the bottom of <body>.
+
+     The 3-part pattern:
+       1. showVariant() — idempotent display function with guard
+       2. setTimeout fallback — guarantees content shows (1.5s)
+       3. posthog.onFeatureFlags() — routes based on flag value
+
+     WHY THIS ORDER MATTERS:
+       - The fallback timer is registered FIRST
+       - If PostHog loads fast, onFeatureFlags fires and the timer
+         becomes a no-op (because `shown` is already true)
+       - If PostHog is blocked/slow, the timer fires after 1.5s
+         and shows the control variant — no blank hero
+     ============================================================ -->
+<script>
+(function() {
+    var shown = false;
+
+    // Part 1: Idempotent display function
+    // The `shown` guard ensures only one variant ever displays,
+    // regardless of whether the timer or PostHog fires first.
+    function showVariant(variant) {
+        if (shown) return;
+        shown = true;
+        var el = document.getElementById('your-experiment-variant-' + variant);
+        if (el) {
+            el.style.display = 'block';
+        }
+        // Track which variant was shown (for experiment analysis)
+        try {
+            if (typeof posthog !== 'undefined' && posthog.capture) {
+                posthog.capture('experiment_variant_shown', {
+                    experiment: 'your-experiment',
+                    variant: variant
+                });
+            }
+        } catch (e) { /* tracking is non-critical */ }
+    }
+
+    // Part 2: Fallback timer (registered FIRST)
+    // Guarantees content appears even if PostHog is blocked by
+    // ad blockers, privacy extensions, or network issues.
+    // 1500ms is enough for PostHog to load on good connections,
+    // short enough that users don't see a blank section.
+    setTimeout(function() {
+        if (!shown) showVariant('a');
+    }, 1500);
+
+    // Part 3: PostHog feature flag routing
+    // onFeatureFlags fires once flags are loaded from the server.
+    // getFeatureFlag returns the variant string ("control" or "test").
+    try {
+        if (typeof posthog !== 'undefined' && posthog.onFeatureFlags) {
+            posthog.onFeatureFlags(function() {
+                var flag = posthog.getFeatureFlag('your-feature-flag');
+                if (flag === 'test') {
+                    showVariant('b');
+                } else {
+                    showVariant('a');
+                }
+            });
+        }
+    } catch (e) { /* PostHog unavailable — fallback timer handles it */ }
+})();
+</script>

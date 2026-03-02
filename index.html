@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onFeatureFlags onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_pPUCpQb90Nv08nzcLLtDrZQgXy1xTqTHuSKTTNVbPS7', {
         api_host: 'https://us.i.posthog.com',
         person_profiles: 'identified_only',
@@ -411,6 +411,9 @@
             color: var(--red);
         }
 
+        /* A/B Test: Hide variants until PostHog decides */
+        .hero-variant { display: none; }
+
         /* Responsive */
         @media (max-width: 900px) {
             .hero {
@@ -463,17 +466,34 @@
     </header>
 
     <main>
-        <!-- Hero -->
+        <!-- Hero (A/B Test: caldris-hero-variant) -->
         <section class="hero">
-            <div class="hero-content">
-                <h1>Compliance-ready audit trails for <span>AI agents</span></h1>
-                <p>Prove Zero Trust to your auditor. Immutable logs that map to SOC 2, HIPAA, and more.</p>
+            <!-- Variant A (control): Current messaging -->
+            <div id="caldris-hero-variant-a" class="hero-variant">
+                <div class="hero-content">
+                    <h1>Compliance-ready audit trails for <span>AI agents</span></h1>
+                    <p>Prove Zero Trust to your auditor. Immutable logs that map to SOC 2, HIPAA, and more.</p>
 
-                <form class="waitlist-form" id="waitlist-hero">
-                    <input type="email" placeholder="you@company.com" required>
-                    <button type="submit">Join Waitlist</button>
-                </form>
-                <p class="form-note">Be first to know when we launch. No spam.</p>
+                    <form class="waitlist-form" id="waitlist-hero">
+                        <input type="email" placeholder="you@company.com" required>
+                        <button type="submit">Join Waitlist</button>
+                    </form>
+                    <p class="form-note">Be first to know when we launch. No spam.</p>
+                </div>
+            </div>
+
+            <!-- Variant B (test): Replace this with your test copy -->
+            <div id="caldris-hero-variant-b" class="hero-variant">
+                <div class="hero-content">
+                    <h1>Your AI agents act. <span>Prove they followed the rules.</span></h1>
+                    <p>Automated compliance evidence for every agent action. SOC 2, HIPAA, and ISO 27001 — mapped and audit-ready.</p>
+
+                    <form class="waitlist-form" id="waitlist-hero-b">
+                        <input type="email" placeholder="you@company.com" required>
+                        <button type="submit">Get Early Access</button>
+                    </form>
+                    <p class="form-note">Design partner spots limited. No spam.</p>
+                </div>
             </div>
 
             <div class="hero-visual">
@@ -618,6 +638,50 @@
         } else {
             initializeWaitlistForms();
         }
+    </script>
+
+    <!-- A/B Test: caldris-hero-variant -->
+    <script>
+    (function() {
+        var shown = false;
+
+        function showVariant(variant) {
+            if (shown) return;
+            shown = true;
+            var el = document.getElementById('caldris-hero-variant-' + variant);
+            if (el) {
+                el.style.display = 'block';
+            }
+            try {
+                if (typeof posthog !== 'undefined' && posthog.capture) {
+                    posthog.capture('hero_variant_shown', {
+                        experiment: 'caldris-hero-variant',
+                        variant: variant
+                    });
+                }
+            } catch (e) { /* tracking is non-critical */ }
+        }
+
+        // Fallback: show control after 1.5s if PostHog hasn't loaded
+        setTimeout(function() {
+            if (!shown) showVariant('a');
+        }, 1500);
+
+        // PostHog feature flag routing
+        try {
+            if (typeof posthog !== 'undefined' && posthog.onFeatureFlags) {
+                posthog.onFeatureFlags(function() {
+                    var flag = posthog.getFeatureFlag('caldris-hero-variant');
+                    if (flag === 'test') {
+                        showVariant('b');
+                    } else {
+                        showVariant('a');
+                    }
+                });
+            }
+        } catch (e) { /* PostHog unavailable — fallback timer handles it */ }
+
+    })();
     </script>
 </body>
 </html>
