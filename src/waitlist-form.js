@@ -18,7 +18,8 @@ class WaitlistForm {
    * Get the signup source based on form ID
    */
   getSignupSource() {
-    return this.formId === 'waitlist-hero' ? 'hero' : 'cta';
+    var sources = { 'waitlist-hero': 'hero', 'waitlist-cta': 'cta' };
+    return sources[this.formId] || this.formId;
   }
 
   /**
