@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Caldris — Evidence Viewer</title>
+<style>
+  :root{--red:#E41E26;--yellow:#FFD200;--blue:#0057B8;--black:#111;--cream:#FAE5BE;--white:#fff;--green:#0a8a3f;--mut:#666}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--black);line-height:1.5}
+  header{display:flex;align-items:center;gap:14px;padding:20px 28px;border-bottom:4px solid var(--black);background:var(--white)}
+  .logo{width:34px;height:34px;border:3px solid var(--black);display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr}
+  .logo i{display:block}.logo .a{background:var(--red);grid-row:span 2}.logo .b{background:var(--blue)}.logo .c{background:var(--yellow)}
+  h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+  .tag{font-size:12px;color:var(--mut);font-weight:500}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 28px}
+  .banner{display:flex;align-items:center;gap:14px;padding:16px 20px;border:3px solid var(--black);font-weight:600;margin-bottom:22px}
+  .banner.ok{background:#e7f6ec;border-color:var(--green);color:var(--green)}
+  .banner.bad{background:#fde8e9;border-color:var(--red);color:var(--red)}
+  .banner .big{font-size:22px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+  .stat{border:3px solid var(--black);background:var(--white);padding:16px 18px}
+  .stat .n{font-size:28px;font-weight:700}.stat .l{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut)}
+  .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--red);margin:6px 0 10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .chip{border:2px solid var(--black);background:var(--white);padding:5px 10px;font-size:12px;font-weight:600}
+  .chip b{color:var(--blue)}
+  table{width:100%;border-collapse:collapse;background:var(--white);border:3px solid var(--black);font-size:13px}
+  th{background:var(--black);color:var(--white);text-align:left;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  td{padding:10px 12px;border-top:1px solid #ddd;vertical-align:top}
+  tr.row{cursor:pointer}tr.row:hover{background:#fbf3df}
+  tr.tampered td{background:#fde8e9}
+  .seq{font-variant-numeric:tabular-nums;color:var(--mut)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+  .badge{display:inline-block;padding:2px 8px;border:2px solid var(--black);font-size:11px;font-weight:700;text-transform:uppercase}
+  .b-allow{background:#e7f6ec;color:var(--green);border-color:var(--green)}
+  .b-deny{background:#fde8e9;color:var(--red);border-color:var(--red)}
+  .cat{font-weight:600}
+  .detail td{background:#faf6ec}
+  .detail pre{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,monospace;font-size:12px;margin:4px 0}
+  .kv{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;font-size:12px}
+  .kv .k{color:var(--mut);font-weight:600}
+  .scope{display:inline-block;border:1px solid #aaa;background:#fff;padding:1px 6px;margin:1px;font-size:11px}
+  .scope.granted{border-color:var(--green)}.scope.denied{border-color:var(--red);text-decoration:line-through;color:var(--red)}
+  .ctrl{display:inline-block;background:var(--yellow);border:1px solid var(--black);padding:1px 6px;margin:1px;font-size:11px;font-weight:600}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+  button{font-family:inherit;font-weight:600;font-size:13px;padding:9px 16px;border:3px solid var(--black);background:var(--black);color:#fff;cursor:pointer}
+  button.alt{background:var(--white);color:var(--black)}
+  button:hover{background:var(--red);border-color:var(--red);color:#fff}
+  .drop{margin-left:auto;font-size:12px;color:var(--mut)}
+  footer{max-width:1180px;margin:0 auto;padding:18px 28px 40px;font-size:12px;color:var(--mut)}
+  .redact{color:var(--mut);font-style:italic}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i></div>
+  <div><h1>Caldris Evidence Viewer</h1><div class="tag" id="meta">Tamper-evident audit trail for coding agents</div></div>
+</header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <button id="reverify" class="alt">Re-verify chain</button>
+    <button id="tamper">Tamper test ⚠</button>
+    <span class="drop">Drag &amp; drop a <span class="mono">bundle.json</span> or <span class="mono">.jsonl</span> to load your own evidence</span>
+  </div>
+
+  <div class="banner" id="banner"><span class="big">…</span><span id="banner-text">Verifying…</span></div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="section-label">Compliance control coverage</div>
+  <div class="chips" id="coverage"></div>
+
+  <div class="section-label">Decision log</div>
+  <table id="log"><thead><tr>
+    <th>#</th><th>Time</th><th>Actor</th><th>Action</th><th>Category</th><th>Decision</th><th>Outcome</th><th>Controls</th>
+  </tr></thead><tbody id="rows"></tbody></table>
+</div>
+
+<footer>
+  Each record is hash-chained (SHA-256 over canonical JSON) to the one before it; this page recomputes every
+  hash in your browser to detect any alteration. Self-contained — no network calls, no backend.
+  <br />Generated by Caldris · <a href="https://caldris.io" style="color:var(--black)">caldris.io</a>
+</footer>
+
+<script>
+// Embedded bundle (replaced by `caldris export`). Null => built-in demo.
+const EMBEDDED = /* __CALDRIS_BUNDLE__ */ null /* __END__ */;
+const GENESIS = 'sha256:' + '0'.repeat(64);
+
+// --- canonicalization + hashing: byte-for-byte identical to src/lib/evidence.js ---
+function canonicalize(v){
+  if(v===null||typeof v!=='object') return JSON.stringify(v);
+  if(Array.isArray(v)) return '['+v.map(canonicalize).join(',')+']';
+  return '{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonicalize(v[k])).join(',')+'}';
+}
+async function sha256Hex(s){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function hashable(rec){const c={...rec};delete c.hash;delete c.sig;return canonicalize(c);}
+async function recordHash(rec){return 'sha256:'+await sha256Hex(hashable(rec));}
+
+async function chainBuild(records){ // assign seq/prev_hash/hash to raw records (demo)
+  let prev=null;
+  for(const r of records){
+    r.seq=prev?prev.seq+1:0;
+    r.prev_hash=prev?prev.hash:GENESIS;
+    r.hash=await recordHash(r);
+    prev=r;
+  }
+  return records;
+}
+async function verifyChain(records){
+  const bad=new Set(); let prevHash=GENESIS, expSeq=0;
+  for(const r of records){
+    let ok = r.seq===expSeq && r.prev_hash===prevHash && (await recordHash(r))===r.hash;
+    if(!ok) bad.add(r.seq);
+    prevHash=r.hash; expSeq=r.seq+1;
+  }
+  return bad;
+}
+
+// --- demo data (used when no bundle embedded) ---
+function demoRecords(){
+  const base=(o)=>Object.assign({v:1,id:crypto.randomUUID(),redactions:[]},o);
+  return [
+    base({ts:'2026-06-18T14:00:01Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
+      action:{tool:'Read',category:'fs.read',phase:'tool_call',intent:'Read src/app.js',target:'src/app.js'},
+      scopes:{requested:['fs:read:src/app.js'],granted:['fs:read:src/app.js'],decision:'allow',permission_mode:'default'},
+      outcome:{status:'success',summary:'42 lines'},controls:['SOC2:CC6.1','SOC2:CC7.2','HIPAA:164.312(a)(1)','HIPAA:164.312(b)']}),
+    base({ts:'2026-06-18T14:00:07Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
+      action:{tool:'Write',category:'fs.write',phase:'tool_call',intent:'Write src/app.js',target:'src/app.js'},
+      scopes:{requested:['fs:write:src/app.js'],granted:['fs:write:src/app.js'],decision:'allow',permission_mode:'acceptEdits'},
+      outcome:{status:'success',summary:'wrote 51 lines'},controls:['SOC2:CC6.1','SOC2:CC6.3','SOC2:CC7.2','SOC2:CC8.1','HIPAA:164.312(a)(1)','HIPAA:164.312(b)','HIPAA:164.312(c)(1)']}),
+    base({ts:'2026-06-18T14:00:15Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
+      action:{tool:'Bash',category:'shell',phase:'tool_call',intent:'$ curl -s https://api.internal/secrets',target:'curl -s https://api.internal/secrets'},
+      scopes:{requested:['shell:exec','net:egress'],granted:[],decision:'deny',permission_mode:'default'},
+      outcome:{status:'blocked',summary:'blocked by permission policy'},controls:['SOC2:CC6.1','SOC2:CC7.2','HIPAA:164.312(b)','HIPAA:164.312(e)(1)']}),
+    base({ts:'2026-06-18T14:00:22Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'subagent',principal:'chris@caldris.io'},
+      action:{tool:'mcp__github__create_pull_request',category:'mcp',phase:'tool_call',intent:'github.create_pull_request(owner, repo, title, head, base)',target:'caldris-io/caldris.io'},
+      scopes:{requested:['mcp:github:create_pull_request'],granted:['mcp:github:create_pull_request'],decision:'allow',permission_mode:'default'},
+      outcome:{status:'success',summary:'opened PR #8'},controls:['SOC2:CC6.1','SOC2:CC6.3','SOC2:CC7.2','HIPAA:164.312(a)(1)','HIPAA:164.312(b)']}),
+    base({ts:'2026-06-18T14:00:31Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
+      action:{tool:'Bash',category:'shell',phase:'tool_call',intent:'$ git push -u origin feature',target:'git push -u origin feature'},
+      scopes:{requested:['shell:exec','git:push'],granted:['shell:exec','git:push'],decision:'allow',permission_mode:'default'},
+      outcome:{status:'success',summary:'pushed 1 commit'},controls:['SOC2:CC6.1','SOC2:CC6.3','SOC2:CC7.2','SOC2:CC8.1','HIPAA:164.312(a)(1)','HIPAA:164.312(b)']}),
+  ];
+}
+
+let RECORDS=[];
+function esc(s){return String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+function render(bad){
+  const total=RECORDS.length;
+  const denied=RECORDS.filter(r=>r.scopes.decision==='deny').length;
+  const cov={}; RECORDS.forEach(r=>(r.controls||[]).forEach(c=>cov[c]=(cov[c]||0)+1));
+  const subs=RECORDS.filter(r=>r.actor.agent_type==='subagent').length;
+
+  document.getElementById('stats').innerHTML=[
+    ['Records',total],['Denied / blocked',denied],['Controls covered',Object.keys(cov).length],['Sub-agent actions',subs]
+  ].map(([l,n])=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+
+  document.getElementById('coverage').innerHTML=Object.keys(cov).sort().map(c=>
+    `<span class="chip">${esc(c)} <b>×${cov[c]}</b></span>`).join('') || '<span class="tag">none</span>';
+
+  const rows=document.getElementById('rows'); rows.innerHTML='';
+  RECORDS.forEach(r=>{
+    const tr=document.createElement('tr'); tr.className='row'+(bad.has(r.seq)?' tampered':'');
+    const dec=r.scopes.decision==='deny'?'<span class="badge b-deny">deny</span>':'<span class="badge b-allow">allow</span>';
+    const intent=esc(r.action.intent).replace(/« redacted:[^»]+»/g,m=>`<span class="redact">${m}</span>`);
+    tr.innerHTML=`<td class="seq">${r.seq}${bad.has(r.seq)?' ⚠':''}</td>
+      <td class="mono">${esc((r.ts||'').replace('T',' ').replace(/\..*/,''))}</td>
+      <td>${esc(r.actor.principal||r.actor.agent)}${r.actor.agent_type==='subagent'?' <span class="tag">(sub)</span>':''}</td>
+      <td class="mono">${intent}</td>
+      <td class="cat">${esc(r.action.category)}</td>
+      <td>${dec}</td>
+      <td>${esc(r.outcome.status)}</td>
+      <td>${(r.controls||[]).slice(0,2).map(c=>`<span class="ctrl">${esc(c)}</span>`).join('')}${(r.controls||[]).length>2?` +${r.controls.length-2}`:''}</td>`;
+    const det=document.createElement('tr'); det.className='detail'; det.style.display='none';
+    det.innerHTML=`<td colspan="8"><div class="kv">
+      <div class="k">Requested</div><div>${r.scopes.requested.map(s=>`<span class="scope">${esc(s)}</span>`).join('')}</div>
+      <div class="k">Granted</div><div>${r.scopes.requested.map(s=>{const g=r.scopes.granted.includes(s);return `<span class="scope ${g?'granted':'denied'}">${esc(s)}</span>`;}).join('')}</div>
+      <div class="k">Permission mode</div><div class="mono">${esc(r.scopes.permission_mode)}</div>
+      <div class="k">Outcome</div><div>${esc(r.outcome.summary)}</div>
+      <div class="k">Controls</div><div>${(r.controls||[]).map(c=>`<span class="ctrl">${esc(c)}</span>`).join('')}</div>
+      ${r.redactions&&r.redactions.length?`<div class="k">Redactions</div><div>${r.redactions.map(esc).join(', ')}</div>`:''}
+      <div class="k">Hash</div><div class="mono" style="word-break:break-all">${esc(r.hash)}</div>
+      <div class="k">Prev</div><div class="mono" style="word-break:break-all">${esc(r.prev_hash)}</div>
+      </div></td>`;
+    tr.onclick=()=>{det.style.display=det.style.display==='none'?'':'none';};
+    rows.appendChild(tr); rows.appendChild(det);
+  });
+}
+
+async function refresh(){
+  const bad=await verifyChain(RECORDS);
+  const b=document.getElementById('banner');
+  if(bad.size===0){b.className='banner ok';b.innerHTML='<span class="big">✓</span><span>Chain verified — '+RECORDS.length+' records intact, no tampering detected.</span>';}
+  else{b.className='banner bad';b.innerHTML='<span class="big">✕</span><span>TAMPER DETECTED — '+bad.size+' record(s) altered (rows #'+[...bad].join(', #')+'). The hash chain no longer validates.</span>';}
+  render(bad);
+}
+
+async function load(bundle){
+  if(bundle && bundle.records){ RECORDS=bundle.records;
+    document.getElementById('meta').textContent='Bundle generated '+(bundle.generated_at||'')+' · '+RECORDS.length+' records'; }
+  else { RECORDS=await chainBuild(demoRecords());
+    document.getElementById('meta').textContent='Demo evidence (no bundle embedded) · drop your own to load'; }
+  await refresh();
+}
+
+document.getElementById('reverify').onclick=refresh;
+document.getElementById('tamper').onclick=async()=>{
+  if(!RECORDS.length)return;
+  const i=Math.min(2,RECORDS.length-1);
+  RECORDS[i].outcome.summary='(silently edited after the fact)';
+  await refresh();
+};
+window.addEventListener('dragover',e=>e.preventDefault());
+window.addEventListener('drop',async e=>{
+  e.preventDefault(); const f=e.dataTransfer.files[0]; if(!f)return;
+  const text=await f.text();
+  try{
+    if(f.name.endsWith('.jsonl')){RECORDS=text.split('\n').filter(l=>l.trim()).map(l=>JSON.parse(l));
+      document.getElementById('meta').textContent=f.name+' · '+RECORDS.length+' records'; await refresh();}
+    else{await load(JSON.parse(text));}
+  }catch(err){alert('Could not parse '+f.name+': '+err.message);}
+});
+
+load(EMBEDDED);
+</script>
+</body>
+</html>

@@ -1,0 +1,2858 @@
+{
+  "caldris_bundle_version": 1,
+  "generated_at": "2026-06-18T20:32:10.335Z",
+  "record_count": 68,
+  "frameworks": [
+    "SOC2",
+    "HIPAA"
+  ],
+  "records": [
+    {
+      "v": 1,
+      "id": "46ec81bc-2fe7-4bcd-af18-d7c7f1db571c",
+      "ts": "2026-06-18T02:12:46.719Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ git log --oneline -10 2>/dev/null; echo \"---BRANCH---\"; git branch -a; echo \"---STATUS---\"; git status; echo \"---FILES---\"; ls -la",
+        "target": "git log --oneline -10 2>/dev/null; echo \"---BRANCH---\"; git branch -a; echo \"---STATUS---\"; git status; echo \"---FILES--"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "6d38236 Merge pull request #6 from Caldris-io/feature/posthog-experiments\nf9d4ff7 Consolidate PostHog to shared project and remove dead A/B test\n3619c53 Merge pull request #5 from Caldris-io/feature/posthog-experiments\n077c6e4 Add PostHog A"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 0,
+      "prev_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "sha256:2a68814bf4651939ed139aa195bddeef5458f9712b0721bf64b76e73a6f2b824"
+    },
+    {
+      "v": 1,
+      "id": "f457b3c0-d34b-452e-bfb2-fe9028341981",
+      "ts": "2026-06-18T02:12:46.897Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "ToolSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "ToolSearch(max_results, query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:ToolSearch"
+        ],
+        "granted": [
+          "tool:ToolSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "  "
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 1,
+      "prev_hash": "sha256:2a68814bf4651939ed139aa195bddeef5458f9712b0721bf64b76e73a6f2b824",
+      "hash": "sha256:6afe8f6e1404c2509d4e6c2f97d207073516f26bfcb5c558802957f4d048197f"
+    },
+    {
+      "v": 1,
+      "id": "291ea939-c338-4ab8-a3e9-762b38c42cc8",
+      "ts": "2026-06-18T02:12:53.882Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Read",
+        "category": "fs.read",
+        "phase": "tool_call",
+        "intent": "Read /home/user/Caldris.io/index.html",
+        "target": "/home/user/Caldris.io/index.html"
+      },
+      "scopes": {
+        "requested": [
+          "fs:read:/home/user/Caldris.io/index.html"
+        ],
+        "granted": [
+          "fs:read:/home/user/Caldris.io/index.html"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "1\t<!DOCTYPE html>\n2\t<html lang=\"en\">\n3\t<head>\n4\t    <script>\n5\t    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(\".\");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 2,
+      "prev_hash": "sha256:6afe8f6e1404c2509d4e6c2f97d207073516f26bfcb5c558802957f4d048197f",
+      "hash": "sha256:80a9a6ce3e1738320a5cce4576fc2c2340619411ed1d8db770c2fff04eff98b2"
+    },
+    {
+      "v": 1,
+      "id": "17fbc270-92cd-44cd-abbe-a5a291e4b624",
+      "ts": "2026-06-18T02:12:54.353Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Read",
+        "category": "fs.read",
+        "phase": "tool_call",
+        "intent": "Read /home/user/Caldris.io/README.md",
+        "target": "/home/user/Caldris.io/README.md"
+      },
+      "scopes": {
+        "requested": [
+          "fs:read:/home/user/Caldris.io/README.md"
+        ],
+        "granted": [
+          "fs:read:/home/user/Caldris.io/README.md"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "1\t## About Caldris.io\n2\tCaldris is building compliance-ready audit trails for AI agents\n3\t[Learn more →](https://caldris.io)\n4\t"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 3,
+      "prev_hash": "sha256:80a9a6ce3e1738320a5cce4576fc2c2340619411ed1d8db770c2fff04eff98b2",
+      "hash": "sha256:02795de457d087a68c64c850c14d2a1f3e4fc8313dc19de57e42d12adfd2c64b"
+    },
+    {
+      "v": 1,
+      "id": "31657d9c-b221-400f-a74a-bf47375a29a1",
+      "ts": "2026-06-18T02:12:54.824Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Read",
+        "category": "fs.read",
+        "phase": "tool_call",
+        "intent": "Read /home/user/Caldris.io/PR_DESCRIPTION.md",
+        "target": "/home/user/Caldris.io/PR_DESCRIPTION.md"
+      },
+      "scopes": {
+        "requested": [
+          "fs:read:/home/user/Caldris.io/PR_DESCRIPTION.md"
+        ],
+        "granted": [
+          "fs:read:/home/user/Caldris.io/PR_DESCRIPTION.md"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "1\t## Problem\n2\t\n3\tForm submissions were showing success (\"You're in!\") but **no emails were being delivered** to chris@caldris.io. Multiple test submissions were made with zero emails received - not even the initial Formsubmit confirmation "
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 4,
+      "prev_hash": "sha256:02795de457d087a68c64c850c14d2a1f3e4fc8313dc19de57e42d12adfd2c64b",
+      "hash": "sha256:42c191673ee2cadcf31685dbc7eac438ae04f692194924a1bb35ea2826f97be6"
+    },
+    {
+      "v": 1,
+      "id": "424480c9-1ffb-48c9-9537-cc40c53a2c4d",
+      "ts": "2026-06-18T02:12:56.115Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 403 Forbidden.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 5,
+      "prev_hash": "sha256:42c191673ee2cadcf31685dbc7eac438ae04f692194924a1bb35ea2826f97be6",
+      "hash": "sha256:299bcb5138b689ffb1bf9f6e54c6ece792b5440ecded48cbf186c98d8d3caca2"
+    },
+    {
+      "v": 1,
+      "id": "8cfcc039-45f7-4d0b-ab09-f31754b09528",
+      "ts": "2026-06-18T02:13:14.260Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"OpenTelemetry GenAI semantic conventions agent spans trace attributes 2026\"\n\nLinks: [{\"title\":\"Semantic conventions for generative client AI spans | OpenTelemetry\",\"url\":\"https://opentelemetry.io/docs/specs/se"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 6,
+      "prev_hash": "sha256:299bcb5138b689ffb1bf9f6e54c6ece792b5440ecded48cbf186c98d8d3caca2",
+      "hash": "sha256:fb4a2d167ea0751b7ca1875bc8e9cd5c869e5cb8c49308d4bef40a72e11b3177"
+    },
+    {
+      "v": 1,
+      "id": "2f05440a-81b6-467d-97bc-37c7a9fbdcb4",
+      "ts": "2026-06-18T02:13:15.206Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"AI agent trace format tool calls authorization scopes audit log standard\"\n\nLinks: [{\"title\":\"Auditing and Logging AI Agent Activity: A Guide for Engineers\",\"url\":\"https://www.loginradius.com/blog/engineering/a"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 7,
+      "prev_hash": "sha256:fb4a2d167ea0751b7ca1875bc8e9cd5c869e5cb8c49308d4bef40a72e11b3177",
+      "hash": "sha256:7ec42498c1b2e62923191b0f2ee582440ebf4202d71fd4192d3734185758d5fd"
+    },
+    {
+      "v": 1,
+      "id": "1731e91b-4140-48bc-a581-010e35eaaa66",
+      "ts": "2026-06-18T02:13:17.191Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"LangChain agent observability trace export callback OpenLLMetry instrumentation\"\n\nLinks: [{\"title\":\"Tracing LangChain apps with OpenLLMetry | Engineering | ClickHouse Resource Hub\",\"url\":\"https://clickhouse.co"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 8,
+      "prev_hash": "sha256:7ec42498c1b2e62923191b0f2ee582440ebf4202d71fd4192d3734185758d5fd",
+      "hash": "sha256:18c6e1d3a6220b8c392fec7c7a64638dc76269a8ee6632455d5b715dd30c6c07"
+    },
+    {
+      "v": 1,
+      "id": "d21eed7e-ab49-4304-805b-dd2fa02ed1d6",
+      "ts": "2026-06-18T02:13:52.077Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "AskUserQuestion",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "AskUserQuestion(questions)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:AskUserQuestion"
+        ],
+        "granted": [
+          "tool:AskUserQuestion"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Your questions have been answered: \"What's the thinnest MVP shape that proves Caldris is real for a design partner?\"=\"Plugin for coding agents\", \"Primary language / agent ecosystem to target first?\"=\"Whatever is best for coding agents\", \"Wh"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 9,
+      "prev_hash": "sha256:18c6e1d3a6220b8c392fec7c7a64638dc76269a8ee6632455d5b715dd30c6c07",
+      "hash": "sha256:252594bea438ddf75492f4e76296ff4a41a6e672102d412361bf7b2614e509b6"
+    },
+    {
+      "v": 1,
+      "id": "78c5c9b3-498d-4fac-ae55-77508f3f543a",
+      "ts": "2026-06-18T02:36:16.097Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Agent",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "Agent(description, prompt, subagent_type)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:Agent"
+        ],
+        "granted": [
+          "tool:Agent"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Based on the official documentation I've successfully retrieved, here's your authoritative audit-plugin design spec:\n\n---\n\n## 1. Plugin Packaging & Structure\n\n**Manifest** (required):\n- Location: `plugin-root/.claude-plugin/plugin.json`\n- R"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 10,
+      "prev_hash": "sha256:252594bea438ddf75492f4e76296ff4a41a6e672102d412361bf7b2614e509b6",
+      "hash": "sha256:fa99cc3f7b342c605b3676a57ff1614bee1639a13d178d206b1c7c9ba807b038"
+    },
+    {
+      "v": 1,
+      "id": "9e795fa2-55df-48a5-928f-f32455f8f8a3",
+      "ts": "2026-06-18T02:36:17.114Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ ls -la src tests 2>/dev/null; echo \"---PKG---\"; cat package.json; echo \"---GITIGNORE---\"; cat .gitignore",
+        "target": "ls -la src tests 2>/dev/null; echo \"---PKG---\"; cat package.json; echo \"---GITIGNORE---\"; cat .gitignore"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "src:\ntotal 32\ndrwxr-xr-x 2 root root  4096 Jun 18 02:12 .\ndrwxr-xr-x 5 root root  4096 Jun 18 02:12 ..\n-rw-r--r-- 1 root root  5246 Jun 18 02:12 waitlist-form.js\n-rw-r--r-- 1 root root 13920 Jun 18 02:12 waitlist-form.test.js\n\ntests:\ntotal "
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 11,
+      "prev_hash": "sha256:fa99cc3f7b342c605b3676a57ff1614bee1639a13d178d206b1c7c9ba807b038",
+      "hash": "sha256:b84969d19b22477beccbf21c61837bf357f8b8058c25546e5170beb1bc5369df"
+    },
+    {
+      "v": 1,
+      "id": "8ad69005-a66f-412d-affc-6daeed0031c7",
+      "ts": "2026-06-18T02:50:33.724Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ echo \"=== ~/.claude/projects ===\"; ls -la ~/.claude/projects/ 2>/dev/null | head -20; echo \"=== find any transcript jsonl ===\"; find ~/.claude -name \"*.jsonl\" 2>/dev/null | head; echo \"=== sample first record (if any) ===\"; f=$(find ~/.claude -name \"*.jsonl\" 2>/dev/null | head -1); if [ -n \"$f\" ]; then head -c 1200 \"$f\"; fi",
+        "target": "echo \"=== ~/.claude/projects ===\"; ls -la ~/.claude/projects/ 2>/dev/null | head -20; echo \"=== find any transcript json"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "=== ~/.claude/projects ===\ntotal 12\ndrwx------ 3 root root 4096 Jun 18 02:50 -home-user-Caldris-io\ndrwx------ 3 root root 4096 Jun 18 02:12 .\ndrwxr-xr-x 8 root root 4096 Jun 18 02:12 ..\n=== find any transcript jsonl ===\n/root/.claude/projec"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 12,
+      "prev_hash": "sha256:b84969d19b22477beccbf21c61837bf357f8b8058c25546e5170beb1bc5369df",
+      "hash": "sha256:80f398203c1a0b4879d0aef6a433815ace7c8f751aebe89a1a3b1f9d3232efbc"
+    },
+    {
+      "v": 1,
+      "id": "aefa51de-c910-4b51-9fea-3ee31cf6e67a",
+      "ts": "2026-06-18T02:50:33.992Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "ToolSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "ToolSearch(max_results, query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:ToolSearch"
+        ],
+        "granted": [
+          "tool:ToolSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "No matching deferred tools found"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 13,
+      "prev_hash": "sha256:80f398203c1a0b4879d0aef6a433815ace7c8f751aebe89a1a3b1f9d3232efbc",
+      "hash": "sha256:8daf5bc9422949e3790ec97c00064fa85fdfb119f22905d4ca901fa6ac857ee4"
+    },
+    {
+      "v": 1,
+      "id": "b0d0fcf6-b8e3-4554-aee5-3bae1bbf4f29",
+      "ts": "2026-06-18T02:50:47.489Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ f=\"/root/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret ».jsonl\"\necho \"=== record count ===\"; wc -l < \"$f\"\necho; echo \"=== distinct top-level keys ===\"; jq -r 'keys[]' \"$f\" 2>/dev/null | sort | uniq -c | sort -rn\necho; echo \"=== distinct .type values ===\"; jq -r '.type' \"$f\" 2>/dev/null | sort | uniq -c\necho; echo \"=== distinct message.content[].type (tool blocks) ===\"; jq -rc 'select(.message.content|type==\"array\") | .message.content[].type' \"$f\" 2>/dev/null | sort | uniq -c\necho; echo \"=== sample tool_use block ===\"; jq -c 'select(.message.content|type==\"array\") | .message.content[] | select(.type==\"tool_use\") | {type,name,id, input_keys:(.input|keys)}' \"$f\" 2>/dev/null | head -5\necho; echo \"=== sample tool_result block (keys) ===\"; jq -c 'select(.message.content|type==\"array\") | .message.content[] | select(.type==\"tool_result\") | {type, tool_use_id, is_error, content_type:(.content|type)}' \"$f\" 2>/dev/null | head -5\necho; echo \"=== one full assistant tool_use record (trimmed) ===\"; jq -c 'select(.type==\"assistant\") | select(.message.content|type==\"array\") | select(any(.message.content[]; .type==\"tool_use\")) | {type, uuid, parentUuid, timestamp, sessionId, cwd, gitBranch}' \"$f\" 2>/dev/null | head -2",
+        "target": "f=\"/root/.claude/projects/-home-user-Caldris-io/c452fc3e-b059-5c63-9353-9d910592d73d.jsonl\"\necho \"=== record count ===\";"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "=== record count ===\n59\n\n=== distinct top-level keys ===\n     59 type\n     59 timestamp\n     59 sessionId\n     57 version\n     57 uuid\n     57 userType\n     57 parentUuid\n     57 isSidechain\n     57 gitBranch\n     57 entrypoint\n     57 cwd\n"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [
+        "uuid-secret"
+      ],
+      "seq": 14,
+      "prev_hash": "sha256:8daf5bc9422949e3790ec97c00064fa85fdfb119f22905d4ca901fa6ac857ee4",
+      "hash": "sha256:51315f3eb9c833b0fdc0cc6d721050b03e01a2201c31eda8f2a762828d60ddb0"
+    },
+    {
+      "v": 1,
+      "id": "eb013ce5-ddb1-4131-90de-4f8a0c0ce014",
+      "ts": "2026-06-18T02:51:57.395Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/PLAN.md",
+        "target": "/home/user/Caldris.io/product/PLAN.md"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/PLAN.md"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/PLAN.md"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/PLAN.md (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 15,
+      "prev_hash": "sha256:51315f3eb9c833b0fdc0cc6d721050b03e01a2201c31eda8f2a762828d60ddb0",
+      "hash": "sha256:b13f81bc55a30fda99cae1b5db6139519331919c6b03b5b401d8475f2ece6fa2"
+    },
+    {
+      "v": 1,
+      "id": "f06ff844-b779-4470-8ac0-c4057a64e912",
+      "ts": "2026-06-18T02:52:04.826Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ git add product/PLAN.md && git commit -q -m \"Add Caldris MVP product plan\n\nCoding-agent evidence-layer plugin for Claude Code, in /product. Captures\ntool calls (live via PreToolUse/PostToolUse hooks, or retroactively from\nsession transcripts) into a tamper-evident, control-mapped evidence chain\nwith a verify/map/export CLI. Includes verified transcript schema, evidence\nrecord schema, efficacy/test-data strategy, risks, and milestones.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01MpEXBFAyVWrWrXH8G4x6Bm\" && echo \"---PUSH---\" && git push -u origin claude/caldris-mvp-repo-plan-rcxl8x 2>&1 | tail -5",
+        "target": "git add product/PLAN.md && git commit -q -m \"Add Caldris MVP product plan\n\nCoding-agent evidence-layer plugin for Claude"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec",
+          "net:egress",
+          "git:push"
+        ],
+        "granted": [
+          "shell:exec",
+          "net:egress",
+          "git:push"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "---PUSH---\nremote:      https://github.com/Caldris-io/Caldris.io/pull/new/claude/caldris-mvp-repo-plan-rcxl8x        \nremote: \nTo http://127.0.0.1:36169/git/Caldris-io/Caldris.io\n * [new branch]      claude/caldris-mvp-repo-plan-rcxl8x -> c"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(e)(1)"
+      ],
+      "redactions": [],
+      "seq": 16,
+      "prev_hash": "sha256:b13f81bc55a30fda99cae1b5db6139519331919c6b03b5b401d8475f2ece6fa2",
+      "hash": "sha256:aeef9e70cc66a2a91892d8ef50c2a4e0f9ca89deb9ad3e9220128300fddedb26"
+    },
+    {
+      "v": 1,
+      "id": "7e1bcb2d-be86-4edd-98e6-0eeea9dc35f6",
+      "ts": "2026-06-18T02:52:10.540Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "ToolSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "ToolSearch(max_results, query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:ToolSearch"
+        ],
+        "granted": [
+          "tool:ToolSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": " "
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 17,
+      "prev_hash": "sha256:aeef9e70cc66a2a91892d8ef50c2a4e0f9ca89deb9ad3e9220128300fddedb26",
+      "hash": "sha256:b2ce0b0b85fb81acff5f2ace0993be419d1133b8fa81fa59183b1e170bc2666e"
+    },
+    {
+      "v": 1,
+      "id": "dcf56848-17c7-45fc-a1a6-78b4bd0c3ad5",
+      "ts": "2026-06-18T02:52:29.750Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "mcp__github__create_pull_request",
+        "category": "mcp",
+        "phase": "tool_call",
+        "intent": "github.create_pull_request(base, body, draft, head, owner, repo, title)",
+        "target": "caldris-io/caldris.io"
+      },
+      "scopes": {
+        "requested": [
+          "mcp:github:create_pull_request"
+        ],
+        "granted": [
+          "mcp:github:create_pull_request"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "{\"id\":\"3888138080\",\"url\":\"https://github.com/Caldris-io/Caldris.io/pull/8\"}"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 18,
+      "prev_hash": "sha256:b2ce0b0b85fb81acff5f2ace0993be419d1133b8fa81fa59183b1e170bc2666e",
+      "hash": "sha256:9cc0155e1016013e1647298562feded11eb51fea92bb5de3628eba00df4f288a"
+    },
+    {
+      "v": 1,
+      "id": "069ac55b-05d1-40fc-bded-277c7778c459",
+      "ts": "2026-06-18T02:52:40.786Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "ToolSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "ToolSearch(max_results, query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:ToolSearch"
+        ],
+        "granted": [
+          "tool:ToolSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": " "
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 19,
+      "prev_hash": "sha256:9cc0155e1016013e1647298562feded11eb51fea92bb5de3628eba00df4f288a",
+      "hash": "sha256:1f75468b78efb8e9e161610d9faa74ff2841aeb9301a098c5e8f9e5ba89d2944"
+    },
+    {
+      "v": 1,
+      "id": "d7c893af-4892-485f-8619-4b84a9ff694d",
+      "ts": "2026-06-18T02:52:43.553Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "mcp__github__pull_request_read",
+        "category": "mcp",
+        "phase": "tool_call",
+        "intent": "github.pull_request_read(method, owner, pullNumber, repo)",
+        "target": "caldris-io/caldris.io"
+      },
+      "scopes": {
+        "requested": [
+          "mcp:github:pull_request_read"
+        ],
+        "granted": [
+          "mcp:github:pull_request_read"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "{\"total_count\":0,\"check_runs\":[]}"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 20,
+      "prev_hash": "sha256:1f75468b78efb8e9e161610d9faa74ff2841aeb9301a098c5e8f9e5ba89d2944",
+      "hash": "sha256:480228fdc23083914f407c69659ed043d93e92b19d010164c38e70ef27f603b0"
+    },
+    {
+      "v": 1,
+      "id": "ba0a3a3f-acd7-4d53-b57a-e4185377b109",
+      "ts": "2026-06-18T02:52:51.208Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "ToolSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "ToolSearch(max_results, query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:ToolSearch"
+        ],
+        "granted": [
+          "tool:ToolSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "  "
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 21,
+      "prev_hash": "sha256:480228fdc23083914f407c69659ed043d93e92b19d010164c38e70ef27f603b0",
+      "hash": "sha256:dc39f44141a547c7882ae33979683f86d1f4f449c0b6b35c7c08ffe560eb82a1"
+    },
+    {
+      "v": 1,
+      "id": "5be858a2-ad92-439f-b363-c19f4544fd8e",
+      "ts": "2026-06-18T20:21:55.616Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "mcp__github__pull_request_read",
+        "category": "mcp",
+        "phase": "tool_call",
+        "intent": "github.pull_request_read(method, owner, pullNumber, repo)",
+        "target": "caldris-io/caldris.io"
+      },
+      "scopes": {
+        "requested": [
+          "mcp:github:pull_request_read"
+        ],
+        "granted": [
+          "mcp:github:pull_request_read"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "{\"number\":8,\"title\":\"Caldris MVP product plan\",\"body\":\"## Summary\\n\\nAdds `product/PLAN.md` — the spec for the Caldris MVP, derived from what caldris.io promises. No product code yet; this is the plan we build from.\\n\\n**The wedge:** a Cald"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 22,
+      "prev_hash": "sha256:dc39f44141a547c7882ae33979683f86d1f4f449c0b6b35c7c08ffe560eb82a1",
+      "hash": "sha256:fdfe08bb3991843851f7f86795c20e52e34cebdf16246ea447af3583997cb642"
+    },
+    {
+      "v": 1,
+      "id": "d6dc748c-4c68-4ca6-809d-2331fb674939",
+      "ts": "2026-06-18T20:21:56.055Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "mcp__github__pull_request_read",
+        "category": "mcp",
+        "phase": "tool_call",
+        "intent": "github.pull_request_read(method, owner, pullNumber, repo)",
+        "target": "caldris-io/caldris.io"
+      },
+      "scopes": {
+        "requested": [
+          "mcp:github:pull_request_read"
+        ],
+        "granted": [
+          "mcp:github:pull_request_read"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "{\"total_count\":0,\"check_runs\":[]}"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 23,
+      "prev_hash": "sha256:fdfe08bb3991843851f7f86795c20e52e34cebdf16246ea447af3583997cb642",
+      "hash": "sha256:34c72ee580eeb8157770b33543da1acc1b89312a126b7f15454213184d35cd5d"
+    },
+    {
+      "v": 1,
+      "id": "dcf000a0-5eaa-47e9-ab93-1ed1395b17cf",
+      "ts": "2026-06-18T20:23:05.594Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 403 Forbidden.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 24,
+      "prev_hash": "sha256:34c72ee580eeb8157770b33543da1acc1b89312a126b7f15454213184d35cd5d",
+      "hash": "sha256:e44fb1e4281078efab905792f9abb619748e3658ddee958b71b66ee2cd468220"
+    },
+    {
+      "v": 1,
+      "id": "acf79f64-cff0-4f3d-9e6d-69d05218aa59",
+      "ts": "2026-06-18T20:23:07.490Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ git checkout claude/caldris-mvp-repo-plan-rcxl8x 2>&1 | tail -2; echo \"---FETCH---\"; git fetch origin main 2>&1 | tail -2; echo \"---MERGE MAIN---\"; git merge origin/main --no-edit 2>&1 | tail -5; echo \"---STATUS---\"; git status -sb; echo \"---PRODUCT---\"; ls -la product/ 2>/dev/null",
+        "target": "git checkout claude/caldris-mvp-repo-plan-rcxl8x 2>&1 | tail -2; echo \"---FETCH---\"; git fetch origin main 2>&1 | tail -"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Already on 'claude/caldris-mvp-repo-plan-rcxl8x'\nYour branch is up to date with 'origin/claude/caldris-mvp-repo-plan-rcxl8x'.\n---FETCH---\n * branch            main       -> FETCH_HEAD\n   6d38236..6e19c0c  main       -> origin/main\n---MERGE "
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 25,
+      "prev_hash": "sha256:e44fb1e4281078efab905792f9abb619748e3658ddee958b71b66ee2cd468220",
+      "hash": "sha256:bc0ee948f01f5cc7aea192f430f4f99ac208df50090e56ebc3fdafc0cec593a1"
+    },
+    {
+      "v": 1,
+      "id": "f73f9ba9-ac4a-4a65-89e3-5e284cb89c62",
+      "ts": "2026-06-18T20:23:17.162Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"Claude Code artifacts feature blog create interactive HTML self-contained app\"\n\nLinks: [{\"title\":\"How to Use Claude Artifacts to Build Shareable Web Apps from a Single Prompt\",\"url\":\"https://www.mindstudio.ai/"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 26,
+      "prev_hash": "sha256:bc0ee948f01f5cc7aea192f430f4f99ac208df50090e56ebc3fdafc0cec593a1",
+      "hash": "sha256:2b3d870f8c820e78a18f85ab210017235b083bae3b040feca5215d192eb48fb0"
+    },
+    {
+      "v": 1,
+      "id": "5db7b570-12cf-43bb-94d9-3c5a7e847d02",
+      "ts": "2026-06-18T20:23:18.138Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 403 Forbidden.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 27,
+      "prev_hash": "sha256:2b3d870f8c820e78a18f85ab210017235b083bae3b040feca5215d192eb48fb0",
+      "hash": "sha256:e24e65217da7d2f805ba88f1247bad7eb0b0841ac0e7221cad9c74cbbbe45a07"
+    },
+    {
+      "v": 1,
+      "id": "e93f7cc7-4cc3-4c0a-a3ff-90b8e46f2a56",
+      "ts": "2026-06-18T20:26:46.451Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/src/lib/evidence.js",
+        "target": "/home/user/Caldris.io/product/src/lib/evidence.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/lib/evidence.js"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/lib/evidence.js"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/src/lib/evidence.js (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 28,
+      "prev_hash": "sha256:e24e65217da7d2f805ba88f1247bad7eb0b0841ac0e7221cad9c74cbbbe45a07",
+      "hash": "sha256:ad298eefb7f90f5c5c25eafb92dfc5867669ca15bb5c6a44cfba8776705b30ef"
+    },
+    {
+      "v": 1,
+      "id": "5fe5f2cd-2e3c-415f-b97f-82757f1f7b84",
+      "ts": "2026-06-18T20:26:54.198Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/src/controls/mappings.soc2.json",
+        "target": "/home/user/Caldris.io/product/src/controls/mappings.soc2.json"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/controls/mappings.soc2.json"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/controls/mappings.soc2.json"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/src/controls/mappings.soc2.json (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 29,
+      "prev_hash": "sha256:ad298eefb7f90f5c5c25eafb92dfc5867669ca15bb5c6a44cfba8776705b30ef",
+      "hash": "sha256:6df1c81aaa7404a0b7a967970b16d9aed32a7378c10a9cd44d478a16b47f242d"
+    },
+    {
+      "v": 1,
+      "id": "841a7ebe-034e-4569-8ccd-a7abf3f98365",
+      "ts": "2026-06-18T20:26:57.651Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/src/controls/mappings.hipaa.json",
+        "target": "/home/user/Caldris.io/product/src/controls/mappings.hipaa.json"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/controls/mappings.hipaa.json"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/controls/mappings.hipaa.json"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/src/controls/mappings.hipaa.json (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 30,
+      "prev_hash": "sha256:6df1c81aaa7404a0b7a967970b16d9aed32a7378c10a9cd44d478a16b47f242d",
+      "hash": "sha256:2e91a9d035eeebf5bdf5f41703859f91c2f00d3420996996b461135302596b07"
+    },
+    {
+      "v": 1,
+      "id": "f3e00dbf-f000-4c58-9338-0f0e7d855bf5",
+      "ts": "2026-06-18T20:27:06.062Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/src/lib/store.js",
+        "target": "/home/user/Caldris.io/product/src/lib/store.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/lib/store.js"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/lib/store.js"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/src/lib/store.js (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 31,
+      "prev_hash": "sha256:2e91a9d035eeebf5bdf5f41703859f91c2f00d3420996996b461135302596b07",
+      "hash": "sha256:3c8d7ad1ec24496f76f4a24f9c8ddbdfe0267b3092cb7f504bf8b3afc965a95b"
+    },
+    {
+      "v": 1,
+      "id": "5e3f92c8-2c7e-424d-b1e5-879fdbb4449c",
+      "ts": "2026-06-18T20:27:15.507Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/src/capture.js",
+        "target": "/home/user/Caldris.io/product/src/capture.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/capture.js"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/capture.js"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/src/capture.js (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 32,
+      "prev_hash": "sha256:3c8d7ad1ec24496f76f4a24f9c8ddbdfe0267b3092cb7f504bf8b3afc965a95b",
+      "hash": "sha256:5f08c1225068133c44157234e5f6ac7c6ec1d63b95dca9995a1727667a1e7112"
+    },
+    {
+      "v": 1,
+      "id": "cebfe5d4-0106-48be-bae3-c1e890053773",
+      "ts": "2026-06-18T20:27:29.346Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/src/import.js",
+        "target": "/home/user/Caldris.io/product/src/import.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/import.js"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/import.js"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/src/import.js (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 33,
+      "prev_hash": "sha256:5f08c1225068133c44157234e5f6ac7c6ec1d63b95dca9995a1727667a1e7112",
+      "hash": "sha256:93d1c89ca5188c7d44604fd4d1b4d27e7ba424574485f1143370215a5e8e13e4"
+    },
+    {
+      "v": 1,
+      "id": "32e582fa-d047-4039-9caf-c5f54add2954",
+      "ts": "2026-06-18T20:27:52.835Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/src/cli.js",
+        "target": "/home/user/Caldris.io/product/src/cli.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/cli.js"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/cli.js"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/src/cli.js (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 34,
+      "prev_hash": "sha256:93d1c89ca5188c7d44604fd4d1b4d27e7ba424574485f1143370215a5e8e13e4",
+      "hash": "sha256:e457e20a9e03c1abf4532695f16c092acc09d97523e02731991ba681a4203f4d"
+    },
+    {
+      "v": 1,
+      "id": "b1a39651-194f-4ef4-8eb1-b1ac086fa8b6",
+      "ts": "2026-06-18T20:27:59.016Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/.claude-plugin/plugin.json",
+        "target": "/home/user/Caldris.io/product/.claude-plugin/plugin.json"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/.claude-plugin/plugin.json"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/.claude-plugin/plugin.json"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/.claude-plugin/plugin.json (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 35,
+      "prev_hash": "sha256:e457e20a9e03c1abf4532695f16c092acc09d97523e02731991ba681a4203f4d",
+      "hash": "sha256:9185e01766a3b31d86b1c17efcea47aecfb869c09321f85ffdddccb5609577e5"
+    },
+    {
+      "v": 1,
+      "id": "7ab3ae23-f01d-4500-89c1-7bd0c8db7d0e",
+      "ts": "2026-06-18T20:28:01.150Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/hooks/hooks.json",
+        "target": "/home/user/Caldris.io/product/hooks/hooks.json"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/hooks/hooks.json"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/hooks/hooks.json"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/hooks/hooks.json (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 36,
+      "prev_hash": "sha256:9185e01766a3b31d86b1c17efcea47aecfb869c09321f85ffdddccb5609577e5",
+      "hash": "sha256:20f474c989522a27eadb1f1cafe8ceba7e57d6cdb63b6014b34edd6b847f21e0"
+    },
+    {
+      "v": 1,
+      "id": "f2df6b2c-8d83-4b73-b748-d9d1c4074135",
+      "ts": "2026-06-18T20:28:02.570Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/package.json",
+        "target": "/home/user/Caldris.io/product/package.json"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/package.json"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/package.json"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/package.json (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 37,
+      "prev_hash": "sha256:20f474c989522a27eadb1f1cafe8ceba7e57d6cdb63b6014b34edd6b847f21e0",
+      "hash": "sha256:7f106ae94dec385d55d5707f323bcfaa554af6c68e4270038b5adc88f75b7c19"
+    },
+    {
+      "v": 1,
+      "id": "3baedcf3-95bb-4649-93e5-d43efc6ce14d",
+      "ts": "2026-06-18T20:28:12.635Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "ToolSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "ToolSearch(max_results, query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:ToolSearch"
+        ],
+        "granted": [
+          "tool:ToolSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "success"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 38,
+      "prev_hash": "sha256:7f106ae94dec385d55d5707f323bcfaa554af6c68e4270038b5adc88f75b7c19",
+      "hash": "sha256:cae8b63ab2590a1e48b87ce74e1de916bbed4a5232193d19bb7773b84b54b185"
+    },
+    {
+      "v": 1,
+      "id": "a6b534b6-dce6-469a-89f2-6f646923936c",
+      "ts": "2026-06-18T20:28:13.101Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"\"Claude Code\" artifacts claude.com/blog/artifacts-in-claude-code feature\"\n\nLinks: [{\"title\":\"How to Use Claude Artifacts: Create, Share, and Remix AI Content | Codecademy\",\"url\":\"https://www.codecademy.com/art"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 39,
+      "prev_hash": "sha256:cae8b63ab2590a1e48b87ce74e1de916bbed4a5232193d19bb7773b84b54b185",
+      "hash": "sha256:2d9e3ec8051391830e2a4deb16ae252b6c5da4b288853f5102285e7f966d54db"
+    },
+    {
+      "v": 1,
+      "id": "7fad9e43-fba0-450e-ba68-394d6bcc05f4",
+      "ts": "2026-06-18T20:28:30.326Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"Claude Code artifacts announcement 2026 create shareable build apps from terminal new feature\"\n\nLinks: [{\"title\":\"Anthropic Supercharges Claude Design With Direct Code Handoff and Cross-Project Systems — BigGo"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 40,
+      "prev_hash": "sha256:2d9e3ec8051391830e2a4deb16ae252b6c5da4b288853f5102285e7f966d54db",
+      "hash": "sha256:7a2228d31d1223caedc2c89dd42d9af7cb6597269b91bc871d1defdd5ee80008"
+    },
+    {
+      "v": 1,
+      "id": "8ecd05e8-0efe-435b-9db2-b0814ffc0f34",
+      "ts": "2026-06-18T20:28:30.478Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"\"artifacts in Claude Code\" Anthropic June 2026 what's new\"\n\nLinks: [{\"title\":\"Claude Code changelog - Claude Code Docs\",\"url\":\"https://code.claude.com/docs/en/changelog\"},{\"title\":\"Claude Code Guide 2026: 25 F"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 41,
+      "prev_hash": "sha256:7a2228d31d1223caedc2c89dd42d9af7cb6597269b91bc871d1defdd5ee80008",
+      "hash": "sha256:4e04eb5e8710759f56d3cd3bad8a72a6aaaaee6e3ace9919b1bf931f0e2e7699"
+    },
+    {
+      "v": 1,
+      "id": "f7a72d76-7cfb-42fa-8744-cc176160bbdb",
+      "ts": "2026-06-18T20:28:48.566Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 403 Forbidden.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 42,
+      "prev_hash": "sha256:4e04eb5e8710759f56d3cd3bad8a72a6aaaaee6e3ace9919b1bf931f0e2e7699",
+      "hash": "sha256:7ce63993097190fcaed91f6206f2ca026a6a7c50e4e9a86e4ce1d08df7534826"
+    },
+    {
+      "v": 1,
+      "id": "c8122dfe-0b0b-4b4b-b2b4-0fccac521aa3",
+      "ts": "2026-06-18T20:29:06.293Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "I searched through the entire changelog provided, and **there are no mentions of \"artifacts\"** as a feature in Claude Code.\n\nThe changelog covers versions from 2.1.181 (June 17, 2026) back through 2.1.139 (May 11, 2026) and includes extensi"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 43,
+      "prev_hash": "sha256:7ce63993097190fcaed91f6206f2ca026a6a7c50e4e9a86e4ce1d08df7534826",
+      "hash": "sha256:4094c8de63dc911220c5be1e7dfd5381211132d7eb1740b2f20c561ccf99d811"
+    },
+    {
+      "v": 1,
+      "id": "ff6f83ff-66e9-4eac-a11c-09033ed65076",
+      "ts": "2026-06-18T20:29:07.023Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebSearch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebSearch(query)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebSearch"
+        ],
+        "granted": [
+          "tool:WebSearch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "Web search results for query: \"Claude Code can now create artifacts preview share session HTML React blog claude.com\"\n\nLinks: [{\"title\":\"How to Use Claude Artifacts to Build Shareable Web Apps from a Single Prompt\",\"url\":\"https://www.mindst"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 44,
+      "prev_hash": "sha256:4094c8de63dc911220c5be1e7dfd5381211132d7eb1740b2f20c561ccf99d811",
+      "hash": "sha256:fb02bfece797b0929238097ec326f42e9ea6cf2e5dc09c6f07935930bb8a44c3"
+    },
+    {
+      "v": 1,
+      "id": "b002f5a1-874e-4169-8e4c-9509c1d5d8aa",
+      "ts": "2026-06-18T20:30:54.654Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/artifact/evidence-viewer.html",
+        "target": "/home/user/Caldris.io/product/artifact/evidence-viewer.html"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/artifact/evidence-viewer.html"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/artifact/evidence-viewer.html"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/artifact/evidence-viewer.html (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 45,
+      "prev_hash": "sha256:fb02bfece797b0929238097ec326f42e9ea6cf2e5dc09c6f07935930bb8a44c3",
+      "hash": "sha256:0c03f4cb5cf9a26fd5a957c21d6199ec3c24ffb48422c4b5fa9ddd62573a25f7"
+    },
+    {
+      "v": 1,
+      "id": "f2067ea0-4e8f-4449-99bd-9e6de8886a0e",
+      "ts": "2026-06-18T20:31:11.954Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/test/evidence.test.js",
+        "target": "/home/user/Caldris.io/product/test/evidence.test.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/test/evidence.test.js"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/test/evidence.test.js"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/test/evidence.test.js (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 46,
+      "prev_hash": "sha256:0c03f4cb5cf9a26fd5a957c21d6199ec3c24ffb48422c4b5fa9ddd62573a25f7",
+      "hash": "sha256:77367405e1008a32c1e0ad55ac6d4e989473001c4d42cafe7c728408a4fdafec"
+    },
+    {
+      "v": 1,
+      "id": "a943f23f-7874-4277-befb-3fdfbfaf9e5d",
+      "ts": "2026-06-18T20:31:13.171Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Write /home/user/Caldris.io/product/.gitignore",
+        "target": "/home/user/Caldris.io/product/.gitignore"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/.gitignore"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/.gitignore"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "File created successfully at: /home/user/Caldris.io/product/.gitignore (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 47,
+      "prev_hash": "sha256:77367405e1008a32c1e0ad55ac6d4e989473001c4d42cafe7c728408a4fdafec",
+      "hash": "sha256:4258502aae513ede4af1bc2f7bf19763ba49db3223207d8aeccb6f147ccd1508"
+    },
+    {
+      "v": 1,
+      "id": "55e56b25-4aa9-4868-8c73-2d2d00151b33",
+      "ts": "2026-06-18T20:31:20.371Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ cd /home/user/Caldris.io/product || exit 1\necho \"=== UNIT TESTS ===\"; node --test 2>&1 | tail -20\necho; echo \"=== REAL TRANSCRIPTS ON DISK ===\"; ls -1 ~/.claude/projects/-home-user-Caldris-io/*.jsonl 2>/dev/null",
+        "target": "cd /home/user/Caldris.io/product || exit 1\necho \"=== UNIT TESTS ===\"; node --test 2>&1 | tail -20\necho; echo \"=== REAL T"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "=== UNIT TESTS ===\nok 6 - control mapping tags fs.write to integrity + audit controls\n  ---\n  duration_ms: 0.298406\n  type: 'test'\n  ...\n# Subtest: hash is stable for identical hashable content\nok 7 - hash is stable for identical hashable c"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 48,
+      "prev_hash": "sha256:4258502aae513ede4af1bc2f7bf19763ba49db3223207d8aeccb6f147ccd1508",
+      "hash": "sha256:ec5202fc6c63f3002bbcb94b3df27a9ccb01715b9491d2c19d3d017bd21dccbe"
+    },
+    {
+      "v": 1,
+      "id": "92f2a77e-fa77-4468-b85e-a0bb444d5c29",
+      "ts": "2026-06-18T20:31:28.631Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ cd /home/user/Caldris.io/product || exit 1\nT=~/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret ».jsonl\nS=~/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret »/subagents/agent-a463538ac975b903b.jsonl\necho \"=== IMPORT (real transcript + subagent sidechain) ===\"\nnode src/cli.js import \"$T\" \"$S\" --out .caldris/evidence/self.jsonl\necho; echo \"=== VERIFY ===\"; node src/cli.js verify\necho; echo \"=== MAP (control coverage) ===\"; node src/cli.js map\necho; echo \"=== EXPORT ===\"; node src/cli.js export\necho; echo \"=== TAMPER → VERIFY should FAIL ===\"\nnode -e \"const fs=require('fs');const f='.caldris/evidence/self.jsonl';const L=fs.readFileSync(f,'utf8').split('\\n').filter(x=>x.trim());const r=JSON.parse(L[2]);r.outcome.summary='SILENTLY EDITED';L[2]=JSON.stringify(r);fs.writeFileSync(f,L.join('\\n')+'\\n');\"\nnode src/cli.js verify; echo \"exit=$?\"",
+        "target": "cd /home/user/Caldris.io/product || exit 1\nT=~/.claude/projects/-home-user-Caldris-io/c452fc3e-b059-5c63-9353-9d910592d7"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "=== IMPORT (real transcript + subagent sidechain) ===\nImported 66 evidence records -> .caldris/evidence/self.jsonl\nChain verified OK.\n\n=== VERIFY ===\nOK    .caldris/evidence/self.jsonl  (66 records)\n\n=== MAP (control coverage) ===\nControl c"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [
+        "uuid-secret"
+      ],
+      "seq": 49,
+      "prev_hash": "sha256:ec5202fc6c63f3002bbcb94b3df27a9ccb01715b9491d2c19d3d017bd21dccbe",
+      "hash": "sha256:5b1983e3395b9ef7ee4052512bccc49da7e3592cbdd4ccd4e152650c42a61a8b"
+    },
+    {
+      "v": 1,
+      "id": "a46b682f-1ded-46de-bb2e-dec67afafc60",
+      "ts": "2026-06-18T20:31:58.788Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Edit",
+        "category": "fs.write",
+        "phase": "tool_call",
+        "intent": "Edit /home/user/Caldris.io/product/src/cli.js",
+        "target": "/home/user/Caldris.io/product/src/cli.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:/home/user/Caldris.io/product/src/cli.js"
+        ],
+        "granted": [
+          "fs:write:/home/user/Caldris.io/product/src/cli.js"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The file /home/user/Caldris.io/product/src/cli.js has been updated successfully. (file state is current in your context — no need to Read it back)"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC6.3",
+        "SOC2:CC7.2",
+        "SOC2:CC8.1",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)",
+        "HIPAA:164.312(c)(1)"
+      ],
+      "redactions": [],
+      "seq": 50,
+      "prev_hash": "sha256:5b1983e3395b9ef7ee4052512bccc49da7e3592cbdd4ccd4e152650c42a61a8b",
+      "hash": "sha256:7ffa4c862cebf41a0499fb470b39d5a22873bc3dbedd32468e0375b0aa2012bb"
+    },
+    {
+      "v": 1,
+      "id": "eb217b17-1524-4637-907f-3ef417a2469d",
+      "ts": "2026-06-18T20:32:09.799Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "main",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "phase": "tool_call",
+        "intent": "$ cd /home/user/Caldris.io/product || exit 1\n# Re-import clean (previous file was tampered for the demo), then export\nT=~/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret ».jsonl\nS=~/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret »/subagents/agent-a463538ac975b903b.jsonl\nrm -rf .caldris caldris-evidence-bundle\nnode src/cli.js import \"$T\" \"$S\" --out .caldris/evidence/self.jsonl >/dev/null\nnode src/cli.js export >/dev/null\necho \"=== confirm placeholder replaced + embedded bundle present ===\"\ngrep -c \"__CALDRIS_BUNDLE__\" caldris-evidence-bundle/index.html\nnode -e \"\nconst fs=require('fs');const {recordHash}=require('./src/lib/evidence');\nconst html=fs.readFileSync('caldris-evidence-bundle/index.html','utf8');\nconst m=html.match(/__CALDRIS_BUNDLE__ \\*\\/ ([\\s\\S]*?) \\/\\* __END__/);\nconst b=JSON.parse(m[1]);\nlet ok=0; for(const r of b.records){ if(recordHash(r)===r.hash) ok++; }\nconsole.log('embedded records:',b.records.length,'| recompute-verified:',ok,'| record_count:',b.record_count,'| manifest:',b.manifest_hash.slice(0,22)+'...');\n\"\necho \"=== commit a real-data artifact + sample bundle into the repo ===\"\nmkdir -p artifact fixtures\ncp caldris-evidence-bundle/index.html artifact/sample-evidence-bundle.html\ncp caldris-evidence-bundle/bundle.json fixtures/self-session.bundle.json\nls -la artifact fixtures\ndu -h artifact/sample-evidence-bundle.html",
+        "target": "cd /home/user/Caldris.io/product || exit 1\n# Re-import clean (previous file was tampered for the demo), then export\nT=~/"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec",
+          "fs:sensitive"
+        ],
+        "granted": [
+          "shell:exec",
+          "fs:sensitive"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "success"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [
+        "uuid-secret"
+      ],
+      "seq": 51,
+      "prev_hash": "sha256:7ffa4c862cebf41a0499fb470b39d5a22873bc3dbedd32468e0375b0aa2012bb",
+      "hash": "sha256:176196b73ef6ce8bedac23fd3a1ff9e2b2931e481a1a505296a1b48a14ed90c4"
+    },
+    {
+      "v": 1,
+      "id": "a0d566f8-21e7-41e4-9ade-f8587126f3a1",
+      "ts": "2026-06-18T02:36:17.991Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "<persisted-output>\nOutput too large (88.6KB). Full output saved to: /root/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret »/tool-results/toolu_018pz35UJm7YND6oAhUKS2Rj.txt\n\nPreview (first 2KB):\n> ## Documentation I"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [
+        "uuid-secret"
+      ],
+      "seq": 52,
+      "prev_hash": "sha256:176196b73ef6ce8bedac23fd3a1ff9e2b2931e481a1a505296a1b48a14ed90c4",
+      "hash": "sha256:0b12ff12d73fa7b5ad08e58dda6b0ee066922ae5389d5ba72dbd25d1ae35f147"
+    },
+    {
+      "v": 1,
+      "id": "de46d7ba-36b5-491a-a071-1458878e9897",
+      "ts": "2026-06-18T02:36:22.382Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "# Claude Code Documentation Pages\n\nHere's a complete list of all available documentation pages organized by category:\n\n## Getting Started\n- Quickstart\n- Overview\n- How Claude Code works\n- Best practices for Claude Code\n\n## Installation & Se"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 53,
+      "prev_hash": "sha256:0b12ff12d73fa7b5ad08e58dda6b0ee066922ae5389d5ba72dbd25d1ae35f147",
+      "hash": "sha256:07d6f708f7ee98fd559e340efe2a500450240c4662aac9ba9aa85f40af09b7f9"
+    },
+    {
+      "v": 1,
+      "id": "c29195d8-903b-445e-9b87-9a81e959a3af",
+      "ts": "2026-06-18T02:36:22.425Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Glob",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "Glob(pattern)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:Glob"
+        ],
+        "granted": [
+          "tool:Glob"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "No files found"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 54,
+      "prev_hash": "sha256:07d6f708f7ee98fd559e340efe2a500450240c4662aac9ba9aa85f40af09b7f9",
+      "hash": "sha256:9a1c8f831eb609f3277e1e009ba7fd5faa49043e6ed6426778dad65f6d7deba1"
+    },
+    {
+      "v": 1,
+      "id": "49024a3a-f567-45df-a6e3-f7e79246047d",
+      "ts": "2026-06-18T02:36:36.726Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "> ## Documentation Index\n> Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Create plugins\n\n> Create custom plugins to extend Claud"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 55,
+      "prev_hash": "sha256:9a1c8f831eb609f3277e1e009ba7fd5faa49043e6ed6426778dad65f6d7deba1",
+      "hash": "sha256:dfbbe541e74ae109def6c3cf7675c361a560e28def3e5040c272482e5a103d80"
+    },
+    {
+      "v": 1,
+      "id": "adc039e2-12ec-4cd4-93c1-c442d9fd5449",
+      "ts": "2026-06-18T02:36:37.378Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 404 Not Found.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 56,
+      "prev_hash": "sha256:dfbbe541e74ae109def6c3cf7675c361a560e28def3e5040c272482e5a103d80",
+      "hash": "sha256:984131c0c2e6e6ab190d8263fae4fee468cd20668d356b372c3e8e8c624b9f94"
+    },
+    {
+      "v": 1,
+      "id": "d11eb99e-9846-4b3f-b817-9c6c437694d5",
+      "ts": "2026-06-18T02:36:37.634Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 404 Not Found.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 57,
+      "prev_hash": "sha256:984131c0c2e6e6ab190d8263fae4fee468cd20668d356b372c3e8e8c624b9f94",
+      "hash": "sha256:06a639c0615ab1aaa1e9a50ae72901bd8fcbc58239ef50a365505a3a8df6d086"
+    },
+    {
+      "v": 1,
+      "id": "b669348b-c4f8-4e67-9de6-c1d4c383ec2c",
+      "ts": "2026-06-18T02:36:52.730Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "# Claude Code Hooks Reference Summary\n\n## Quick Overview\n\nHooks are user-defined commands, HTTP endpoints, or LLM prompts that execute at specific points in Claude Code's lifecycle. They enable automation, validation, and custom behavior co"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 58,
+      "prev_hash": "sha256:06a639c0615ab1aaa1e9a50ae72901bd8fcbc58239ef50a365505a3a8df6d086",
+      "hash": "sha256:1a8f9a5088244a8f3a6565067c9fd038f59958ecca820a2f55f8b15a11bbe7b1"
+    },
+    {
+      "v": 1,
+      "id": "29e287ed-64b8-4b14-a9d5-f71caaff0954",
+      "ts": "2026-06-18T02:36:53.156Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "<persisted-output>\nOutput too large (76.9KB). Full output saved to: /root/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret »/tool-results/toolu_019AfgkKXcg7mw328Y34ZA9E.txt\n\nPreview (first 2KB):\n> ## Documentation I"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [
+        "uuid-secret"
+      ],
+      "seq": 59,
+      "prev_hash": "sha256:1a8f9a5088244a8f3a6565067c9fd038f59958ecca820a2f55f8b15a11bbe7b1",
+      "hash": "sha256:bb405c8027c8e7ad499bdb5873bc682f8d0ee044e7757c29074f02afe4b50061"
+    },
+    {
+      "v": 1,
+      "id": "09a01d71-a4dc-4d2a-b16d-6226e824f2a0",
+      "ts": "2026-06-18T02:36:53.590Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 404 Not Found.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 60,
+      "prev_hash": "sha256:bb405c8027c8e7ad499bdb5873bc682f8d0ee044e7757c29074f02afe4b50061",
+      "hash": "sha256:9fce83879ca3c360bb43a4cb65b0888c9bda61abe1b1d2f398c8b92569640450"
+    },
+    {
+      "v": 1,
+      "id": "8cefc814-53f0-4bbe-b367-70bcedcce33a",
+      "ts": "2026-06-18T02:37:09.095Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "Read",
+        "category": "fs.read",
+        "phase": "tool_call",
+        "intent": "Read /root/.claude/projects/-home-user-Caldris-io/« redacted:uuid-secret »/tool-results/toolu_019AfgkKXcg7mw328Y34ZA9E.txt",
+        "target": "/root/.claude/projects/-home-user-Caldris-io/c452fc3e-b059-5c63-9353-9d910592d73d/tool-results/toolu_019AfgkKXcg7mw328Y34ZA9E.txt"
+      },
+      "scopes": {
+        "requested": [
+          "fs:read:/root/.claude/projects/-home-user-Caldris-io/c452fc3e-b059-5c63-9353-9d910592d73d/tool-results/toolu_019AfgkKXcg7mw328Y34ZA9E.txt"
+        ],
+        "granted": [
+          "fs:read:/root/.claude/projects/-home-user-Caldris-io/c452fc3e-b059-5c63-9353-9d910592d73d/tool-results/toolu_019AfgkKXcg7mw328Y34ZA9E.txt"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "1\t> ## Documentation Index\n2\t> Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt\n3\t> Use this file to discover all available pages before exploring further.\n4\t\n5\t# Plugins reference\n6\t\n7\t> Complete technical r"
+      },
+      "controls": [
+        "SOC2:CC6.1",
+        "SOC2:CC7.2",
+        "HIPAA:164.312(a)(1)",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [
+        "uuid-secret"
+      ],
+      "seq": 61,
+      "prev_hash": "sha256:9fce83879ca3c360bb43a4cb65b0888c9bda61abe1b1d2f398c8b92569640450",
+      "hash": "sha256:577e9db8491212007d46cd8020f22869d337ece2278d0334f82f9eff5bac7af5"
+    },
+    {
+      "v": 1,
+      "id": "a8d1ec80-e465-452a-846a-ffba476156dd",
+      "ts": "2026-06-18T02:37:09.640Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 404 Not Found.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 62,
+      "prev_hash": "sha256:577e9db8491212007d46cd8020f22869d337ece2278d0334f82f9eff5bac7af5",
+      "hash": "sha256:f4258f0288615d6d8150bf3f6399850578d4dd47df9e6ec36bdaed57e0c90b88"
+    },
+    {
+      "v": 1,
+      "id": "79fb5b81-44cc-4495-bd4f-cd2d809645a3",
+      "ts": "2026-06-18T02:37:12.187Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "# PreToolUse and PostToolUse JSON Input Schemas\n\nBased on the documentation, here are the complete JSON schemas for these two hook events:\n\n## PreToolUse Input\n\nFires **before a tool call executes** and can block it.\n\n```json\n{\n  \"session_i"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 63,
+      "prev_hash": "sha256:f4258f0288615d6d8150bf3f6399850578d4dd47df9e6ec36bdaed57e0c90b88",
+      "hash": "sha256:130d7fbd8c4019e07a5beafd87f4c5e60a73a3b656e81686c90be97151caf8ad"
+    },
+    {
+      "v": 1,
+      "id": "0c0a2fcc-5e84-46ab-8ae4-7d558e6f4d84",
+      "ts": "2026-06-18T02:37:12.574Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "# Claude API Documentation Overview\n\nBased on the documentation provided, here's a comprehensive overview of the Anthropic Developer Platform:\n\n## Key Sections\n\n### 1. **Messages API**\nThe core API for interacting with Claude, covering:\n- C"
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 64,
+      "prev_hash": "sha256:130d7fbd8c4019e07a5beafd87f4c5e60a73a3b656e81686c90be97151caf8ad",
+      "hash": "sha256:08497af4af4d4384dea95b027d233846de8ebc5fa9ef98690cf988e35aee8e33"
+    },
+    {
+      "v": 1,
+      "id": "c45b597a-c7e8-4c98-be91-122d7035e1bb",
+      "ts": "2026-06-18T02:37:23.460Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 404 Not Found.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 65,
+      "prev_hash": "sha256:08497af4af4d4384dea95b027d233846de8ebc5fa9ef98690cf988e35aee8e33",
+      "hash": "sha256:133f0f5d3684ac351ae9c0f4c8a42ecaaedc49ba5d00e3012473cb1fd3ffbe34"
+    },
+    {
+      "v": 1,
+      "id": "d7306ee7-f5ab-4176-a533-5d63090e8229",
+      "ts": "2026-06-18T02:37:25.305Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 404 Not Found.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 66,
+      "prev_hash": "sha256:133f0f5d3684ac351ae9c0f4c8a42ecaaedc49ba5d00e3012473cb1fd3ffbe34",
+      "hash": "sha256:889ad97746fb0d16ab7e617f26339ff436b7928c8d880a8139507bf41abc5496"
+    },
+    {
+      "v": 1,
+      "id": "f47b2d9c-97a0-4fd5-b9fd-326f04265101",
+      "ts": "2026-06-18T02:37:27.309Z",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "c452fc3e-b059-5c63-9353-9d910592d73d",
+        "agent_type": "subagent",
+        "principal": "transcript-import"
+      },
+      "action": {
+        "tool": "WebFetch",
+        "category": "tool",
+        "phase": "tool_call",
+        "intent": "WebFetch(prompt, url)",
+        "target": ""
+      },
+      "scopes": {
+        "requested": [
+          "tool:WebFetch"
+        ],
+        "granted": [
+          "tool:WebFetch"
+        ],
+        "decision": "allow",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "The server returned HTTP 404 Not Found.\n\nThe response body was not retrieved. If this URL requires authentication, use an authenticated tool (e.g. `gh` for GitHub, or an MCP-provided fetch tool) instead of WebFetch."
+      },
+      "controls": [
+        "SOC2:CC7.2",
+        "HIPAA:164.312(b)"
+      ],
+      "redactions": [],
+      "seq": 67,
+      "prev_hash": "sha256:889ad97746fb0d16ab7e617f26339ff436b7928c8d880a8139507bf41abc5496",
+      "hash": "sha256:728fb045e2c5249da9828d098e7c3b5f1d9d3b21e31e9d300424c74bac1de229"
+    }
+  ],
+  "manifest_hash": "sha256:961a3ccfacf369a19ac0ec10b8cc3a6c9b9f84151e05c5a2913bcb0aafbcf702"
+}

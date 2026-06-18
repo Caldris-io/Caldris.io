@@ -1,0 +1,23 @@
+{
+  "framework": "HIPAA",
+  "version": "45 CFR Part 164 Subpart C",
+  "note": "Draft mapping for M0. Evidence supports these Security Rule safeguards; review required before auditor use.",
+  "controls": {
+    "164.312(a)(1)": {
+      "title": "Access control — allow access only to authorized persons/software",
+      "match": { "scope_prefix": ["fs:", "mcp:"] }
+    },
+    "164.312(b)": {
+      "title": "Audit controls — record and examine activity in systems with ePHI",
+      "match": { "any": true }
+    },
+    "164.312(c)(1)": {
+      "title": "Integrity — protect ePHI from improper alteration or destruction",
+      "match": { "category": ["fs.write"] }
+    },
+    "164.312(e)(1)": {
+      "title": "Transmission security — guard against unauthorized access during transmission",
+      "match": { "scope_prefix": ["net:egress"] }
+    }
+  }
+}
