@@ -170,7 +170,7 @@ function render(bad){
     const tr=document.createElement('tr'); tr.className='row'+(bad.has(r.seq)?' tampered':'');
     const dec=r.scopes.decision==='deny'?'<span class="badge b-deny">deny</span>':'<span class="badge b-allow">allow</span>';
     const intent=esc(r.action.intent).replace(/« redacted:[^»]+»/g,m=>`<span class="redact">${m}</span>`);
-    tr.innerHTML=`<td class="seq">${r.seq}${bad.has(r.seq)?' ⚠':''}</td>
+    tr.innerHTML=`<td class="seq">${esc(r.seq)}${bad.has(r.seq)?' ⚠':''}</td>
       <td class="mono">${esc((r.ts||'').replace('T',' ').replace(/\..*/,''))}</td>
       <td>${esc(r.actor.principal||r.actor.agent)}${r.actor.agent_type==='subagent'?' <span class="tag">(sub)</span>':''}</td>
       <td class="mono">${intent}</td>
@@ -198,7 +198,7 @@ async function refresh(){
   const bad=await verifyChain(RECORDS);
   const b=document.getElementById('banner');
   if(bad.size===0){b.className='banner ok';b.innerHTML='<span class="big">✓</span><span>Chain verified — '+RECORDS.length+' records intact, no tampering detected.</span>';}
-  else{b.className='banner bad';b.innerHTML='<span class="big">✕</span><span>TAMPER DETECTED — '+bad.size+' record(s) altered (rows #'+[...bad].join(', #')+'). The hash chain no longer validates.</span>';}
+  else{b.className='banner bad';b.innerHTML='<span class="big">✕</span><span>TAMPER DETECTED — '+bad.size+' record(s) altered (rows #'+[...bad].map(esc).join(', #')+'). The hash chain no longer validates.</span>';}
   render(bad);
 }
 

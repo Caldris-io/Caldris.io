@@ -7,7 +7,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { verifyChain, mapControls, recordHash } = require('./lib/evidence');
+const { verifyChain, mapControls, scriptSafeJson } = require('./lib/evidence');
 const { evidenceDir, readRecords, writeRecords } = require('./lib/store');
 const { importTranscript } = require('./import');
 
@@ -97,11 +97,16 @@ function cmdExport(args) {
   fs.mkdirSync(out, { recursive: true });
   fs.writeFileSync(path.join(out, 'bundle.json'), JSON.stringify(bundle, null, 2));
 
-  // Build the self-contained viewer (artifact) with the bundle embedded.
+  // Build the self-contained viewer (artifact) with the bundle embedded. The
+  // JSON is script-context-escaped (see SCRIPT_UNSAFE) so untrusted record
+  // content (e.g. file contents an agent read) cannot break out via
+  // "</script>". A replacement FUNCTION is used so "$"-sequences in the data
+  // are not interpreted as String.prototype.replace patterns.
   const template = fs.readFileSync(path.join(__dirname, '..', 'artifact', 'evidence-viewer.html'), 'utf8');
+  const safeJson = scriptSafeJson(bundle);
   const html = template.replace(
     /\/\* __CALDRIS_BUNDLE__ \*\/[\s\S]*?\/\* __END__ \*\//,
-    `/* __CALDRIS_BUNDLE__ */ ${JSON.stringify(bundle)} /* __END__ */`
+    () => `/* __CALDRIS_BUNDLE__ */ ${safeJson} /* __END__ */`
   );
   fs.writeFileSync(path.join(out, 'index.html'), html);
 

@@ -32,6 +32,19 @@ function sha256Hex(str) {
   return crypto.createHash('sha256').update(str, 'utf8').digest('hex');
 }
 
+/**
+ * Serialize a value as JSON that is safe to embed inside an HTML <script>
+ * element. Characters that are legal in JSON strings but can terminate or break
+ * out of a script ("<", ">", "&", and the JS line terminators U+2028/U+2029)
+ * are emitted as \uXXXX escapes. The result is still valid JSON (JSON.parse
+ * understands \uXXXX), so untrusted record content cannot inject markup via
+ * "</script>".
+ */
+const SCRIPT_UNSAFE = /[<>&\u2028\u2029]/g;
+function scriptSafeJson(value) {
+  return JSON.stringify(value).replace(SCRIPT_UNSAFE, (c) => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0'));
+}
+
 /** The bytes that get hashed: the record minus its own hash/sig fields. */
 function hashableString(record) {
   const copy = Object.assign({}, record);
@@ -289,6 +302,7 @@ module.exports = {
   GENESIS,
   canonicalize,
   sha256Hex,
+  scriptSafeJson,
   recordHash,
   chainNext,
   verifyChain,

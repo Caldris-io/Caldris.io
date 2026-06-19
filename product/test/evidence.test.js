@@ -1,8 +1,10 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert');
+const fs = require('node:fs');
+const path = require('node:path');
 const {
-  buildRecord, chainNext, verifyChain, recordHash, deriveScopes, redact, mapControls,
+  buildRecord, chainNext, verifyChain, recordHash, deriveScopes, redact, mapControls, scriptSafeJson,
 } = require('../src/lib/evidence');
 
 function chain(events) {
@@ -68,6 +70,24 @@ test('control mapping tags fs.write to integrity + audit controls', () => {
   const controls = mapControls(r);
   assert.ok(controls.includes('SOC2:CC6.1'));
   assert.ok(controls.includes('HIPAA:164.312(c)(1)'));
+});
+
+test('scriptSafeJson neutralizes </script> breakout but round-trips', () => {
+  const evil = { records: [{ outcome: { summary: '</script><img src=x onerror=alert(1)>' } }], amp: 'a&b', sep: 'a\u2028b\u2029c' };
+  const out = scriptSafeJson(evil);
+  // No characters that could break out of a <script> element remain raw.
+  assert.ok(!/[<>&]/.test(out), 'raw < > & must not survive');
+  assert.ok(!/<\/script/i.test(out), 'no </script breakout');
+  assert.ok(!/[\u2028\u2029]/.test(out), 'JS line terminators escaped');
+  // Still valid JSON that parses back to the original value.
+  assert.deepStrictEqual(JSON.parse(out), evil);
+});
+
+test('viewer template escapes seq and the tamper banner (no raw injection sink)', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'artifact', 'evidence-viewer.html'), 'utf8');
+  assert.ok(html.includes('${esc(r.seq)}'), 'seq must be escaped before innerHTML');
+  assert.ok(!/\$\{r\.seq\}[^}]*<\/td>/.test(html), 'no unescaped ${r.seq} in a table cell');
+  assert.ok(html.includes('[...bad].map(esc).join'), 'tamper banner must escape seq values');
 });
 
 test('hash is stable for identical hashable content', () => {
