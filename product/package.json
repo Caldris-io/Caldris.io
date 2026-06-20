@@ -1,13 +1,15 @@
 {
   "name": "@caldris/plugin",
   "version": "0.1.0",
-  "description": "Caldris evidence layer for coding agents (M0)",
+  "description": "Caldris evidence layer for coding agents (M0 demo slice)",
   "bin": {
     "caldris": "src/cli.js"
   },
   "scripts": {
     "test": "node --test",
-    "caldris": "node src/cli.js"
+    "caldris": "node src/cli.js",
+    "make:sample": "node scripts/make-sample.js",
+    "scan:bundle": "node src/cli.js scan fixtures/demo-bundle.json"
   },
   "engines": {
     "node": ">=18"

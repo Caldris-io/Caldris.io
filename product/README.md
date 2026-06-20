@@ -1,24 +1,44 @@
-# Caldris — evidence layer for coding agents (M0)
+# Caldris — evidence layer for coding agents (M0 demo slice)
 
 Caldris captures every tool action a coding agent takes and turns it into a
-**tamper-evident, compliance-mapped audit trail** you can hand to an auditor.
-This is **M0**: capture + hash-chained evidence + control mapping + export, for
-**Claude Code**. Zero runtime dependencies, Node ≥ 18.
+**tamper-evident, lifecycle-aware audit trail**. This is the **M0 demo slice** —
+enough to prove the thesis end to end for a design partner, with the milestone
+boundaries kept honest (see "Scope & honesty" below). Zero runtime
+dependencies, Node ≥ 18, targets **Claude Code**.
 
 ```
-agent tool call ──▶ hooks / transcript ──▶ evidence record ──▶ hash-chained JSONL
-                                                                  │
-                                            caldris verify / map / export ──▶ bundle + viewer
+agent tool call ──▶ hooks / transcript ──▶ evidence event ──▶ hash-chained JSONL
+                                                                 │
+                                   caldris verify / map / scan / export ──▶ bundle + viewer
 ```
+
+## Event model
+
+Claude Code fires a hook at each step of a tool call, and every step carries a
+`tool_use_id`. Caldris records one immutable event per step and correlates them
+via `action_id` (= `tool_use_id`):
+
+| Hook event | Caldris `event_type` | decision / `auth_source` |
+| --- | --- | --- |
+| `PreToolUse` | `attempted` | pending / inferred |
+| `PermissionRequest` | `permission_requested` | pending / claude_permission |
+| `PermissionDenied` | `permission_denied` | **deny** / claude_permission |
+| `PostToolUse` | `executed` | allow / inferred |
+| `PostToolUseFailure` | `failed` | allow / inferred |
+
+`auth_source` is explicit: `claude_permission` means the decision was *observed*
+from Claude's permission system; `inferred` means we only know the tool ran.
+We do not claim "granted" where we only inferred it.
 
 ## Two ways to capture
 
-**1. Live (plugin).** Install as a Claude Code plugin; `PreToolUse` + `PostToolUse`
-hooks record every tool call to `.caldris/evidence/<session>.jsonl`. Capture is
-**fail-open** — it never blocks or slows the agent.
+**1. Live (plugin).** Hooks in `hooks/hooks.json` record the lifecycle above to
+`.caldris/evidence/<session>.jsonl`. Capture is **fail-open** (never blocks the
+agent) and **lock-guarded** (Claude batches parallel tool calls, so concurrent
+hooks can append to the same log).
 
-**2. Retroactive (transcript mining).** Reconstruct evidence from sessions that
-already happened — no instrumentation needed:
+**2. Retroactive (transcript mining).** Reconstruct `executed`/`failed` events
+from a session that already happened (the transcript has no permission events):
 
 ```bash
 node src/cli.js import ~/.claude/projects/<project>/<session>.jsonl --out .caldris/evidence/self.jsonl
@@ -30,38 +50,48 @@ node src/cli.js import ~/.claude/projects/<project>/<session>.jsonl --out .caldr
 node src/cli.js init                 # create the .caldris/ evidence store
 node src/cli.js import <transcript>  # reconstruct evidence from a session transcript
 node src/cli.js verify               # recompute the hash chain (exit 1 if broken)
-node src/cli.js map                  # show SOC 2 / HIPAA control coverage
-node src/cli.js export               # build bundle.json + a self-contained viewer
+node src/cli.js map                  # candidate evidence tags (heuristic, with confidence)
+node src/cli.js scan [file ...]      # flag sensitive content before sharing a bundle
+node src/cli.js export               # build a demo bundle + self-contained viewer
 ```
 
-`export` writes `caldris-evidence-bundle/`:
-- **`bundle.json`** — machine-readable evidence (for Vanta / Drata / an auditor).
-- **`index.html`** — the **Evidence Viewer** artifact: a single self-contained file
-  that renders the audit trail and **recomputes every hash in the browser** to prove
-  (or detect tampering in) the chain. No backend, no network.
+`export` writes `caldris-evidence-bundle/`: `bundle.json` (machine-readable) and
+`index.html` (the **Evidence Viewer** — a single self-contained file that
+recomputes every hash in the browser to detect tampering).
 
-## Evidence record
+## Evidence tags ≠ compliance coverage
 
-Each record carries actor, intent, **scopes requested vs. granted**, outcome, mapped
-controls, and the hash chain (`prev_hash` → `hash`, SHA-256 over canonical JSON). See
-`PLAN.md` (repo root → `product/PLAN.md`) for the full schema and roadmap (M1 scopes
-from the real permission decision, M2 redaction/export hardening, M3 multi-agent reach).
+`map` emits **candidate evidence tags** with a confidence level
+(`direct` / `supporting` / `weak`) sourced from `src/controls/mappings.*.json`.
+A tag means an event *may* serve as evidence toward a control — it is **not** a
+claim of coverage or compliance, and the catch-all rules are deliberately
+`weak`. Mappings must be reviewed by a compliance owner before any auditor use.
 
-## Install as a Claude Code plugin (dev)
+## Before you share a bundle
 
-The plugin manifest is `.claude-plugin/plugin.json` and hooks are in `hooks/hooks.json`
-(`node "${CLAUDE_PLUGIN_ROOT}/src/capture.js"`). Load this directory with Claude Code's
-`--plugin-dir` during development, or publish it to a marketplace.
+Bundles are valuable because they are rich, and dangerous for the same reason.
+**Always scan first** — `caldris scan` flags emails, tokens, secret shapes, URLs
+and home/absolute paths. The committed demo (`fixtures/demo-bundle.json`,
+`artifact/sample-evidence-bundle.html`) is generated from **synthetic** events
+by `npm run make:sample` and is verified scan-clean; never commit real evidence.
 
 ## Tests
 
 ```bash
-node --test        # chain verify, tamper detection, scope derivation, redaction, mapping
+node --test    # chain verify, tamper detection, event lifecycle/correlation,
+               # scopes, redaction, evidence tags, XSS escaping, scan, locked append
 ```
 
-## Status & honesty
+## Scope & honesty
 
-M0 is tamper-**evident** (a local hash chain), not tamper-**proof**. Signing keys,
-WORM/anchored storage, real auth-decision capture, and the hosted backend are tracked
-in `PLAN.md` and `THREAT_MODEL.md`. Control mappings are **draft** and must be reviewed
-by a compliance-literate owner before auditor use.
+M0 is tamper-**evident** (a local hash chain), not tamper-**proof**, and it is a
+**demo slice**, not an auditor deliverable. Roadmap (see `PLAN.md`):
+
+- **M0 (this):** capture lifecycle + correlation, hash chain + verify, importer,
+  candidate tags, scan, demo viewer/export.
+- **M1:** treat the observed permission decision as authoritative `granted`;
+  begin moving evidence out of the agent's reach (signing / remote sink).
+- **M2:** hardened export package (signing, external anchoring) — the point at
+  which "hand to an auditor" becomes a fair claim.
+
+See `THREAT_MODEL.md` for what M0 does and does not defend against.

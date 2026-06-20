@@ -70,12 +70,16 @@ function importTranscript(files) {
     for (const block of content) {
       if (block && block.type === 'tool_use') {
         const res = results[block.id] || { status: 'success', output: '' };
+        const failed = res.status === 'error';
         events.push({
-          phase: 'tool_call',
+          // A transcript only records executed/failed outcomes; the permission
+          // decision is not in the transcript, so auth_source stays "inferred".
+          event_type: failed ? 'failed' : 'executed',
+          action_id: block.id || null,
           tool: block.name,
           input: block.input || {},
-          output: res.output,
-          status: res.status,
+          output: failed ? undefined : res.output,
+          error: failed ? res.output : undefined,
           session_id: row.sessionId,
           cwd: row.cwd,
           permission_mode: row.permissionMode || 'default',

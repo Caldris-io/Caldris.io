@@ -2,10 +2,13 @@
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const {
-  buildRecord, chainNext, verifyChain, recordHash, deriveScopes, redact, mapControls, scriptSafeJson,
+  buildRecord, chainNext, verifyChain, recordHash, deriveScopes, redact, mapEvidenceTags, scriptSafeJson,
 } = require('../src/lib/evidence');
+const { scanRecords } = require('../src/scan');
+const { appendEvidence, readRecords } = require('../src/lib/store');
 
 function chain(events) {
   const recs = [];
@@ -65,11 +68,55 @@ test('secrets are redacted from intent', () => {
   assert.ok(r.redactions.includes('github-token'));
 });
 
-test('control mapping tags fs.write to integrity + audit controls', () => {
-  const r = buildRecord({ tool: 'Write', input: { file_path: 'x.js' }, status: 'success', session_id: 's' });
-  const controls = mapControls(r);
-  assert.ok(controls.includes('SOC2:CC6.1'));
-  assert.ok(controls.includes('HIPAA:164.312(c)(1)'));
+test('evidence tags carry ids + confidence for fs.write', () => {
+  const r = buildRecord({ event_type: 'executed', tool: 'Write', input: { file_path: 'x.js' }, session_id: 's' });
+  const ids = r.evidence_tags.map((t) => t.id);
+  assert.ok(ids.includes('SOC2:CC6.1'));
+  assert.ok(ids.includes('HIPAA:164.312(c)(1)'));
+  const integrity = r.evidence_tags.find((t) => t.id === 'HIPAA:164.312(c)(1)');
+  assert.strictEqual(integrity.confidence, 'direct');
+  // the catch-all "any" rule must be downgraded, never presented as strong
+  const audit = r.evidence_tags.find((t) => t.id === 'HIPAA:164.312(b)');
+  assert.strictEqual(audit.confidence, 'weak');
+});
+
+test('event lifecycle: attempt and outcome correlate by action_id', () => {
+  const attempt = buildRecord({ event_type: 'attempted', action_id: 'tu_1', tool: 'Bash', input: { command: 'ls' }, session_id: 's' });
+  const done = buildRecord({ event_type: 'executed', action_id: 'tu_1', tool: 'Bash', input: { command: 'ls' }, session_id: 's' });
+  assert.strictEqual(attempt.action_id, done.action_id);
+  assert.strictEqual(attempt.scopes.decision, 'pending');
+  assert.deepStrictEqual(attempt.scopes.granted, []);
+  assert.strictEqual(done.scopes.decision, 'allow');
+});
+
+test('permission_denied is observed (claude_permission), executed is inferred', () => {
+  const denied = buildRecord({ event_type: 'permission_denied', action_id: 'tu_2', tool: 'Bash', input: { command: 'curl https://x' }, session_id: 's' });
+  assert.strictEqual(denied.scopes.decision, 'deny');
+  assert.deepStrictEqual(denied.scopes.granted, []);
+  assert.strictEqual(denied.scopes.auth_source, 'claude_permission');
+  const ran = buildRecord({ event_type: 'executed', tool: 'Read', input: { file_path: 'a' }, session_id: 's' });
+  assert.strictEqual(ran.scopes.auth_source, 'inferred');
+});
+
+test('scanner flags emails and home paths, passes clean records', () => {
+  const dirty = [{ seq: 0, action: { intent: 'mail to a@b.com', target: '/home/alice/.ssh/id_rsa' }, outcome: {}, actor: {} }];
+  const found = scanRecords(dirty);
+  assert.ok(found.some((f) => f.kind === 'email'));
+  assert.ok(found.some((f) => f.kind === 'home-path'));
+  const clean = [{ seq: 0, action: { intent: 'Read src/app.js', target: 'src/app.js' }, outcome: { summary: 'ok' }, actor: { principal: 'demo-user' } }];
+  assert.deepStrictEqual(scanRecords(clean), []);
+});
+
+test('appendEvidence links a valid chain across sequential writes', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'caldris-'));
+  const file = path.join(dir, 's.jsonl');
+  for (let i = 0; i < 5; i++) {
+    appendEvidence(file, buildRecord({ event_type: 'executed', action_id: 'c' + i, tool: 'Read', input: { file_path: 'f' + i }, session_id: 's' }));
+  }
+  const recs = readRecords(file);
+  assert.strictEqual(recs.length, 5);
+  assert.ok(verifyChain(recs).ok);
+  fs.rmSync(dir, { recursive: true, force: true });
 });
 
 test('scriptSafeJson neutralizes </script> breakout but round-trips', () => {

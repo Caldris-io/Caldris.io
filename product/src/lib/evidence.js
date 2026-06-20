@@ -211,12 +211,17 @@ function loadMappings() {
   return all;
 }
 
-/** Return the control ids (e.g. "SOC2:CC6.1") that apply to a record. */
-function mapControls(record, mappings) {
+/**
+ * Return the candidate evidence tags that apply to a record, each with a
+ * confidence level (direct | supporting | weak). These are NOT a claim of
+ * compliance "coverage" — they are heuristic candidates that a compliance owner
+ * must review. Confidence comes from the mapping rule.
+ */
+function mapEvidenceTags(record, mappings) {
   mappings = mappings || loadMappings();
   const out = [];
   const category = record.action.category;
-  const requested = record.scopes.requested || [];
+  const requested = (record.scopes && record.scopes.requested) || [];
   for (const fw of mappings) {
     for (const [id, ctrl] of Object.entries(fw.controls)) {
       const m = ctrl.match || {};
@@ -226,7 +231,7 @@ function mapControls(record, mappings) {
       if (!hit && Array.isArray(m.scope_prefix)) {
         hit = requested.some((s) => m.scope_prefix.some((p) => s.startsWith(p)));
       }
-      if (hit) out.push(`${fw.framework}:${id}`);
+      if (hit) out.push({ id: `${fw.framework}:${id}`, confidence: ctrl.confidence || 'needs_review' });
     }
   }
   return out;
@@ -250,24 +255,57 @@ function summarizeIntent(tool, input) {
   return `${tool}(${Object.keys(input).join(', ')})`;
 }
 
+// Event types in the tool-call lifecycle. Each hook fires its own immutable
+// record; records for the SAME tool call share an `action_id` (Claude Code's
+// tool_use_id) so attempt / permission / outcome can be correlated.
+const EVENT_SEMANTICS = {
+  attempted:           { status: 'pending', decision: 'pending', auth_source: 'inferred' },
+  permission_requested:{ status: 'pending', decision: 'pending', auth_source: 'claude_permission' },
+  permission_denied:   { status: 'blocked', decision: 'deny',    auth_source: 'claude_permission' },
+  executed:            { status: 'success', decision: 'allow',   auth_source: 'inferred' },
+  failed:              { status: 'error',   decision: 'allow',   auth_source: 'inferred' },
+};
+
+/** Map a Claude Code hook event name to a Caldris event_type. */
+function eventTypeFromHook(hookName, toolSucceeded) {
+  switch (hookName) {
+    case 'PreToolUse': return 'attempted';
+    case 'PermissionRequest': return 'permission_requested';
+    case 'PermissionDenied': return 'permission_denied';
+    case 'PostToolUse': return 'executed';
+    case 'PostToolUseFailure': return 'failed';
+    default: return toolSucceeded === false ? 'failed' : 'executed';
+  }
+}
+
 /**
  * Build an evidence record (without chain fields) from a normalized event:
- *   { phase, tool, input, output, status, session_id, cwd,
+ *   { event_type, action_id, tool, input, output, error, session_id, cwd,
  *     permission_mode, agent, agent_type, principal, ts }
+ * `granted`/`decision` reflect ONLY what this event observed; `auth_source`
+ * says whether the decision was observed from Claude's permission system
+ * ("claude_permission") or merely inferred from the fact the tool ran.
  */
 function buildRecord(event) {
   const tool = event.tool || 'unknown';
-  const status = event.status || (event.phase === 'PreToolUse' ? 'requested' : 'success');
-  const scopes = deriveScopes(tool, event.input, event.permission_mode, status);
+  const event_type = event.event_type || eventTypeFromHook(event.phase, event.tool_succeeded);
+  const sem = EVENT_SEMANTICS[event_type] || EVENT_SEMANTICS.executed;
+
+  const base = deriveScopes(tool, event.input, event.permission_mode, 'success');
+  const granted = sem.decision === 'allow' ? base.requested.slice() : [];
 
   const intentRedact = redact(summarizeIntent(tool, event.input));
-  const outputRedact = redact(typeof event.output === 'string' ? event.output.slice(0, 240) : '');
+  const rawOutcome = typeof event.output === 'string' ? event.output
+    : typeof event.error === 'string' ? event.error : '';
+  const outputRedact = redact(rawOutcome.slice(0, 240));
   const redactions = [...new Set([...intentRedact.kinds, ...outputRedact.kinds])];
 
   const record = {
     v: 1,
     id: crypto.randomUUID(),
     ts: event.ts || new Date().toISOString(),
+    event_type,
+    action_id: event.action_id || null,
     actor: {
       agent: event.agent || 'claude-code',
       session_id: event.session_id || 'unknown',
@@ -276,25 +314,25 @@ function buildRecord(event) {
     },
     action: {
       tool,
-      category: scopes.category,
-      phase: event.phase || 'tool_call',
+      category: base.category,
       intent: intentRedact.text,
-      target: scopes.target || '',
+      target: base.target || '',
     },
     scopes: {
-      requested: scopes.requested,
-      granted: scopes.granted,
-      decision: scopes.decision,
-      permission_mode: scopes.permission_mode,
+      requested: base.requested,
+      granted,
+      decision: sem.decision,
+      auth_source: sem.auth_source,
+      permission_mode: event.permission_mode || 'default',
     },
     outcome: {
-      status,
-      summary: outputRedact.text || (status === 'requested' ? 'action attempted' : status),
+      status: sem.status,
+      summary: outputRedact.text || sem.status,
     },
-    controls: [],
+    evidence_tags: [],
     redactions,
   };
-  record.controls = mapControls(record);
+  record.evidence_tags = mapEvidenceTags(record);
   return record;
 }
 
@@ -309,7 +347,8 @@ module.exports = {
   redact,
   deriveScopes,
   loadMappings,
-  mapControls,
+  mapEvidenceTags,
+  eventTypeFromHook,
   buildRecord,
   pruneUndefined,
 };

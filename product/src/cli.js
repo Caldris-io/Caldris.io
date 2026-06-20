@@ -7,9 +7,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { verifyChain, mapControls, scriptSafeJson } = require('./lib/evidence');
+const { verifyChain, mapEvidenceTags, scriptSafeJson } = require('./lib/evidence');
 const { evidenceDir, readRecords, writeRecords } = require('./lib/store');
 const { importTranscript } = require('./import');
+const { scanRecords } = require('./scan');
 
 function listEvidenceFiles(cwd) {
   const dir = evidenceDir(cwd);
@@ -66,13 +67,42 @@ function cmdVerify(args) {
 
 function cmdMap() {
   const records = loadAllRecords(process.cwd());
-  const coverage = {};
+  const tally = {};
   for (const r of records) {
-    const controls = r.controls && r.controls.length ? r.controls : mapControls(r);
-    for (const c of controls) coverage[c] = (coverage[c] || 0) + 1;
+    const tags = (r.evidence_tags && r.evidence_tags.length ? r.evidence_tags : mapEvidenceTags(r));
+    for (const t of tags) {
+      const key = `${t.id} [${t.confidence}]`;
+      tally[key] = (tally[key] || 0) + 1;
+    }
   }
-  console.log(`Control coverage across ${records.length} records:`);
-  for (const [c, n] of Object.entries(coverage).sort()) console.log(`  ${c.padEnd(24)} ${n}`);
+  console.log(`Candidate evidence tags across ${records.length} records`);
+  console.log('(heuristic, NOT reviewed — not a claim of compliance coverage):');
+  for (const [k, n] of Object.entries(tally).sort()) console.log(`  ${k.padEnd(40)} ${n}`);
+}
+
+function recordsFromFile(file) {
+  if (file.endsWith('.json')) {
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return Array.isArray(data) ? data : data.records || [];
+  }
+  return readRecords(file);
+}
+
+function cmdScan(args) {
+  const files = args.filter((a) => !a.startsWith('--'));
+  const records = files.length ? files.flatMap(recordsFromFile) : loadAllRecords(process.cwd());
+  if (!records.length) {
+    console.error('Nothing to scan.');
+    process.exit(2);
+  }
+  const findings = scanRecords(records);
+  if (!findings.length) {
+    console.log(`Scan clean: no denylisted content in ${records.length} records.`);
+    process.exit(0);
+  }
+  console.log(`Found ${findings.length} sensitive item(s) — do NOT publish this bundle as-is:`);
+  for (const f of findings.slice(0, 50)) console.log(`  ${f.kind.padEnd(14)} seq ${f.seq} ${f.field}: ${f.sample}`);
+  process.exit(1);
 }
 
 function cmdExport(args) {
@@ -110,9 +140,10 @@ function cmdExport(args) {
   );
   fs.writeFileSync(path.join(out, 'index.html'), html);
 
-  console.log(`Exported evidence bundle to ${path.relative(process.cwd(), out)}/`);
-  console.log('  bundle.json  – machine-readable evidence (for Vanta/Drata/auditor)');
+  console.log(`Exported demo evidence bundle to ${path.relative(process.cwd(), out)}/`);
+  console.log('  bundle.json  – machine-readable evidence (demo slice; not signed/anchored yet)');
   console.log('  index.html   – self-contained Evidence Viewer (open in any browser)');
+  console.log('Run "caldris scan" before sharing — bundles may contain sensitive tool output.');
 }
 
 function takeFlag(args, name) {
@@ -130,14 +161,16 @@ function main() {
     case 'import': return cmdImport(args);
     case 'verify': return cmdVerify(args);
     case 'map': return cmdMap();
+    case 'scan': return cmdScan(args);
     case 'export': return cmdExport(args);
     default:
       console.log('caldris <command>');
       console.log('  init                       create .caldris/ evidence store');
       console.log('  import <transcript.jsonl>  reconstruct evidence from a session transcript');
       console.log('  verify [file ...]          verify hash-chain integrity (exit 1 if broken)');
-      console.log('  map                        show compliance-control coverage');
-      console.log('  export [--out dir]         build evidence bundle + self-contained viewer');
+      console.log('  map                        show candidate evidence tags (heuristic)');
+      console.log('  scan [file ...]            flag sensitive content before sharing a bundle');
+      console.log('  export [--out dir]         build demo evidence bundle + self-contained viewer');
       process.exit(cmd ? 1 : 0);
   }
 }

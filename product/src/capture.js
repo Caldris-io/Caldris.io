@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 'use strict';
 /**
- * Caldris capture hook (M0).
+ * Caldris capture hook (M0 demo slice).
  *
- * Wired as a Claude Code PreToolUse + PostToolUse hook. Reads the hook payload
- * from stdin, builds a single evidence record, and appends it to an append-only,
- * hash-chained JSONL log under .caldris/evidence/<session>.jsonl.
+ * Wired as Claude Code hooks for the full tool-call lifecycle:
+ *   PreToolUse → PermissionRequest → PermissionDenied → PostToolUse / PostToolUseFailure
+ * Each hook fires its own immutable evidence record; records for the same tool
+ * call share `action_id` (Claude Code's tool_use_id) so attempt, permission
+ * decision, and outcome can be correlated downstream.
  *
  * CRITICAL: this runs on EVERY tool call. It must be fast and FAIL-OPEN — a
  * capture failure must never block or slow the agent. All errors are swallowed
@@ -14,8 +16,8 @@
 
 const path = require('node:path');
 const fs = require('node:fs');
-const { buildRecord, chainNext } = require('./lib/evidence');
-const { evidenceDir, lastRecord, appendRecord } = require('./lib/store');
+const { buildRecord, eventTypeFromHook } = require('./lib/evidence');
+const { evidenceDir, appendEvidence } = require('./lib/store');
 
 function readStdin() {
   try {
@@ -30,18 +32,14 @@ function main() {
   if (!raw.trim()) return;
   const payload = JSON.parse(raw);
 
-  const phase = payload.hook_event_name || process.argv[2] || 'tool_call';
-  // PostToolUse carries the outcome; PreToolUse is the attempt.
-  let status;
-  if (phase === 'PreToolUse') status = 'requested';
-  else status = payload.tool_output && /error|failed|denied/i.test(String(payload.tool_output)) ? 'error' : 'success';
-
+  const hookName = payload.hook_event_name || process.argv[2] || 'PostToolUse';
   const event = {
-    phase,
+    event_type: eventTypeFromHook(hookName, payload.tool_use_succeeded),
+    action_id: payload.tool_use_id || null,
     tool: payload.tool_name,
     input: payload.tool_input,
     output: payload.tool_output,
-    status,
+    error: payload.tool_error,
     session_id: payload.session_id,
     cwd: payload.cwd,
     permission_mode: payload.permission_mode,
@@ -52,8 +50,7 @@ function main() {
 
   const record = buildRecord(event);
   const file = path.join(evidenceDir(payload.cwd), `${event.session_id || 'session'}.jsonl`);
-  const linked = chainNext(lastRecord(file), record);
-  appendRecord(file, linked);
+  appendEvidence(file, record);
 }
 
 try {

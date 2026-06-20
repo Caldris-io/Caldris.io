@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Caldris — Evidence Viewer</title>
+<title>Caldris — Evidence Viewer (demo)</title>
 <style>
   :root{--red:#E41E26;--yellow:#FFD200;--blue:#0057B8;--black:#111;--cream:#FAE5BE;--white:#fff;--green:#0a8a3f;--mut:#666}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -13,7 +13,8 @@
   .logo i{display:block}.logo .a{background:var(--red);grid-row:span 2}.logo .b{background:var(--blue)}.logo .c{background:var(--yellow)}
   h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
   .tag{font-size:12px;color:var(--mut);font-weight:500}
-  .wrap{max-width:1180px;margin:0 auto;padding:24px 28px}
+  .wrap{max-width:1220px;margin:0 auto;padding:24px 28px}
+  .disclaimer{background:var(--yellow);border:3px solid var(--black);padding:10px 16px;font-size:12px;font-weight:600;margin-bottom:18px}
   .banner{display:flex;align-items:center;gap:14px;padding:16px 20px;border:3px solid var(--black);font-weight:600;margin-bottom:22px}
   .banner.ok{background:#e7f6ec;border-color:var(--green);color:var(--green)}
   .banner.bad{background:#fde8e9;border-color:var(--red);color:var(--red)}
@@ -25,9 +26,14 @@
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
   .chip{border:2px solid var(--black);background:var(--white);padding:5px 10px;font-size:12px;font-weight:600}
   .chip b{color:var(--blue)}
+  .conf{font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:1px 5px;border:1px solid var(--black);margin-left:4px}
+  .c-direct{background:var(--green);color:#fff;border-color:var(--green)}
+  .c-supporting{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .c-weak{background:#eee;color:var(--mut)}
+  .c-needs_review{background:var(--red);color:#fff;border-color:var(--red)}
   table{width:100%;border-collapse:collapse;background:var(--white);border:3px solid var(--black);font-size:13px}
-  th{background:var(--black);color:var(--white);text-align:left;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-  td{padding:10px 12px;border-top:1px solid #ddd;vertical-align:top}
+  th{background:var(--black);color:var(--white);text-align:left;padding:9px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  td{padding:9px 10px;border-top:1px solid #ddd;vertical-align:top}
   tr.row{cursor:pointer}tr.row:hover{background:#fbf3df}
   tr.tampered td{background:#fde8e9}
   .seq{font-variant-numeric:tabular-nums;color:var(--mut)}
@@ -35,20 +41,20 @@
   .badge{display:inline-block;padding:2px 8px;border:2px solid var(--black);font-size:11px;font-weight:700;text-transform:uppercase}
   .b-allow{background:#e7f6ec;color:var(--green);border-color:var(--green)}
   .b-deny{background:#fde8e9;color:var(--red);border-color:var(--red)}
+  .b-pending{background:#eee;color:var(--mut)}
+  .ev{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
   .cat{font-weight:600}
   .detail td{background:#faf6ec}
-  .detail pre{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,monospace;font-size:12px;margin:4px 0}
-  .kv{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;font-size:12px}
+  .kv{display:grid;grid-template-columns:140px 1fr;gap:4px 12px;font-size:12px}
   .kv .k{color:var(--mut);font-weight:600}
   .scope{display:inline-block;border:1px solid #aaa;background:#fff;padding:1px 6px;margin:1px;font-size:11px}
   .scope.granted{border-color:var(--green)}.scope.denied{border-color:var(--red);text-decoration:line-through;color:var(--red)}
-  .ctrl{display:inline-block;background:var(--yellow);border:1px solid var(--black);padding:1px 6px;margin:1px;font-size:11px;font-weight:600}
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
   button{font-family:inherit;font-weight:600;font-size:13px;padding:9px 16px;border:3px solid var(--black);background:var(--black);color:#fff;cursor:pointer}
   button.alt{background:var(--white);color:var(--black)}
   button:hover{background:var(--red);border-color:var(--red);color:#fff}
   .drop{margin-left:auto;font-size:12px;color:var(--mut)}
-  footer{max-width:1180px;margin:0 auto;padding:18px 28px 40px;font-size:12px;color:var(--mut)}
+  footer{max-width:1220px;margin:0 auto;padding:18px 28px 40px;font-size:12px;color:var(--mut)}
   .redact{color:var(--mut);font-style:italic}
 </style>
 </head>
@@ -59,6 +65,11 @@
 </header>
 
 <div class="wrap">
+  <div class="disclaimer">
+    Demo slice. Records are tamper-<em>evident</em> (a local hash chain), not yet signed or externally anchored.
+    Evidence tags are heuristic candidates, not a claim of compliance. Don't treat this as an auditor deliverable.
+  </div>
+
   <div class="toolbar">
     <button id="reverify" class="alt">Re-verify chain</button>
     <button id="tamper">Tamper test ⚠</button>
@@ -69,12 +80,12 @@
 
   <div class="stats" id="stats"></div>
 
-  <div class="section-label">Compliance control coverage</div>
+  <div class="section-label">Candidate evidence tags (heuristic — review before any compliance use)</div>
   <div class="chips" id="coverage"></div>
 
   <div class="section-label">Decision log</div>
   <table id="log"><thead><tr>
-    <th>#</th><th>Time</th><th>Actor</th><th>Action</th><th>Category</th><th>Decision</th><th>Outcome</th><th>Controls</th>
+    <th>#</th><th>Time</th><th>Actor</th><th>Action</th><th>Cat</th><th>Event</th><th>Decision</th><th>Outcome</th><th>Tags</th>
   </tr></thead><tbody id="rows"></tbody></table>
 </div>
 
@@ -85,7 +96,7 @@
 </footer>
 
 <script>
-// Embedded bundle (replaced by `caldris export`). Null => built-in demo.
+// Embedded bundle (replaced by `caldris export` / make-sample). Null => built-in demo.
 const EMBEDDED = /* __CALDRIS_BUNDLE__ */ null /* __END__ */;
 const GENESIS = 'sha256:' + '0'.repeat(64);
 
@@ -102,7 +113,7 @@ async function sha256Hex(s){
 function hashable(rec){const c={...rec};delete c.hash;delete c.sig;return canonicalize(c);}
 async function recordHash(rec){return 'sha256:'+await sha256Hex(hashable(rec));}
 
-async function chainBuild(records){ // assign seq/prev_hash/hash to raw records (demo)
+async function chainBuild(records){
   let prev=null;
   for(const r of records){
     r.seq=prev?prev.seq+1:0;
@@ -122,69 +133,67 @@ async function verifyChain(records){
   return bad;
 }
 
-// --- demo data (used when no bundle embedded) ---
+// --- demo data (used only when no bundle is embedded) ---
 function demoRecords(){
-  const base=(o)=>Object.assign({v:1,id:crypto.randomUUID(),redactions:[]},o);
+  const mk=(o)=>Object.assign({v:1,id:crypto.randomUUID(),redactions:[]},o);
+  const actor=(t)=>({agent:'claude-code',session_id:'demo',agent_type:t||'main',principal:'demo-user'});
+  const T=['SOC2:CC6.1','SOC2:CC7.2','HIPAA:164.312(b)'].map(id=>({id,confidence:'weak'}));
   return [
-    base({ts:'2026-06-18T14:00:01Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
-      action:{tool:'Read',category:'fs.read',phase:'tool_call',intent:'Read src/app.js',target:'src/app.js'},
-      scopes:{requested:['fs:read:src/app.js'],granted:['fs:read:src/app.js'],decision:'allow',permission_mode:'default'},
-      outcome:{status:'success',summary:'42 lines'},controls:['SOC2:CC6.1','SOC2:CC7.2','HIPAA:164.312(a)(1)','HIPAA:164.312(b)']}),
-    base({ts:'2026-06-18T14:00:07Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
-      action:{tool:'Write',category:'fs.write',phase:'tool_call',intent:'Write src/app.js',target:'src/app.js'},
-      scopes:{requested:['fs:write:src/app.js'],granted:['fs:write:src/app.js'],decision:'allow',permission_mode:'acceptEdits'},
-      outcome:{status:'success',summary:'wrote 51 lines'},controls:['SOC2:CC6.1','SOC2:CC6.3','SOC2:CC7.2','SOC2:CC8.1','HIPAA:164.312(a)(1)','HIPAA:164.312(b)','HIPAA:164.312(c)(1)']}),
-    base({ts:'2026-06-18T14:00:15Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
-      action:{tool:'Bash',category:'shell',phase:'tool_call',intent:'$ curl -s https://api.internal/secrets',target:'curl -s https://api.internal/secrets'},
-      scopes:{requested:['shell:exec','net:egress'],granted:[],decision:'deny',permission_mode:'default'},
-      outcome:{status:'blocked',summary:'blocked by permission policy'},controls:['SOC2:CC6.1','SOC2:CC7.2','HIPAA:164.312(b)','HIPAA:164.312(e)(1)']}),
-    base({ts:'2026-06-18T14:00:22Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'subagent',principal:'chris@caldris.io'},
-      action:{tool:'mcp__github__create_pull_request',category:'mcp',phase:'tool_call',intent:'github.create_pull_request(owner, repo, title, head, base)',target:'caldris-io/caldris.io'},
-      scopes:{requested:['mcp:github:create_pull_request'],granted:['mcp:github:create_pull_request'],decision:'allow',permission_mode:'default'},
-      outcome:{status:'success',summary:'opened PR #8'},controls:['SOC2:CC6.1','SOC2:CC6.3','SOC2:CC7.2','HIPAA:164.312(a)(1)','HIPAA:164.312(b)']}),
-    base({ts:'2026-06-18T14:00:31Z',actor:{agent:'claude-code',session_id:'demo',agent_type:'main',principal:'chris@caldris.io'},
-      action:{tool:'Bash',category:'shell',phase:'tool_call',intent:'$ git push -u origin feature',target:'git push -u origin feature'},
-      scopes:{requested:['shell:exec','git:push'],granted:['shell:exec','git:push'],decision:'allow',permission_mode:'default'},
-      outcome:{status:'success',summary:'pushed 1 commit'},controls:['SOC2:CC6.1','SOC2:CC6.3','SOC2:CC7.2','SOC2:CC8.1','HIPAA:164.312(a)(1)','HIPAA:164.312(b)']}),
+    mk({ts:'2026-06-18T14:00:00Z',event_type:'executed',action_id:'call_a',actor:actor(),
+      action:{tool:'Read',category:'fs.read',intent:'Read src/app.js',target:'src/app.js'},
+      scopes:{requested:['fs:read:src/app.js'],granted:['fs:read:src/app.js'],decision:'allow',auth_source:'inferred',permission_mode:'default'},
+      outcome:{status:'success',summary:'42 lines'},evidence_tags:T}),
+    mk({ts:'2026-06-18T14:00:08Z',event_type:'permission_denied',action_id:'call_c',actor:actor(),
+      action:{tool:'Bash',category:'shell',intent:'$ curl -s internal-metadata/secrets',target:'curl -s internal-metadata/secrets'},
+      scopes:{requested:['shell:exec','net:egress'],granted:[],decision:'deny',auth_source:'claude_permission',permission_mode:'default'},
+      outcome:{status:'blocked',summary:'blocked by permission policy'},evidence_tags:T}),
+    mk({ts:'2026-06-18T14:00:15Z',event_type:'executed',action_id:'call_d',actor:actor('subagent'),
+      action:{tool:'mcp__github__create_pull_request',category:'mcp',intent:'github.create_pull_request(owner, repo, title, head, base)',target:'acme/widgets'},
+      scopes:{requested:['mcp:github:create_pull_request'],granted:['mcp:github:create_pull_request'],decision:'allow',auth_source:'inferred',permission_mode:'default'},
+      outcome:{status:'success',summary:'opened PR 8'},evidence_tags:T}),
   ];
 }
 
 let RECORDS=[];
 function esc(s){return String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function tagChip(t){return `<span class="chip">${esc(t.id)}<span class="conf c-${esc(t.confidence)}">${esc(t.confidence)}</span></span>`;}
+function decBadge(d){const c={allow:'b-allow',deny:'b-deny',pending:'b-pending'}[d]||'b-pending';return `<span class="badge ${c}">${esc(d)}</span>`;}
 
 function render(bad){
   const total=RECORDS.length;
   const denied=RECORDS.filter(r=>r.scopes.decision==='deny').length;
-  const cov={}; RECORDS.forEach(r=>(r.controls||[]).forEach(c=>cov[c]=(cov[c]||0)+1));
+  const cov={}; RECORDS.forEach(r=>(r.evidence_tags||[]).forEach(t=>{cov[t.id]=cov[t.id]||t.confidence;}));
   const subs=RECORDS.filter(r=>r.actor.agent_type==='subagent').length;
 
   document.getElementById('stats').innerHTML=[
-    ['Records',total],['Denied / blocked',denied],['Controls covered',Object.keys(cov).length],['Sub-agent actions',subs]
+    ['Records',total],['Denied / blocked',denied],['Evidence tags',Object.keys(cov).length],['Sub-agent actions',subs]
   ].map(([l,n])=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
 
-  document.getElementById('coverage').innerHTML=Object.keys(cov).sort().map(c=>
-    `<span class="chip">${esc(c)} <b>×${cov[c]}</b></span>`).join('') || '<span class="tag">none</span>';
+  document.getElementById('coverage').innerHTML=Object.keys(cov).sort().map(id=>tagChip({id,confidence:cov[id]})).join('') || '<span class="tag">none</span>';
 
   const rows=document.getElementById('rows'); rows.innerHTML='';
   RECORDS.forEach(r=>{
     const tr=document.createElement('tr'); tr.className='row'+(bad.has(r.seq)?' tampered':'');
-    const dec=r.scopes.decision==='deny'?'<span class="badge b-deny">deny</span>':'<span class="badge b-allow">allow</span>';
     const intent=esc(r.action.intent).replace(/« redacted:[^»]+»/g,m=>`<span class="redact">${m}</span>`);
+    const tags=(r.evidence_tags||[]);
     tr.innerHTML=`<td class="seq">${esc(r.seq)}${bad.has(r.seq)?' ⚠':''}</td>
       <td class="mono">${esc((r.ts||'').replace('T',' ').replace(/\..*/,''))}</td>
       <td>${esc(r.actor.principal||r.actor.agent)}${r.actor.agent_type==='subagent'?' <span class="tag">(sub)</span>':''}</td>
       <td class="mono">${intent}</td>
       <td class="cat">${esc(r.action.category)}</td>
-      <td>${dec}</td>
+      <td class="ev">${esc(r.event_type||'')}</td>
+      <td>${decBadge(r.scopes.decision)}</td>
       <td>${esc(r.outcome.status)}</td>
-      <td>${(r.controls||[]).slice(0,2).map(c=>`<span class="ctrl">${esc(c)}</span>`).join('')}${(r.controls||[]).length>2?` +${r.controls.length-2}`:''}</td>`;
+      <td>${tags.slice(0,2).map(t=>`<span class="chip">${esc(t.id)}</span>`).join('')}${tags.length>2?` +${tags.length-2}`:''}</td>`;
     const det=document.createElement('tr'); det.className='detail'; det.style.display='none';
-    det.innerHTML=`<td colspan="8"><div class="kv">
+    det.innerHTML=`<td colspan="9"><div class="kv">
+      <div class="k">Action id</div><div class="mono">${esc(r.action_id||'—')}</div>
       <div class="k">Requested</div><div>${r.scopes.requested.map(s=>`<span class="scope">${esc(s)}</span>`).join('')}</div>
       <div class="k">Granted</div><div>${r.scopes.requested.map(s=>{const g=r.scopes.granted.includes(s);return `<span class="scope ${g?'granted':'denied'}">${esc(s)}</span>`;}).join('')}</div>
+      <div class="k">Auth source</div><div class="mono">${esc(r.scopes.auth_source||'inferred')}</div>
       <div class="k">Permission mode</div><div class="mono">${esc(r.scopes.permission_mode)}</div>
       <div class="k">Outcome</div><div>${esc(r.outcome.summary)}</div>
-      <div class="k">Controls</div><div>${(r.controls||[]).map(c=>`<span class="ctrl">${esc(c)}</span>`).join('')}</div>
+      <div class="k">Evidence tags</div><div>${tags.map(tagChip).join('')}</div>
       ${r.redactions&&r.redactions.length?`<div class="k">Redactions</div><div>${r.redactions.map(esc).join(', ')}</div>`:''}
       <div class="k">Hash</div><div class="mono" style="word-break:break-all">${esc(r.hash)}</div>
       <div class="k">Prev</div><div class="mono" style="word-break:break-all">${esc(r.prev_hash)}</div>
@@ -213,7 +222,7 @@ async function load(bundle){
 document.getElementById('reverify').onclick=refresh;
 document.getElementById('tamper').onclick=async()=>{
   if(!RECORDS.length)return;
-  const i=Math.min(2,RECORDS.length-1);
+  const i=Math.min(1,RECORDS.length-1);
   RECORDS[i].outcome.summary='(silently edited after the fact)';
   await refresh();
 };

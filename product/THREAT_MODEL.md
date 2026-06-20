@@ -14,7 +14,15 @@ plainly what M0 defends against, what it does not, and how each gap closes.
   or slows a tool call.
 - **Obvious secret leakage.** Known secret shapes (API keys, tokens, JWTs, private keys)
   are redacted from `intent`/`summary` before they are written, and the redaction is
-  recorded on the record.
+  recorded on the record. Before a bundle is shared, `caldris scan` is a tripwire for
+  emails, tokens, URLs and home/absolute paths that survived redaction.
+- **Concurrent capture corrupting the chain.** Claude Code batches parallel tool calls,
+  so multiple hooks may append at once. Appends are guarded by an `O_EXCL` lockfile
+  (with stale-lock reclaim) so each chain link reads a consistent tail.
+- **Over-claiming authorization.** Records distinguish an *observed* permission decision
+  (`auth_source: claude_permission`, from `PermissionRequest`/`PermissionDenied`) from an
+  *inferred* one (`auth_source: inferred`, "the tool simply ran"). We never label an
+  inferred grant as observed.
 
 ## What we do NOT yet defend against (and the fix)
 
@@ -22,9 +30,9 @@ plainly what M0 defends against, what it does not, and how each gap closes.
 | --- | --- | --- |
 | An agent that can run `Bash` rewrites the **entire** local chain | A local hash chain proves internal consistency, not external truth — a full rewrite re-verifies | Out-of-process / append-only writer; ship records to a remote sink or WORM store (S3 Object Lock); anchor periodic chain heads externally (transparency log / notarization) |
 | Forged signatures | M0 does not sign records (`sig` is reserved) | Per-tenant signing key held in KMS, outside the agent's reach — the line between "log" and "evidence" |
-| "Granted" scope is asserted, not observed | M0 infers `granted` from the outcome; it does not read the real authorization decision | M1: capture the actual permission decision (Claude Code permission system; later, an external auth layer such as Arcade/Merge) |
-| PII beyond known secret shapes | Regex redaction misses novel/contextual PII | Configurable redaction policy, default-deny field capture, review before any data leaves the machine |
-| Mapping over-claims compliance | Draft SOC 2 / HIPAA mappings | Versioned, compliance-reviewed mappings; "evidence supports control," never "guarantees compliance" |
+| `granted` on `executed` events is inferred, not authoritative | M0 captures the permission events but does not yet *join* them to mark the executed action's grant as observed | M1: correlate by `action_id` and treat the observed permission decision as the authoritative `granted`; later, an external auth layer (Arcade/Merge) |
+| PII beyond known secret shapes | Regex redaction + scan miss novel/contextual PII | Configurable redaction policy, default-deny field capture, review before any data leaves the machine |
+| Tags over-claim compliance | Draft, heuristic SOC 2 / HIPAA evidence tags | Versioned, compliance-reviewed mappings; "candidate evidence," never "coverage" or "guarantees compliance" |
 
 ## Trust boundary (M0)
 
