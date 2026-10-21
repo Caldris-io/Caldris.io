@@ -155,7 +155,7 @@ function demoRecords(){
 }
 
 let RECORDS=[];
-function esc(s){return String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function tagChip(t){return `<span class="chip">${esc(t.id)}<span class="conf c-${esc(t.confidence)}">${esc(t.confidence)}</span></span>`;}
 function decBadge(d){const c={allow:'b-allow',deny:'b-deny',pending:'b-pending'}[d]||'b-pending';return `<span class="badge ${c}">${esc(d)}</span>`;}
 

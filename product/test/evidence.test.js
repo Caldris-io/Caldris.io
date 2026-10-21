@@ -135,6 +135,8 @@ test('viewer template escapes seq and the tamper banner (no raw injection sink)'
   assert.ok(html.includes('${esc(r.seq)}'), 'seq must be escaped before innerHTML');
   assert.ok(!/\$\{r\.seq\}[^}]*<\/td>/.test(html), 'no unescaped ${r.seq} in a table cell');
   assert.ok(html.includes('[...bad].map(esc).join'), 'tamper banner must escape seq values');
+  // esc() is also used inside quoted attributes (tag confidence class), so it must escape quotes.
+  assert.ok(/function esc\(s\)\{[^}]*\[&<>"'\]/.test(html), 'esc must escape " and \' for attribute contexts');
 });
 
 test('hash is stable for identical hashable content', () => {
