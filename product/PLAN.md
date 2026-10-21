@@ -189,14 +189,24 @@ duty: **design-partner demo bundle**, **regression suite**, and **evidence of ef
 
 ## 8. Milestones
 
-- **M0 — Capture + chain** ("immutable logs"): plugin scaffold, both hooks, transcript
-  importer, signed append-only JSONL, `caldris verify`, `THREAT_MODEL.md`. Demoable e2e.
-- **M1 — Scopes + controls** ("compliance-mapped"): scope deriver, SOC 2 / HIPAA rules,
-  `caldris map`.
-- **M2 — Export** ("one-click evidence"): auditor bundle + Vanta/Drata-shaped JSON,
-  redaction pass, `caldris export`.
-- **M3 — Reach**: second agent surface (Cursor/Copilot via MCP or OTel GenAI ingest).
+Honest boundaries (a staff review flagged an earlier draft for compressing three
+milestones into "M0 complete" — fixed here). What shipped is the **M0 demo slice**:
+it spans capture/chain/tags/scan/viewer so the thesis is demoable, but it does **not**
+yet claim authoritative authorization, signing, or an auditor deliverable.
 
-**Recommended first build:** M0 in `product/`, seeded by transcript mining of this
-repo's own sessions, so the first Caldris evidence bundle is generated from real work
-already done here.
+- **M0 demo slice (shipped):** plugin scaffold; full-lifecycle hooks (`PreToolUse`,
+  `PermissionRequest`, `PermissionDenied`, `PostToolUse`, `PostToolUseFailure`) with
+  `tool_use_id` correlation; lock-guarded append-only hash chain + `verify`; transcript
+  importer; heuristic **candidate evidence tags** (with confidence) via `map`; disclosure
+  `scan`; synthetic demo bundle + self-contained viewer via `export`; `THREAT_MODEL.md`.
+- **M1 — Authoritative authorization:** join permission events to executed actions by
+  `action_id` so `granted`/`auth_source` reflect the *observed* decision; begin moving
+  evidence out of the agent's reach (per-tenant signing key in KMS / remote sink).
+- **M2 — Auditor-grade export:** signing + external anchoring (WORM / transparency log)
+  and Vanta/Drata-shaped output. This is the point at which "hand to an auditor" is a
+  fair claim — not before.
+- **M3 — Reach:** second agent surface (Cursor/Copilot via MCP or OTel GenAI ingest).
+
+**Note on the demo bundle:** the committed sample is generated from **synthetic** events
+(`npm run make:sample`) and verified scan-clean — never real session data, which the
+`scan` command shows is riddled with paths/PII.

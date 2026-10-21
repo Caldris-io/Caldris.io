@@ -1,0 +1,27 @@
+{
+  "framework": "SOC2",
+  "version": "2017 TSC",
+  "note": "DRAFT candidate evidence tags for M0 — heuristic, not reviewed. A tag means an event may serve as evidence toward a control; it is NOT a claim of coverage or compliance. Confidence: direct | supporting | weak. Must be reviewed by a compliance owner before any auditor use.",
+  "controls": {
+    "CC6.1": {
+      "title": "Logical and physical access controls restrict access to information assets",
+      "confidence": "supporting",
+      "match": { "category": ["fs.read", "fs.write", "mcp", "shell"] }
+    },
+    "CC6.3": {
+      "title": "Access to data and software is authorized and based on roles/scopes",
+      "confidence": "supporting",
+      "match": { "scope_prefix": ["mcp:", "fs:write:", "git:"] }
+    },
+    "CC7.2": {
+      "title": "System components are monitored to detect anomalies and security events",
+      "confidence": "weak",
+      "match": { "any": true }
+    },
+    "CC8.1": {
+      "title": "Changes to infrastructure, data, and software are authorized and logged",
+      "confidence": "direct",
+      "match": { "category": ["fs.write"], "scope_prefix": ["git:push"] }
+    }
+  }
+}

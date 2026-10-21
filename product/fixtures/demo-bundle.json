@@ -1,0 +1,486 @@
+{
+  "caldris_bundle_version": 1,
+  "generated_at": "2026-06-18T14:30:00Z",
+  "record_count": 8,
+  "frameworks": [
+    "SOC2",
+    "HIPAA"
+  ],
+  "records": [
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000001",
+      "ts": "2026-06-18T14:00:00Z",
+      "event_type": "executed",
+      "action_id": "call_a",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "main",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "Read",
+        "category": "fs.read",
+        "intent": "Read src/app.js",
+        "target": "src/app.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:read:src/app.js"
+        ],
+        "granted": [
+          "fs:read:src/app.js"
+        ],
+        "decision": "allow",
+        "auth_source": "inferred",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "export function handler() { return ok; }"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(a)(1)",
+          "confidence": "supporting"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        }
+      ],
+      "redactions": [],
+      "seq": 0,
+      "prev_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "sha256:56e94be8a750e3743bdb6d1f890f0054d149fd82d5182a1d4b92aa873c07f433"
+    },
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000002",
+      "ts": "2026-06-18T14:01:00Z",
+      "event_type": "permission_requested",
+      "action_id": "call_b",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "main",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "intent": "Write src/app.js",
+        "target": "src/app.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:src/app.js"
+        ],
+        "granted": [],
+        "decision": "pending",
+        "auth_source": "claude_permission",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "pending",
+        "summary": "pending"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC6.3",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "SOC2:CC8.1",
+          "confidence": "direct"
+        },
+        {
+          "id": "HIPAA:164.312(a)(1)",
+          "confidence": "supporting"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(c)(1)",
+          "confidence": "direct"
+        }
+      ],
+      "redactions": [],
+      "seq": 1,
+      "prev_hash": "sha256:56e94be8a750e3743bdb6d1f890f0054d149fd82d5182a1d4b92aa873c07f433",
+      "hash": "sha256:c872fe69788c925166a6e9dd23fa980dff9c394e468a8036399c9eac7ae3545f"
+    },
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000003",
+      "ts": "2026-06-18T14:02:00Z",
+      "event_type": "executed",
+      "action_id": "call_b",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "main",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "Write",
+        "category": "fs.write",
+        "intent": "Write src/app.js",
+        "target": "src/app.js"
+      },
+      "scopes": {
+        "requested": [
+          "fs:write:src/app.js"
+        ],
+        "granted": [
+          "fs:write:src/app.js"
+        ],
+        "decision": "allow",
+        "auth_source": "inferred",
+        "permission_mode": "acceptEdits"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "wrote 51 lines"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC6.3",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "SOC2:CC8.1",
+          "confidence": "direct"
+        },
+        {
+          "id": "HIPAA:164.312(a)(1)",
+          "confidence": "supporting"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(c)(1)",
+          "confidence": "direct"
+        }
+      ],
+      "redactions": [],
+      "seq": 2,
+      "prev_hash": "sha256:c872fe69788c925166a6e9dd23fa980dff9c394e468a8036399c9eac7ae3545f",
+      "hash": "sha256:662a4b03c2b898cfd5a10f733d08f9bd9677ba3f66d66af3bd616daf360bda8a"
+    },
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000004",
+      "ts": "2026-06-18T14:03:00Z",
+      "event_type": "attempted",
+      "action_id": "call_c",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "main",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "intent": "$ curl -s internal-metadata/secrets",
+        "target": "curl -s internal-metadata/secrets"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec",
+          "net:egress"
+        ],
+        "granted": [],
+        "decision": "pending",
+        "auth_source": "inferred",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "pending",
+        "summary": "pending"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(e)(1)",
+          "confidence": "supporting"
+        }
+      ],
+      "redactions": [],
+      "seq": 3,
+      "prev_hash": "sha256:662a4b03c2b898cfd5a10f733d08f9bd9677ba3f66d66af3bd616daf360bda8a",
+      "hash": "sha256:4fc92c280ea871b4b80a6004e927c469e16c01afe9a5798a12f9d840d371ca5a"
+    },
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000005",
+      "ts": "2026-06-18T14:04:00Z",
+      "event_type": "permission_denied",
+      "action_id": "call_c",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "main",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "intent": "$ curl -s internal-metadata/secrets",
+        "target": "curl -s internal-metadata/secrets"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec",
+          "net:egress"
+        ],
+        "granted": [],
+        "decision": "deny",
+        "auth_source": "claude_permission",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "blocked",
+        "summary": "blocked"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(e)(1)",
+          "confidence": "supporting"
+        }
+      ],
+      "redactions": [],
+      "seq": 4,
+      "prev_hash": "sha256:4fc92c280ea871b4b80a6004e927c469e16c01afe9a5798a12f9d840d371ca5a",
+      "hash": "sha256:0b5a65f015ef2fa16b7ad8ba8027aead3910bd971e25bca61768dcea371cb2d3"
+    },
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000006",
+      "ts": "2026-06-18T14:05:00Z",
+      "event_type": "executed",
+      "action_id": "call_d",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "subagent",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "mcp__github__create_pull_request",
+        "category": "mcp",
+        "intent": "github.create_pull_request(owner, repo, title, head, base)",
+        "target": "acme/widgets"
+      },
+      "scopes": {
+        "requested": [
+          "mcp:github:create_pull_request"
+        ],
+        "granted": [
+          "mcp:github:create_pull_request"
+        ],
+        "decision": "allow",
+        "auth_source": "inferred",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "opened PR 8"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC6.3",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(a)(1)",
+          "confidence": "supporting"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        }
+      ],
+      "redactions": [],
+      "seq": 5,
+      "prev_hash": "sha256:0b5a65f015ef2fa16b7ad8ba8027aead3910bd971e25bca61768dcea371cb2d3",
+      "hash": "sha256:8766661e18e4efaca0660c17b9a3009b60d445be919df83b9d7acaf8ee56ae3d"
+    },
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000007",
+      "ts": "2026-06-18T14:06:00Z",
+      "event_type": "failed",
+      "action_id": "call_e",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "main",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "intent": "$ npm test",
+        "target": "npm test"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec"
+        ],
+        "granted": [
+          "shell:exec"
+        ],
+        "decision": "allow",
+        "auth_source": "inferred",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "error",
+        "summary": "1 test failed"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        }
+      ],
+      "redactions": [],
+      "seq": 6,
+      "prev_hash": "sha256:8766661e18e4efaca0660c17b9a3009b60d445be919df83b9d7acaf8ee56ae3d",
+      "hash": "sha256:51471613ef2b6d33813e2e02c54c02b071fffc138117b6c365681913569bbd62"
+    },
+    {
+      "v": 1,
+      "id": "00000000-0000-4000-8000-000000000008",
+      "ts": "2026-06-18T14:07:00Z",
+      "event_type": "executed",
+      "action_id": "call_f",
+      "actor": {
+        "agent": "claude-code",
+        "session_id": "demo-session-0001",
+        "agent_type": "main",
+        "principal": "demo-user"
+      },
+      "action": {
+        "tool": "Bash",
+        "category": "shell",
+        "intent": "$ git push -u origin feature",
+        "target": "git push -u origin feature"
+      },
+      "scopes": {
+        "requested": [
+          "shell:exec",
+          "git:push"
+        ],
+        "granted": [
+          "shell:exec",
+          "git:push"
+        ],
+        "decision": "allow",
+        "auth_source": "inferred",
+        "permission_mode": "default"
+      },
+      "outcome": {
+        "status": "success",
+        "summary": "pushed 1 commit"
+      },
+      "evidence_tags": [
+        {
+          "id": "SOC2:CC6.1",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC6.3",
+          "confidence": "supporting"
+        },
+        {
+          "id": "SOC2:CC7.2",
+          "confidence": "weak"
+        },
+        {
+          "id": "SOC2:CC8.1",
+          "confidence": "direct"
+        },
+        {
+          "id": "HIPAA:164.312(b)",
+          "confidence": "weak"
+        }
+      ],
+      "redactions": [],
+      "seq": 7,
+      "prev_hash": "sha256:51471613ef2b6d33813e2e02c54c02b071fffc138117b6c365681913569bbd62",
+      "hash": "sha256:631f42dca60333361b490403775e24c7250d48edea06781edbe9e67b2f906b76"
+    }
+  ],
+  "manifest_hash": "sha256:943360c3dbc075708ca5b684c2507aa3ecc9ae592b53ab472982e2579d6f45b2"
+}

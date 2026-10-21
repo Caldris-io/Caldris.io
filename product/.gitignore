@@ -1,0 +1,5 @@
+# Local evidence store (captured at runtime — do not commit)
+.caldris/
+# Generated export bundles
+caldris-evidence-bundle/
+node_modules/

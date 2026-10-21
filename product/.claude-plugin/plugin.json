@@ -1,0 +1,8 @@
+{
+  "name": "caldris",
+  "version": "0.1.0",
+  "description": "Compliance-ready evidence layer for coding agents. Captures every tool call into a tamper-evident, control-mapped audit trail.",
+  "author": "Caldris",
+  "homepage": "https://caldris.io",
+  "license": "MIT"
+}

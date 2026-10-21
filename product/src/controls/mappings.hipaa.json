@@ -1,0 +1,27 @@
+{
+  "framework": "HIPAA",
+  "version": "45 CFR Part 164 Subpart C",
+  "note": "DRAFT candidate evidence tags for M0 — heuristic, not reviewed. A tag means an event may serve as evidence toward a safeguard; it is NOT a claim of coverage or compliance. Confidence: direct | supporting | weak. Review required before auditor use.",
+  "controls": {
+    "164.312(a)(1)": {
+      "title": "Access control — allow access only to authorized persons/software",
+      "confidence": "supporting",
+      "match": { "scope_prefix": ["fs:", "mcp:"] }
+    },
+    "164.312(b)": {
+      "title": "Audit controls — record and examine activity in systems with ePHI",
+      "confidence": "weak",
+      "match": { "any": true }
+    },
+    "164.312(c)(1)": {
+      "title": "Integrity — protect ePHI from improper alteration or destruction",
+      "confidence": "direct",
+      "match": { "category": ["fs.write"] }
+    },
+    "164.312(e)(1)": {
+      "title": "Transmission security — guard against unauthorized access during transmission",
+      "confidence": "supporting",
+      "match": { "scope_prefix": ["net:egress"] }
+    }
+  }
+}
